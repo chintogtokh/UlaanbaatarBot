@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "mwn": "^1.11.4"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1"
+  }
+}
