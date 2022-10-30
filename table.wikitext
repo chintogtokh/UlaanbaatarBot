@@ -1,0 +1,1053 @@
+
+    <table class="infobox vcard" style="width: 300px; font-size:85%; line-height:130%;"><!--
+    
+    ================================================================
+                       Нэр
+    ================================================================
+    -->{{#if:{{{албан_ёсны_нэр|}}}{{{уугуул_нэр|}}}{{{богино_нэр|}}} |<!--then:
+         --><tr class="adr">
+              <td colspan="3" align="center" class="mergedtoprow"
+                  style="line-height:1.2em; padding:0.23em 0.32em 0.32em; font-size:1.23em;"><!--
+               -->{{#if:{{{албан_ёсны_нэр|}}} |<!--then:--><span class=" fn org country-name">{{{албан_ёсны_нэр|}}}</span> }}<!--
+               -->{{#if:{{{уугуул_нэр|}}}{{{богино_нэр|}}}
+                  |<!--then:--><div style="padding-top:0.22em;"><!--
+                    -->{{br separated entries|{{{уугуул_нэр|}}}|{{#if:{{{богино_нэр|}}}|<span class="fn org country-name"></span>}}}}</div><!--
+               -->}}<!--
+           --></th>
+            </tr><!--
+    -->}}<!--
+    
+    -->{{#if:{{{эрх_байдал|}}}{{{эрххэмжээ|}}} |<!--then:
+         --><tr> <td colspan="3" style="line-height:1.2em; text-align:center; background-color:#efefef"><!--
+                  -->{{{эрх_байдал|}}}{{{эрххэмжээ|}}}</td>
+            </tr><!--
+    -->}}<!--
+    
+    
+    ================================================================
+                     Билгэ тэмдэг
+    ================================================================
+    
+    -->{{#if:{{{далбааны_зураг|}}}
+       |<!--thenF:
+        -----------------------------------------------------------
+         Flag provided, so display it and coat-of-arms (or other symbol) if provided:
+        -----------------------------------------------------------
+        --><tr class="mergedtoprow">
+             <td class="maptable" colspan="3" align="center" style="padding:0.5em 0;"><!--
+               --------------------------------------------------
+                   Subtable to format coat-of-arms (or symbol)
+                   display. Align="center"s and "width:auto;"s
+                   are for sake of Internet Explorer.
+               --------------------------------------------------
+            --><table align="center" style="width:100%; background:none;"><!--
+                 -----------Image/s-----------
+              --><tr>
+                   <td align="center"
+                       style="{{#if:{{{сүлдний_зураг|}}}{{{image_symbol|}}}
+                              |<!--then:-->
+    {{#if:{{{flag_width|}}}
+                             |<!--then:-->width:{{{flag_width}}};<!--
+                          -->|<!--else:-->width:58%;<!--(58% as flags usually wider than coats-of-arms/symbols. Also accommodates IE.)--><!--
+                          -->}}
+    }} vertical-align:middle;"><!--
+                 -->[[File:{{{далбааны_зураг}}}|130px|border|alt={{{alt_flag|}}}|{{{богино_нэр|{{{linking_name|{{{name|{{PAGENAME}}}}}}}}}}} улсын төрийн далбаа]]<!--end border:--><!--
+                --></td>
+                   {{#if:{{{сүлдний_зураг|}}}{{{image_symbol|}}}
+                   |<!--then:--><td align="center" style="width:auto; vertical-align:middle;"><!--
+                    -->[[File:{{{сүлдний_зураг|{{{image_symbol|}}}}}} |{{{symbol_width|90px}}} |alt={{{alt_coat|{{{alt_symbol|}}}}}}|{{{богино_нэр|{{{linking_name|{{{name|{{PAGENAME}}}}}}}}}}} улсын төрийн сүлд]]<!--
+                --></td>
+                   }}
+                 </tr><!--
+                 ----------Caption/s----------
+              --><tr>
+                   {{#if:{{{богино_нэр|}}}{{{linking_name|}}}{{{name|}}} |<!--then:
+                     --><td align="center"><small>{{#ifexist:{{{богино_нэр|{{{linking_name|{{{name|{{PAGENAME}}}}}}}}}}} |<!--then:-->[[{{{богино_нэр|{{{linking_name|{{{name|{{PAGENAME}}}}}}}}}}} улсын төрийн далбаа |{{{flag_caption|Төрийн далбаа}}}]]}}</small></td>
+                   }}
+                   {{#if:{{{сүлдний_зураг|}}}{{{image_symbol|}}} |<!--then:
+                     --><td align="center"><small>{{#ifexist:{{{богино_нэр|{{{linking_name|{{{name|{{PAGENAME}}}}}}}}}}} |<!--then:-->[[{{{богино_нэр|{{{linking_name|{{{name|{{PAGENAME}}}}}}}}}}} улсын төрийн сүлд|{{{symbol_type|Төрийн сүлд}}}]]}}</small></td>
+                   }}
+                 </tr><!--
+               ---------End subtable:---------
+            --></table>
+             </td>
+           </tr><!--
+    
+    -->|<!--elseF:
+        ------------------------------------------------------------
+         Flag not provided, so display coat-of-arms or other symbol (if provided):
+        ------------------------------------------------------------
+        -->{{#if:{{{сүлдний_зураг|}}}{{{image_symbol|}}}
+           |<!--thenS2:
+            --><tr class="mergedtoprow">
+                 <td class="maptable" colspan="3" align="center" style="padding:0.5em 0;"><!--
+                   -----------------------------------------------
+                     Subtable to format coat-of-arms (or symbol)
+                     display. Align="center"s and "width:auto;"s
+                     are for sake of Internet Explorer.
+                   -----------------------------------------------
+                --><table align="center" style="width:100%; background:none;"><!--
+                     -----------Image-----------
+                  --><tr>
+                       <td align="center"
+                           style="width:auto; vertical-align:middle;"><!--
+                           -->[[File:{{{сүлдний_зураг|{{{image_symbol|}}}}}} |{{{symbol_width|90px}}} |alt={{{alt_coat|{{{alt_symbol|}}}}}}|{{{symbol_type|Coat of arms}}} of {{{богино_нэр|{{{linking_name|{{{name|{{PAGENAME}}}}}}}}}}}]]</td>
+                     </tr><!--
+                     ----------Caption----------
+                  --><tr>
+                       <td align="center"><!--
+                        --><small>{{#ifexist:{{{symbol_type_article|{{{symbol_type|Coat of arms}}}}}} of {{{богино_нэр|{{{linking_name|{{{name|{{PAGENAME}}}}}}}}}}} |<!--then:--> [[{{{symbol_type_article|{{{symbol_type|Coat of arms}}}}}} of {{{богино_нэр|{{{linking_name|{{{name|{{PAGENAME}}}}}}}}}}} |{{{symbol_type|Сүлд}}}]]}}</small><!--
+                    --></td>
+                     </tr><!--
+                    ---------End subtable:----------
+                 --></table>
+                 </td>
+               </tr><!--
+          -->}}<!--(endS2)
+    -->}}<!--(endF)
+    
+    ================================================================
+                                   Уриа
+    ================================================================
+    -->{{#if:{{{үндэсний_уриа|}}}{{{уриа|}}} |<!--then:
+         --><tr> <td colspan="3" style="line-height:1.2em; text-align:center;"><!--
+                  -->'''Уриа:&nbsp;'''{{{үндэсний_уриа|}}}{{{уриа|}}}</td>
+            </tr><!--
+    -->}}<!--
+    
+    ================================================================
+                                  Дуулал
+    ================================================================
+    -->{{#if:{{{үндэсний_дуулал|}}}{{{хааны_дуулал|}}}{{{дуулал|}}} |<!--then:
+         --><tr>
+              <td class="anthem" colspan="3" style="line-height:1.2em; text-align:center;"><!--
+               -->{{#if:{{{үндэсний_дуулал|}}}
+                  |<!--then:-->'''Төрийн дууллын нэр:'''<br/>{{{үндэсний_дуулал}}}<br/>
+                  }}<!--
+               -->{{#if:{{{дуулал|}}}
+                  |<!--then:-->'''Төрийн дууллын нэр:'''<br/>{{{дуулал}}}<br/>
+                  }}<!--
+               -->{{#if:{{{хааны_дуулал|}}}
+                  |<!--then:-->'''Хаан төрийн дууллын нэр:'''<br/>'''{{{хааны_дуулал}}}
+                  }}<!--
+           --></td>
+            </tr><!--
+    -->}}<!--
+    
+    ================================================================
+                               Бусад билгэ тэмдэг
+    ================================================================
+    -->{{#if:{{{бусад_билэгдэл|}}}{{{үгэн_билэгдэл|}}} |<!--then:
+         --><tr>
+              <td colspan="3" style="line-height:1.2em; text-align:center;"><!--
+               -->{{#if:{{{бусад_билэгдэл_хэлбэр|}}}{{{үгэн_билэгдэл_хэлбэр|}}} |<!--then:
+                    -->'''{{{бусад_билэгдэл_хэлбэр|}}}{{{үгэн_билэгдэл_хэлбэр|}}}'''<br/>}}<!--
+               -->{{{бусад_билэгдэл|}}}{{{үгэн_билэгдэл|}}}</td>
+            </tr><!--
+    -->}}<!--
+    
+    ================================================================
+                                    Газрын зураг
+    ================================================================
+    -->{{#if:{{{газрын_зураг|}}} |<!--then:
+         --><tr>
+              <td colspan="3" style="text-align:center; padding:0.6em 0em;">[[File:{{{газрын_зураг}}} |{{{map_width|270px}}} |center |alt={{{alt_map|{{{map_caption|}}}}}}|{{{alt_map|{{{map_caption|{{{common_name|{{{linking_name|{{PAGENAME}} }}} }}} }}} }}} байршил]] <div style="position:relative; top:0.3em;"><small>{{{map_caption|}}}</small></div>
+              </td>
+            </tr><!--
+    -->}}<!--
+    
+    -->{{#if:{{{газрын_зураг1|}}} |<!--then:
+         --><tr>
+              <td colspan="3" style="text-align:center; padding:0.6em 0em;">[[File:{{{газрын_зураг1}}} |{{{map_width|270px}}} |center |alt={{{alt_map|{{{map_caption1|}}}}}}|{{{alt_map|{{{map_caption1|{{{common_name|{{{linking_name|{{PAGENAME}} }}} }}} }}} }}} байршил]] <div style="position:relative; top:0.3em;"><small>{{{map_caption1|}}}</small></div>
+              </td>
+            </tr><!--
+    -->}}<!--
+    
+    ================================================================
+          Нийслэл, Төв, Хамгийн том хот, Суурин
+    ================================================================
+    -->{{#if:{{{нийслэл_хот|}}}{{{засаг_төв|}}}{{{хамгийн_том_хот|}}}{{{том_суурин|}}}
+       |<!--then1:
+        --><tr class="mergedtoprow"><!--
+           -----------Check if capital/admin center provided:-------
+           -->{{#if:{{{нийслэл_хот|}}}{{{засаг_төв|}}}
+              |<!--then2:
+               --><td colspan="2"><!--
+                 -->{{#if:{{{засаг_төв_хэлбэр|}}}{{{засаг_төв|}}}
+                    |<!--then:-->'''{{{засаг_төв_хэлбэр|Administrative&nbsp;center}}}'''<!--
+                 -->|<!--else:-->{{#if:{{{нийслэл_хэлбэр|}}}
+                                 |<!--then:-->'''{{{нийслэл_хэлбэр}}}'''<!--
+                              -->|<!--else:-->'''Нийслэл'''<!--
+                              -->}}<!--
+                 -->}}<!--
+           ---------------------------------------------------------
+              If capital provided, check whether largest_city or largest_settlement
+                     (if provided) equals "capital", capital or [[capital]];
+           ---------------------------------------------------------
+                 -->{{#ifeq: {{#ifeq:{{{том_хот|}}}{{{том_суурин|}}}
+                             |<!--equals3:-->capital
+                             |<!---then3:--->capital<!--
+                          -->|<!---else3:
+                              -->{{#switch:{{{нийслэл_хот}}}
+                                 | [[{{{хамгийн_том_хот|}}}{{{том_суурин|}}}]] = capital
+                                 | {{{хамгийн_том_хот|}}}{{{том_суурин|}}}     = capital
+                                 | not capital
+                                 }}<!--(end#switch)
+                          -->}}<!--(end3)-->
+                    |<!--equals4:-->capital
+                    |<!---then4:
+                     -----------------------------------------------
+                      capital is largest_city or largest_settlement:
+                     -----------------------------------------------
+                        --> &nbsp;<br>({{{том_суурин_хэлбэр|их хот}}})
+                           </td><!--
+                        --------Add capital:--------
+                        --><td>{{{нийслэл_хот}}}<!--
+                        --------Add capital's latitude and longitude (if provided):-------
+                        -->{{#if:{{{latd|}}}
+                           |<!--then:--><br><small><span style="white-space:nowrap;"><!--
+                            -->{{coord|{{{latd}}}|{{{latm}}}|{{{latNS}}}|{{{longd}}}<!--
+                                      -->|{{{longm}}}|{{{longEW}}}|type:country<!--
+                            -->}}</span></small><!--
+                        -->}}
+                           </td><!--
+                 -->|<!---else4:
+                     ------------------------------------------------
+                     capital isn't largest_city or largest_settlement:
+                     ------------------------------------------------
+                      --></td><!--
+                         --------Add capital/admin center:--------
+                      --><td>{{{нийслэл_хот|}}}{{{засаг_төв|}}}<!--
+                         --------Add capital/admin center's [lat/long]itude (if provided):-------
+                         -->{{#if:{{{latd|}}}
+                            |<!--then:--><br/><small><span style="white-space:nowrap;"><!--
+                             -->{{coord|{{{latd}}}|{{{latm}}}|{{{latNS}}}|{{{longd}}}<!--
+                                       -->|{{{longm}}}|{{{longEW}}}|type:country<!--
+                             -->}}</span></small><!--
+                        -->}}
+                         </td><!--
+                    --------Add largest_city or largest_settlement (if provided):--------
+                    -->{{#if:{{{хамгийн_том_хот|}}}{{{том_суурин|}}} |<!--then5:
+                    --></tr>
+                       <tr class="mergedbottomrow">
+                         <td colspan="2"><!--
+                          -->{{#if:{{{common_name|}}}
+                             |<!--then:-->
+                                  Largest {{{том_суурин_хэлбэр|city}}}
+                             |<!--else:-->Том {{{том_суурин_хэлбэр|хот}}}<!--
+                          -->}}<!--
+                      --></td>
+                         <td>{{{хамгийн_том_хот|}}}{{{том_суурин|}}}</td><!--
+                    -->}}<!--(end5)
+                 -->}}<!--(end4)
+          ---------------------------------------------------------
+            Capital not provided, so add largest_city or
+                              largest_settlement (if provided):
+          ---------------------------------------------------------
+              -->|<!--else2:
+                  -->{{#if:{{{хамгийн_том_хот|}}}{{{том_суурин|}}}
+                     |<!--then6:
+                      --><th colspan="2"><!--
+                          -->{{#if:{{{common_name|}}}
+                               |<!--then:-->
+                                  (and {{{том_суурин_хэлбэр|largest city}}})
+                               |<!--else:-->Largest {{{том_суурин_хэлбэр|city}}}<!--
+                          -->}}<!--
+                      --></th>
+                         <td>{{{хамгийн_том_хот|}}}{{{том_суурин|}}}</td>
+                     }}<!--(end6)
+              -->}}<!--(end2)
+           --></tr><!--
+    -->}}<!--(end1)
+    
+    ================================================================
+         Албан ёсны болон бүс нутгийн хэл, Үндэс, Угсаа
+    ================================================================
+    -->{{#if:{{{албан_ёсны_хэл|}}} |<!--then:
+         --><tr>
+              <th colspan="2" style="vertical-align:middle; white-space:nowrap;">Албан хэл</th>
+              <td>{{{албан_ёсны_хэл|}}}</td>
+            </tr><!--
+         -->{{#if:{{{албан_үсэг|}}} |<!--then:
+              --><tr>
+                   <td colspan="2">Албан үсэг</td>
+                   <td style="vertical-align:middle;">{{{албан_үсэг|}}}</td>
+                 </tr><!--
+         -->}}<!--
+         -->{{#if:{{{бүс_нутгийн_хэл|}}} |<!--then:
+              --><tr class="mergedbottomrow">
+                   <td colspan="2">Зөвшөөрөгдсөн орон&nbsp;нутгийн хэл</td>
+                   <td style="vertical-align:middle;">{{{бүс_нутгийн_хэл|}}}</td>
+                 </tr><!--
+         -->}}<!--
+    -->}}<!--
+    
+    -->{{#if:{{{languages|}}} |<!--then:
+         --><tr{{#ifeq:{{{languages2_sub|}}}|yes|{{#ifeq:{{{languages_sub|}}}|yes|<nowiki> </nowiki>class="mergedrow"|}}|{{#ifeq:{{{languages_sub|}}}|yes|<nowiki> </nowiki>class="mergedbottomrow"|}}}}>
+              <{{#ifeq:{{{languages_sub|}}}|yes|td|th}} colspan="2" style="vertical-align:middle; white-space:nowrap;">{{{languages_type}}}</{{#ifeq:{{{languages_sub|}}}|yes|td|th}}>
+              <td>{{{languages|}}}</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{languages2|}}} |<!--then:
+         --><tr{{#ifeq:{{{languages2_sub|}}}|yes|<nowiki> </nowiki>class="mergedbottomrow"|}}>
+              <{{#ifeq:{{{languages2_sub|}}}|yes|td|th}} colspan="2" style="vertical-align:middle; white-space:nowrap;">{{{languages2_type}}}</{{#ifeq:{{{languages2_sub|}}}|yes|td|th}}>
+              <td>{{{languages2|}}}</td>
+            </tr><!--
+    -->}}<!--
+    
+    -->{{#if:{{{үндэс_язгуур|}}} |<!--then:
+         --><tr>
+              <td colspan="2">'''Ард түмэн'''&nbsp;<!--
+               -->{{#if:{{{үндэс_язгуур_он|}}} |<!--then:--><br>({{{үндэс_язгуур_он}}} он) }}</td>
+              <td>{{{үндэс_язгуур}}}</td>
+            </tr><!--
+    -->}}<!--
+    
+    -->{{#if:{{{нутгийн_олон|}}} |<!--then:
+         --> <tr class="mergedrow">
+              <td style="width:0.5em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">Нутгийн олон</td>
+              <td>{{{нутгийн_олон}}}</td>
+            </tr><!--
+    -->}}<!--
+    
+    ================================================================
+                                   Demonym
+    ================================================================
+    -->{{#if:{{{demonym|}}} |<!--then:
+         --><tr>
+              <td colspan="2">Олон түмэн</td>
+              <td>{{#ifexist:{{{demonym}}} people |<!--then:
+                  -->[[{{{demonym}}} people|{{{demonym}}}]] |<!--else:
+                  -->{{{demonym}}}<!--
+               -->}}
+              </td>
+            </tr><!--
+    -->}}<!--
+    ================================================================
+         Organization type, Membership (geopolitical organization)
+    ================================================================
+    -->{{#if:{{{org_type|}}} |<!--then:
+         --><tr> <td colspan="2">'''Type'''</td>
+                 <td>{{{org_type}}}</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{membership|}}} |<!--then:
+         --><tr> <td colspan="2" style="vertical-align:middle;"> '''{{{membership_type|Membership}}}'''</td>
+                 <td>{{{membership}}}</td>
+            </tr><!--
+    -->}}<!--
+    
+    ================================================================
+         "Government" (country/territory)
+                or "Leaders" (geopolitical organization)
+    ================================================================
+    -->{{#if:{{{засаглалын_хэлбэр|}}} |<!--then:
+         --><tr>
+              <th colspan="2">{{#if:{{{politics_link|}}}|<!--then:
+                  -->[[{{{politics_link}}}|Засаглал]]|<!--else:
+                  -->{{#ifexist:Politics of {{{linking_name|{{{common_name|{{{name|{{PAGENAME}}}}}}}}}}}|<!--then:
+                      -->[[Politics of {{{linking_name|{{{common_name|{{{name|{{PAGENAME}}}}}}}}}}}|Government]]|<!--else:
+                      -->Төр засаг}}}}</th>
+              <td>{{{засаглалын_хэлбэр|}}}</td>
+            </tr><!--
+    -->|<!--else no government_type provided, so if at least one leader provided,
+            use "Leaders" (geopolitical org) or "Government" (country/territory):
+        -->{{#if:{{{удирдагч_тушаал1|}}}{{{удирдагч_нэр1|}}} |<!--then:
+             -->{{#if:{{{name|}}}{{{membership|}}}
+                |<!--then template being used for geopolitical organization:
+                  --><tr><th colspan="3">Leaders</th></tr><!--
+             -->|<!--else template being used for a country or territory:
+                  --><tr><th colspan="3">Government</th></tr><!--
+             -->}}<!--
+        -->}}<!--
+    -->}}<!--
+    
+    ================================================================
+                                   Leaders
+    ================================================================
+    -->{{#if:{{{удирдагчийн_цол1|}}} |<!--then:
+         --><tr class="{{#if:{{{удирдагчийн_цол2|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{удирдагчийн_цол1}}}</td>
+              <td>{{{удирдагчийн_нэр1}}}</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{удирдагчийн_цол2|}}} |<!--then:
+         --><tr class="{{#if:{{{удирдагчийн_цол3|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{удирдагчийн_цол2}}}</td>
+              <td>{{{удирдагчийн_нэр2}}}</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{удирдагчийн_цол3|}}} |<!--then:
+         --><tr class="{{#if:{{{удирдагчийн_цол4|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{удирдагчийн_цол3}}}</td>
+              <td>{{{удирдагчийн_нэр3}}}</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{удирдагчийн_цол4|}}} |<!--then:
+         --><tr class="{{#if:{{{удирдагчийн_цол5|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{удирдагчийн_цол4}}}</td>
+              <td>{{{удирдагчийн_нэр4}}}</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{удирдагчийн_цол5|}}} |<!--then:
+         --><tr class="mergedbottomrow">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{удирдагчийн_цол5}}}</td>
+              <td>{{{удирдагчийн_нэр5}}}</td>
+            </tr><!--
+    -->}}<!--
+    
+    ================================================================
+                               Хууль
+    ================================================================
+    -->{{#if:{{{хууль_тогтоогч|}}} |<!--then:
+         --><tr>
+              <th colspan="2">Улсын хурал</th>
+              <td>{{{хууль_тогтоогч|}}}</td>
+          </tr><!--
+    -->}}<!--
+    -->{{#if:{{{дээд_танхим|}}} |<!--then:
+         --> <tr class="mergedrow">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">Дээд танхим</td>
+              <td>{{{дээд_танхим}}}</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{доод_танхим|}}} |<!--then:
+         --><tr class="mergedbottomrow">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">Доод танхим</td>
+              <td>{{{доод_танхим}}}</td>
+            </tr><!--
+    -->}}<!--
+    
+    ================================================================
+         Sovereignty (country/territory)
+               or Establishment (geopolitical organization)
+    ================================================================
+    -->{{#if:{{{тогтносон_үйл_явдал1|}}}{{{оршин_тогтнолын_утга|}}}{{{үүссэн|}}} |<!--then:
+         --><tr {{#if:{{{тогтносон_үйл_явдал1|}}} |<!--then:-->class="mergedtoprow"}}><!--
+             ----------Sovereignty----------
+             -->{{#if:{{{оршин_тогтнолын_утга|}}}
+                |<!--then:-->{{#if:{{{sovereignty_note|}}}
+                             |<!--then:--><th colspan="2">{{{sovereignty_note}}}</th>
+                                          <td>{{{sovereignty_note}}}&nbsp;</td><!--
+                          -->|<!--else:--><th colspan="3">{{{оршин_тогтнолын_утга}}}</th><!--
+                          -->}}<!--
+             ---------Establishment----------
+             -->|<!--else:-->{{#if:{{{үүссэн|}}}
+                             |<!--then:--><th colspan="2">Түүхт эхлэл</th>
+                                          <td>{{{үүссэн}}}</td><!--
+                          -->|<!--else:--><th colspan="3"></th><!--
+                          -->}}<!--
+             -->}}<!--
+         --></tr><!--
+    -->}}<!--
+    ================================================================
+            Significant events in country/territory
+                           or organization's establishment
+    ================================================================
+    -->{{#if:{{{тогтносон_үйл_явдал1|}}} |<!--then:
+         --><tr class="{{#if:{{{тогтносон_үйл_явдал2|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{тогтносон_үйл_явдал1}}}</td>
+              <td>{{{үйл_явдалын_огноо1|}}}&nbsp;</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{тогтносон_үйл_явдал2|}}} |<!--then:
+         --><tr class="{{#if:{{{тогтносон_үйл_явдал3|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{тогтносон_үйл_явдал2}}}</td>
+              <td>{{{үйл_явдалын_огноо2|}}}&nbsp;</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{тогтносон_үйл_явдал3|}}} |<!--then:
+         --><tr class="{{#if:{{{тогтносон_үйл_явдал4|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{тогтносон_үйл_явдал3}}}</td>
+              <td>{{{үйл_явдалын_огноо3|}}}&nbsp;</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{тогтносон_үйл_явдал4|}}} |<!--then:
+         --><tr class="{{#if:{{{established_event5|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{тогтносон_үйл_явдал4}}}</td>
+              <td>{{{үйл_явдалын_огноо4|}}}&nbsp;</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{established_event5|}}} |<!--then:
+         --><tr class="{{#if:{{{established_event6|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{established_event5}}}</td>
+              <td>{{{established_date5|}}}&nbsp;</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{established_event6|}}} |<!--then:
+         --><tr class="{{#if:{{{established_event7|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{established_event6}}}</td>
+              <td>{{{established_date6|}}}&nbsp;</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{established_event7|}}} |<!--then:
+         --><tr class="{{#if:{{{established_event8|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{established_event7}}}</td>
+              <td>{{{established_date7|}}}&nbsp;</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{established_event8|}}} |<!--then:
+         --><tr class="{{#if:{{{established_event9|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{established_event8}}}</td>
+              <td>{{{established_date8|}}}&nbsp;</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{established_event9|}}} |<!--then:
+         --><tr class="{{#if:{{{established_event10|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{established_event9}}}</td>
+              <td>{{{established_date9|}}}&nbsp;</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{established_event10|}}} |<!--then:
+         --><tr class="{{#if:{{{established_event11|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{established_event10}}}</td>
+              <td>{{{established_date10|}}}&nbsp;</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{established_event11|}}} |<!--then:
+         --><tr class="{{#if:{{{established_event12|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{established_event11}}}</td>
+              <td>{{{established_date11|}}}&nbsp;</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{established_event12|}}} |<!--then:
+         --><tr class="mergedbottomrow">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{established_event12}}}</td>
+              <td>{{{established_date12|}}}&nbsp;</td>
+            </tr><!--
+    -->}}<!--
+    
+    ================================================================
+         Sovereignty (country/territory)
+               or Establishment (geopolitical organization)
+    ================================================================
+    -->{{#if:{{{түүхэн_огноо1|}}}{{{түүхэн_утга|}}}{{{established|}}} |<!--then:
+         --><tr {{#if:{{{түүхэн_огноо1|}}} |<!--then:-->class="mergedtoprow"}}><!--
+             ----------Sovereignty----------
+             -->{{#if:{{{түүхэн_утга|}}}
+                |<!--then:-->{{#if:{{{утгын_тайлбар|}}}
+                             |<!--then:--><th colspan="2">{{{түүхэн_утга}}}</th>
+                                          <td>{{{утгын_тайлбар}}}&nbsp;</td><!--
+                          -->|<!--else:--><th colspan="3">{{{түүхэн_утга}}}</th><!--
+                          -->}}<!--
+             ---------Establishment----------
+             -->|<!--else:-->{{#if:{{{үүсжээ|}}}
+                             |<!--then:--><th colspan="2">Үүсжээ</th>
+                                          <td>{{{үүсжээ}}}</td><!--
+                          -->|<!--else:--><th colspan="3">Үүсжээ</th><!--
+                          -->}}<!--
+             -->}}<!--
+         --></tr><!--
+    -->}}<!--
+    ================================================================
+            Significant events in country/territory
+                           or organization's establishment
+    ================================================================
+    -->{{#if:{{{түүхэн_огноо1|}}} |<!--then:
+         --><tr class="{{#if:{{{түүхэн_огноо2|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{түүхэн_огноо1}}}</td>
+              <td>{{{түүхэн_үйл1|}}}&nbsp;</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{түүхэн_огноо2|}}} |<!--then:
+         --><tr class="{{#if:{{{түүхэн_огноо3|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{түүхэн_огноо2}}}</td>
+              <td>{{{түүхэн_үйл2|}}}&nbsp;</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{түүхэн_огноо3|}}} |<!--then:
+         --><tr class="{{#if:{{{түүхэн_огноо4|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{түүхэн_огноо3}}}</td>
+              <td>{{{түүхэн_үйл3|}}}&nbsp;</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{түүхэн_огноо4|}}} |<!--then:
+         --><tr class="{{#if:{{{түүхэн_огноо5|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{түүхэн_огноо4}}}</td>
+              <td>{{{түүхэн_үйл4|}}}&nbsp;</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{түүхэн_огноо5|}}} |<!--then:
+         --><tr class="{{#if:{{{түүхэн_огноо6|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{түүхэн_огноо5}}}</td>
+              <td>{{{түүхэн_үйл5|}}}&nbsp;</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{түүхэн_огноо6|}}} |<!--then:
+         --><tr class="{{#if:{{{түүхэн_огноо7|}}}
+                       |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{түүхэн_огноо6}}}</td>
+              <td>{{{түүхэн_үйл6|}}}&nbsp;</td>
+            </tr><!--
+    -->}}<!--
+    
+    ================================================================
+         Area (area_label, area_km2, area_label2, area_data2,...)
+    ================================================================
+    -->{{#if:{{{газар_нутаг_км2|}}} |<!--then:
+         --><tr class="mergedtoprow">
+              <th colspan="3">{{#if:{{{area_link|}}}|<!--then:
+                  -->[[{{{area_link}}}|Area]]|<!--else:
+                  -->{{#ifexist:Geography of {{{linking_name|{{{common_name|{{{name|{{PAGENAME}}}}}}}}}}}|<!--then:
+                      -->[[Geography of {{{linking_name|{{{common_name|{{{name|{{PAGENAME}}}}}}}}}}}|Area]]|<!--else:
+                      -->Нутаг дэвсгэр}}}}</th>
+            </tr>
+            <tr class="mergedrow">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{area_label|Бүх талбай}}}<!--
+    --France-related footnote:-->{{#if:{{{FR_foot4|}}} |<!--then:-->{{{FR_foot4}}} }}</td>
+              <td>{{formatnum:{{{газар_нутаг_км2|}}}}}&nbsp;км<sup>2</sup>&nbsp;<!--
+                  -->{{#if:{{{area_footnote|}}}|{{{area_footnote|}}} }}{{#if:{{{нутгийн_талбайгаарх_эрэмбэ_дэс|}}} |<!--then:-->([[Улс орнуудын газар нутгийн хэмжээ|{{{нутгийн_талбайгаарх_эрэмбэ_дэс}}}]]) }}<!--
+    -->}}<!--
+       -------------------Percentage water--------------------
+    -->{{#if:{{{усны_эзлэх_хувь|}}} |<!--then:
+         --><tr class="mergedrow">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">Гадаргын ус (%)</td>
+              <td>{{{усны_эзлэх_хувь|}}}</td>
+            </tr><!--
+    -->}}<!--
+       -------------------Area 2 (customized)------------------
+    -->{{#if:{{{area_label2|}}} |<!--then:
+         --><tr class="mergedrow">
+              <td>&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">{{{area_label2|}}}</td>
+              <td>{{{area_data2|area_data2}}}</td>
+            </tr><!--
+    -->}}<!--
+       -----------Areas of France-----------
+    -->{{#if:{{{FR_metropole|}}} |<!--then:
+         --><tr class="mergedrow">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td colspan="2" style="padding-left:0em;">{{{FR_metropole}}}</td>
+            </tr>
+            <tr class="mergedrow">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;</td>
+              <td style="padding-left:1em;">-&nbsp;[[Institut Géographique National|IGN]]{{{FR_foot2|}}}</td>
+              <td>{{formatnum:{{{FR_IGN_area_km2|}}}}}&nbsp;km<sup>2</sup>&nbsp;([[List of countries and outlying territories by total area|{{{FR_IGN_area_rank|}}}]])<br/><!--
+                  -->{{#if:{{{FR_IGN_area_sq_mi|}}}|{{formatnum:{{{FR_IGN_area_sq_mi|}}}}}|{{formatnum:{{#expr: {{{FR_IGN_area_km2|}}} div 2.589988110336 round 0}}}}}}&nbsp;sq&nbsp;mi</td>
+            </tr>
+            <tr class="mergedrow">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;</td>
+              <td style="padding-left:1em;">-&nbsp;[[Cadastre]]{{{FR_foot3|}}}</td>
+              <td>{{formatnum:{{{FR_cadastre_area_km2|}}}}}&nbsp;km<sup>2</sup>&nbsp;([[List of countries and outlying territories by total area|{{{FR_cadastre_area_rank|}}}]])<br/><!--
+                  -->{{#if:{{{FR_cadastre_area_sq_mi|}}}|{{formatnum: {{{FR_cadastre_area_sq_mi|}}}}}|{{formatnum:{{#expr: {{{FR_cadastre_area_km2|}}} div 2.589988110336 round 0}}}}}} &nbsp;sq&nbsp;mi</td>
+            </tr><!--
+    -->}}<!--
+    
+    ================================================================
+                                  Хүн ам
+    ================================================================
+    -->{{#if:{{{хүн_амын_тооцоо|}}}{{{хүн_амын_тооллого|}}}{{{FR_metropole_population|}}} |<!--then:
+         --><tr class="mergedtoprow">
+              <th colspan="3">{{#if:{{{population_link|}}}|<!--then:
+                  -->[[{{{population_link}}}|Population]]|<!--else:
+                  -->{{#ifexist:Demographics of {{{linking_name|{{{common_name|{{{name|{{PAGENAME}}}}}}}}}}}|<!--then:
+                      -->[[Demographics of {{{linking_name|{{{common_name|{{{name|{{PAGENAME}}}}}}}}}}}|Population]]|<!--else:
+                      -->[[Хүн ам]]}}}}</th>
+            </tr><!--
+         ---------------Estimate---------------
+         -->{{#if:{{{хүн_амын_тооцоо|}}} |<!--then:
+            --><tr class="mergedrow">
+                 <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+                 <td style="padding-left:0em;">Тооцоо&nbsp;({{{хүн_ам_тооцоолсон_он|}}})</td>
+                 <td>{{{хүн_амын_тооцоо|}}}&nbsp;<!--
+                  -->{{#if:{{{хүн_амын_тоогоор_эрэмбэ_дэс|}}} |<!--then:-->([[Улс орнуудын хүн амын тоо|{{{хүн_амын_тоогоор_эрэмбэ_дэс}}}]]) }}</td>
+               </tr><!--
+         -->}}<!--
+         ----------------Census----------------
+         -->{{#if:{{{хүн_амын_тооллого|}}} |<!--then:
+              --><tr class="mergedrow">
+                   <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+                   <td style="padding-left:0em;">Тооллого&nbsp;({{{хүн_ам_тоолсон_он|}}})</td>
+                   <td>{{{хүн_амын_тооллого|}}}&nbsp;<!--
+                       -->{{#if:{{{хүн_амын_тооллого_эрэмбэ_тоологдсоноор|}}} |<!--then:-->([[Улс орнуудын жагсаалт (Тоологдсон хүн амын тоогоор)|{{{хүн_амын_тооллого_эрэмбэ_тоологдсоноор}}}]]) }}</td>
+                 </tr><!--
+         -->}}<!--
+    -->}}<!--
+       -------(France)-------
+       -->{{#if:{{{FR_metropole_population|}}} |<!--then:
+            --><tr class="mergedrow">
+                 <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;</td>
+                 <td colspan="2" style="padding-left:0em;">({{{FR_total_population_estimate_year}}})</td>
+               </tr>
+               <tr class="mergedrow">
+                 <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td> 
+                 <td style="padding-left:0em;">Total{{{FR_foot}}}</td>
+                 <td>{{{FR_total_population_estimate}}}&nbsp;([[List of countries by population in 2005|{{{FR_total_population_estimate_rank}}}]])</td>
+               </tr>
+               <tr class="mergedrow">
+                 <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+                 <td style="padding-left:0em;">{{{FR_metropole}}}</td>
+                 <td>{{{FR_metropole_population}}}&nbsp;([[List of countries by population in 2005|{{{FR_metropole_population_estimate_rank}}}]])</td>
+               </tr><!--
+       -->}}<!--
+       ---------------Нягтрал----------------
+    -->{{#if:{{{хүн_амын_нягтрал_нэгж_км2|}}} |<!--then:
+         --><tr class="mergedbottomrow">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">[[Хүн амын нягтрал|Нягт сийрэг]]<!--
+    --France-related footnote:-->{{#if:{{{FR_foot5|}}} |<!--then:-->{{{FR_foot5}}} }}</td>
+              <td>{{{хүн_амын_нягтрал_нэгж_км2|}}} хүн/км<sup>2</sup>&nbsp;<!--
+                  -->{{#if:{{{хүн_ам_нягтрал_км2_хөл|}}}|{{{хүн_ам_нягтрал_хөл|}}}}}{{#if:{{{хүн_амын_нягтралаар_эрэмбэ_дэс|}}} |<!--then:-->([[Улс орнуудын жагсаалт (Хүн амын нягтралаар)|{{{хүн_амын_нягтралаар_эрэмбэ_дэс}}}]]) }}<!--
+            </tr><!--
+    -->}}<!--
+    
+    ================================================================
+                                      ДНБ
+    ================================================================
+       -----------------PPP-----------------
+    -->{{#if:{{{ДНБ_ХАЧ|}}} |<!--then:
+         --><tr class="mergedtoprow">
+              <td colspan="2">'''[[Дотоодын нийт бүтээгдэхүүн|ДНБ]]'''&nbsp;(ХАЧТ)</td>
+              <td>{{{ДНБ_ХАЧ_он|}}}&nbsp;оны тооцоо</td>
+            </tr>
+            <tr class="mergedrow">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">Нийт дүн</td>
+              <td>{{{ДНБ_ХАЧ}}}&nbsp;<!--
+                  -->{{#if:{{{ДНБ_ХАЧ_эрэмбэ|}}} |<!--then:-->([[Улс орнуудын жагсаалт (Худалдан авах чадвараар тэгшитгэгдсэн Дотоодын нийт бүтээгдэхүүнээр)|{{{ДНБ_ХАЧ_эрэмбэ}}}]]) }}</td>
+            </tr><!--
+       -------(PPP per capita)-------
+       -->{{#if:{{{ДНБ_ХАЧ_Нэг_хүнд|}}} |<!--then:
+            --><tr class="mergedbottomrow">
+                 <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+                 <td style="padding-left:0em;">Нэг хүнд</td>
+                 <td>{{{ДНБ_ХАЧ_Нэг_хүнд}}}&nbsp;<!--
+                     -->{{#if:{{{ДНБ_ХАЧ_Нэг_хүнд_эрэмбэ|}}} |<!--then:-->([[Улс орнуудын жагсаалт (Нэг хүнд оногдох Худалдан авах чадвараар тэгшитгэгдсэн Дотоодын нийт бүтээгдэхүүнээр)|{{{ДНБ_ХАЧ_Нэг_хүнд_эрэмбэ}}}]]) }}</td>
+               </tr><!--
+       -->}}<!--
+    -->}}<!--
+       ---------------Nominal---------------
+    -->{{#if:{{{ДНБ_нэрлэсэн|}}} |<!--then:
+         --><tr class="mergedtoprow">
+              <td colspan="2">'''[[Дотоодын нийт бүтээгдэхүүн|ДНБ]]''' (Нэрлэсэн)</td>
+              <td>{{{ДНБ_нэрлэсэн_он|}}}&nbsp;оны тооцоо</td>
+            </tr>
+            <tr class="mergedrow">
+              <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+              <td style="padding-left:0em;">Нийт дүн</td>
+              <td>{{{ДНБ_нэрлэсэн}}}&nbsp;<!--
+                  -->{{#if:{{{ДНБ_нэрлэсэн_эрэмбэ|}}} |<!--then:-->([[Улс орнуудын жагсаалт (Нэрлэсэн Дотоодын нийт бүтээгдэхүүнээр)|{{{ДНБ_нэрлэсэн_эрэмбэ}}}]]) }}</td>
+            </tr><!--
+       -------(Nominal per capita)-------
+       -->{{#if:{{{ДНБ_нэрлэсэн_нэг_хүнд|}}} |<!--then:
+            --><tr class="mergedbottomrow">
+                 <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+                 <td style="padding-left:0em;">Нэг хүнд</td>
+                 <td>{{{ДНБ_нэрлэсэн_нэг_хүнд}}}&nbsp;<!--
+                     -->{{#if:{{{ДНБ_нэрлэсэн_нэг_хүнд_эрэмбэ|}}} |<!--then:-->([[Улс орнуудын жагсаалт (Нэг хүнд оногдох Нэрлэсэн Дотоодын нийт бүтээгдэхүүнээр)|{{{ДНБ_нэрлэсэн_нэг_хүнд_эрэмбэ}}}]]) }}</td>
+               </tr><!--
+       -->}}<!--
+    -->}}<!--
+    
+    ================================================================
+                     Хэрэглээний тэгш бус байдлын илтгэлцүүр
+    ================================================================
+    -->{{#if:{{{ХТББИ|}}} |<!--then:
+         --><tr>
+              <td colspan="2">'''[[Орлогын тэгш бус байдлын илтгэлцүүр|ОТББИ]]'''&nbsp;{{#if:{{{Илтгэлцүүр_он|}}} |<!--then:-->({{{Илтгэлцүүр_он|}}}) }}</td>
+              <td>{{{ХТББИ}}}&nbsp;<!--
+                  -->{{#if:{{{Илтгэлцүүр_ангилал|}}} |<!--then:-->({{{Илтгэлцүүр_ангилал|}}})&nbsp;}}<!--
+                  -->{{#if:{{{Илтгэлцүүр_эрэмбэ|}}}     |<!--then:-->([[List of countries by income equality|{{{Илтгэлцүүр_эрэмбэ}}}]]) }}</td>
+            </tr><!--
+    -->}}<!--
+    
+    ================================================================
+                                     ХХИ
+    ================================================================
+    -->{{#if:{{{ХХИ|}}} |<!--then:
+         --><tr>
+              <td colspan="2">'''[[Хүний хөгжлийн илтгэцүүр|ХХИ]]'''&nbsp;{{#if:{{{ХХИ_он|}}} |<!--then:-->({{{ХХИ_он|}}}) }}</td>
+              <td>{{{ХХИ}}}&nbsp;<!--
+                  -->{{#if:{{{ХХИ_ангилал|}}} |<!--then:-->({{{ХХИ_ангилал|}}})&nbsp;}}<!--
+                  -->{{#if:{{{ХХИ_эрэмбэ|}}}     |<!--then:-->([[Улс орнуудын жагсаалт (Хүний хөгжлийн илтгэцүүрээр)|{{{ХХИ_эрэмбэ}}}]]) }}</td>
+            </tr><!--
+    -->}}<!--
+    
+    ================================================================
+                                  Мөнгөн тэмдэгт
+    ================================================================
+    -->{{#if:{{{Мөнгөн_тэмдэгт|}}} |<!--then:
+         --><tr>
+              <th colspan="2" style="vertical-align:middle;">Мөнгөний нэгж</th>
+              <td>{{{Мөнгөн_тэмдэгт}}} <!--
+                  -->{{#if:{{{Мөнгөн_тэмдэгт_код|}}}
+                     |<!--then:-->({{{Мөнгөн_тэмдэгт_код}}}}}) </td>
+            </tr><!--
+    -->}}<!--
+    
+    ================================================================
+                                  Цагийн бүс
+    ================================================================
+    -->{{#if:{{{Цагийн_бүс|}}}{{{utc_offset|}}} |<!--then:
+         --><tr {{#if:{{{utc_offset_DST|}}}{{{DST_note|}}} |<!--then:-->class="mergedtoprow"}}>
+              <th colspan="2">[[Цагийн бүс]]</th>
+              <td>{{{Цагийн_бүс|}}} <!--
+                  -->{{#if:{{{utc_offset|}}} |<!--then:-->{{nowrap|([[Нэгтгэн зохицуулсан нийтлэг цаг|НЗНЦ]]{{{utc_offset}}})<!--endnowrap:-->}}<!--endif:-->}}</td>
+            </tr><!--
+         -->{{#if:{{{зуны_цагийн_бүсийн_нэр|}}}{{{utc_offset_DST|}}} |<!--then:
+              --><tr class="{{#if:{{{DST_note|}}} |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}">
+                   <td style="width:1em; padding:0 0 0 0.6em;">&nbsp;-&nbsp;</td>
+                   <td style="padding-left:0em;">Зуны цаг</td>
+                   <td>{{{DST|{{{зуны_цагийн_бүсийн_нэр|}}}}}}&nbsp;([[Нэгтгэн зохицуулсан нийтлэг цаг|НЗНЦ]]{{{utc_offset_DST}}})</td>
+                 </tr><!--
+         -->}}<!--
+    -->}}<!--
+    -->{{#if:{{{DST_note|}}} |<!--then:
+         --><tr class="mergedbottomrow">
+              <td colspan="2"></td>
+              <td>{{{DST_note}}}</td>
+            </tr><!--
+    -->}}<!--
+    
+    ==========================================================================================
+                                             Antipodes
+    ==========================================================================================
+    -->{{#if:{{{antipodes|}}} |<!--then:
+         --><tr>
+              <th colspan="2">[[Antipodes]]</th>
+              <td>{{{antipodes}}}</td>
+            </tr><!--
+    -->}}<!--
+    
+    ==========================================================================================
+                                            Хэв огноо
+    ==========================================================================================
+    -->{{#if:{{{хэв_огноо|}}} |<!--then:
+         --><tr>
+              <th colspan="2">Хэв огноо</th>
+              <td>{{{хэв_огноо}}}</td>
+            </tr><!--
+    -->}}<!--
+    
+    
+    
+    
+    
+    ==========================================================================================
+                                            Аль гарын замын хөдөлгөөн
+    ==========================================================================================
+    -->{{#if:{{{аль_гарын_замын_хөдөлгөөн|}}} |<!--then:
+         --><tr>
+              <th colspan="2">Замын хөдөлгөөн</th>
+              <td>{{{аль_гарын_замын_хөдөлгөөн}}}</td>
+            </tr><!--
+    -->}}<!--
+    
+    ================================================================
+                                    ISO 3166 code 
+    ================================================================
+    -->{{#switch:{{{iso3166code|}}} 
+      |omit=<!-- do nothing -->
+      |=<!-- if iso3166code is not supplied:-->{{#if:{{{common_name|}}}
+        |<!-- then: -->{{#ifexist:Template:ISO 3166 code {{{common_name|}}}
+          |<!-- then: --><tr class="mergedtoprow">
+          <th colspan="2">[[ISO 3166|ISO&nbsp;3166&nbsp;code]]</th>
+          <td>[[ISO 3166-2:{{ISO 3166 code {{{common_name|}}} }}|{{ISO 3166 code {{{common_name|}}} }}]]</td>
+          </tr>
+        }}<!--end ifexist -->
+      }}<!--end if common_name-->
+      |#default=<tr>
+      <th colspan="2">[[ISO 3166|ISO&nbsp;3166&nbsp;code]]</th>
+      <td>[[ISO 3166-2:{{uc:{{{iso3166code}}} }}|{{uc:{{{iso3166code}}} }}]]</td>
+      </tr>
+    }}<!--
+    
+    ================================================================
+                                Интернетийн домэйн
+    ================================================================
+    -->{{#if:{{{Интернетийн_АДН|}}} |<!--then:
+         --><tr>
+              <th colspan="2">[[Интернетийн улсын домэйн хаягийн жагсаалт|Домэйн нэр]]</th>
+              <td>{{{Интернетийн_АДН}}}</td>
+            </tr><!--
+    -->}}<!--
+    ================================================================
+                    Official website (geopolitical organization)
+    ================================================================
+    -->{{#if:{{{official_website|}}} |<!--then:
+         --><tr>
+              <td colspan="3" style="line-height:11pt; text-align:center;"><!--
+               -->'''Website'''<br/>{{{official_website}}}</td>
+            </tr><!--
+    -->}}<!--
+    
+    ================================================================
+                                Утасны дугаар
+    ================================================================
+    -->{{#if:{{{Утасны_код|}}} |<!--then:
+         --><tr>
+              <th colspan="2">[[Улсын утасны кодуудын жагсаалт|Утасны томьёо]]</th>
+              <td>{{{Утасны_код}}}</td>
+            </tr><!--
+    -->}}<!--
+    
+    -->{{#if:{{{утас_домэйн|}}} |<!--then:
+         --><tr>
+              <th colspan="2">Утас, домэйн</th>
+              <td>{{{утас_домэйн}}}</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{томъёолбор|}}} |<!--then:
+         --><tr>
+              <th colspan="2">Томъёолбор</th>
+              <td>{{{томъёолбор}}}</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{нэр_томъёо|}}} |<!--then:
+         --><tr>
+              <th colspan="2">Нэр томъёо</th>
+              <td>{{{нэр_томъёо}}}</td>
+            </tr><!--
+    -->}}<!--
+    
+    ================================================================
+                               Patron saint
+    ================================================================
+    -->{{#if:{{{patron_saint|{{{patron_saints|}}}}}} |<!--then:
+         --><tr>
+              <th colspan="2" >[[Patron saint]]{{#if:{{{patron_saints|}}}|s}}</th>
+              <td>{{{patron_saint|{{{patron_saints}}}}}}</td>
+            </tr><!--
+    -->}}<!--
+    
+    <!--
+    
+    ================================================================
+                                Bottom Map
+    ================================================================
+    -->{{#if:{{{image_map3|}}} |<!--then:
+         --><tr class="mergedtoprow">
+              <td colspan="3" style="text-align:center; padding:0.6em 0em;"> [[File:{{{image_map3}}} |{{{map3_width|250px}}} |center |alt={{{alt_map3|}}}|Location of {{{common_name|{{{linking_name|{{PAGENAME}}}}}}}}]] <div style="position:relative; top:0.3em;"><small>{{{map_caption3|}}}</small></div>
+              </td>
+            </tr><!--
+    -->}}<!--
+    
+    ================================================================
+                                 Footnotes
+    ================================================================
+        ----------Non-specific----------
+    -->{{#if:{{{тэмдэглэл|}}} |<!--then:
+         --><tr>
+              <td colspan="3"><small>{{{тэмдэглэл}}}</small></td>
+            </tr><!--
+    -->}}<!--
+       ------------Numbered------------
+    -->{{#if:{{{тэмдэглэл1|}}} |<!--then:
+         --><tr style="font-size:80%;">
+              <td align="right">{{lower|0.3em|<sup>1</sup>}}</td>
+              <td colspan="2" style="padding-left:0em;">{{{тэмдэглэл1}}}</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{тэмдэглэл2|}}} |<!--then:
+         --><tr class="{{#if:{{{тэмдэглэл3|}}} |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}" style="font-size:80%;">
+              <td align="right">{{lower|0.3em|<sup>2</sup>}}</td>
+              <td colspan="2" style="padding-left:0em;">{{{тэмдэглэл2}}}</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{тэмдэглэл3|}}} |<!--then:
+         --><tr class="{{#if:{{{тэмдэглэл4|}}} |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}" style="font-size:80%;">
+              <td align="right">{{lower|0.3em|<sup>3</sup>}}</td>
+              <td colspan="2" style="padding-left:0em;">{{{тэмдэглэл3}}}</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{тэмдэглэл4|}}} |<!--then:
+         --><tr class="{{#if:{{{footnote5|}}} |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}" style="font-size:80%;">
+              <td align="right">{{lower|0.3em|<sup>4</sup>}}</td>
+              <td colspan="2" style="padding-left:0em;">{{{тэмдэглэл4}}}</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{footnote5|}}} |<!--then:
+         --><tr class="{{#if:{{{footnote6|}}} |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}" style="font-size:80%;">
+              <td align="right">{{lower|0.3em|<sup>5</sup>}}</td>
+              <td colspan="2" style="padding-left:0em;">{{{footnote5}}}</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{footnote6|}}} |<!--then:
+         --><tr class="{{#if:{{{footnote7|}}} |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}" style="font-size:80%;">
+              <td align="right">{{lower|0.3em|<sup>6</sup>}}</td>
+              <td colspan="2" style="padding-left:0em;">{{{footnote6}}}</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{footnote7|}}} |<!--then:
+         --><tr class="{{#if:{{{footnote8|}}} |<!--then:-->mergedrow |<!--else:-->mergedbottomrow}}" style="font-size:80%;">
+              <td align="right">{{lower|0.3em|<sup>7</sup>}}</td>
+              <td colspan="2" style="padding-left:0em;">{{{footnote7}}}</td>
+            </tr><!--
+    -->}}<!--
+    -->{{#if:{{{footnote8|}}} |<!--then:
+         --><tr class="mergedbottomrow" style="font-size:80%;">
+              <td align="right">{{lower|0.3em|<sup>8</sup>}}</td>
+              <td colspan="2" style="padding-left:0em;">{{{footnote8}}}</td>
+            </tr><!--
+    -->}}<!--
+    
+    ================================================================
+                                Газрын зураг
+    ================================================================
+    
+    -->{{#if:{{{газрын_зураг2|}}} |<!--then:
+         --><tr class="mergedtoprow">
+              <td colspan="3" style="text-align:center; padding:0.6em 0em;"> [[File:{{{газрын_зураг2}}} |{{{map2_width|280px}}} |center |alt={{{alt_map2|{{{map_caption2|}}}}}}|{{{alt_map2|{{{map_caption2|Location of {{{common_name|{{{linking_name|{{PAGENAME}} }}} }}} }}} }}}]] <div style="position:relative; top:0.3em;"><small>{{{map_caption2|}}}</small></div>
+              </td>
+            </tr><!--
+    -->}}<!--
+    
+    
+    ================================================================
+                                Navbox
+    ================================================================
+    -->{{#if:{{{navbar|}}} |<!--then:
+         --><tr class="mergedtoprow noprint">
+              <td colspan="3" style="text-align:center;">{{navbar|{{{navbar|}}}}}</td>
+            </tr><!--
+    -->}}<!--
+    
+    --></table>

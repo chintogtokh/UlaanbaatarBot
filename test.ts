@@ -22,20 +22,22 @@ const renameCategories = async () => {
   //   "Hello world (testing bot)"
   // );
 
-  const pages = await bot.getPagesInCategory("Ангилал:Сурвалж бичиг");
+  const pages = await bot.getPagesInCategory(
+    "Ангилал:Pages using infobox country with unknown parameters"
+  );
 
   for await (const element of pages) {
     console.log(element);
 
     bot.edit(element, (rev) => {
       let text = rev.content.replace(
-        /\[\[Ангилал\: ?Сурвалж бичиг\]\]/g,
-        "[[Ангилал:Монголын түүхийн сурвалж бичиг]]"
+        /\{\{Инфобокс улс/g,
+        "{{subst:Инфобокс улс хувиргагч"
       );
       return {
         text: text,
         summary:
-          "[[Ангилал:Сурвалж бичиг]]-ийг [[Ангилал:Монголын түүхийн сурвалж бичиг]]-аар сольж байна",
+          "[[Template:Инфобокс улс]]-ийг буруу ашигласан хуудсыг засаж байна",
         minor: true,
       };
     });
