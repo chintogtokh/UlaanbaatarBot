@@ -22,29 +22,27 @@ const renameCategories = async () => {
   //   "Hello world (testing bot)"
   // );
 
-  const pages = await bot.getPagesInCategory(
-    "Ангилал:Pages using infobox country with unknown parameters"
-  );
+  const pages = await bot.getPagesInCategory("Ангилал:Программ хангамж");
 
   for await (const element of pages) {
     console.log(element);
 
     bot.edit(element, (rev) => {
       let text = rev.content.replace(
-        /\{\{Инфобокс улс/g,
-        "{{subst:Инфобокс улс хувиргагч"
+        /\[\[Ангилал:Программ хангамж/g,
+        "[[Ангилал:Програм хангамж"
       );
       return {
         text: text,
         summary:
-          "[[Template:Инфобокс улс]]-ийг буруу ашигласан хуудсыг засаж байна",
+          "[[Ангилал:Программ хангамж]]-ийг [[Ангилал:Програм хангамж]]-аар сольж байна",
         minor: true,
       };
     });
 
     console.log(1);
 
-    await new Promise((r) => setTimeout(r, 5000));
+    await new Promise((r) => setTimeout(r, 1500));
   }
 };
 
