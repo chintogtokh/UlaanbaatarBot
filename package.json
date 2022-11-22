@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "boh": "npx ts-node src/projects/wrestlers/categorise",
+    "date_articles": "npx ts-node src/projects/date_articles/createDateArticles"
+  },
   "dependencies": {
     "dotenv": "^16.0.3",
     "mwn": "^1.11.4"

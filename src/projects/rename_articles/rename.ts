@@ -1,26 +1,12 @@
 import { mwn } from "mwn";
 import * as dotenv from "dotenv";
+import { BotConfig } from "../../utils/bot";
 
 dotenv.config();
 
-const config = {
-  apiUrl: "https://mn.wikipedia.org/w/api.php",
-  username: `${process.env.USERNAME}`,
-  password: `${process.env.PASSWORD}`,
-  userAgent: "UlaanbaatarBot 0.01 ([[User:UlaanbaatarBot]])",
-  defaultParams: { assert: "user" },
-};
-
 const renameCategories = async () => {
-  const bot = new mwn(config);
-
+  const bot = new mwn(BotConfig);
   await bot.login();
-
-  // bot.create(
-  //   "Хэрэглэгчийн_яриа:UlaanbaatarBot",
-  //   "Hello world --~~~~",
-  //   "Hello world (testing bot)"
-  // );
 
   const pages = await bot.getPagesInCategory("Ангилал:Программ хангамж");
 
@@ -40,9 +26,7 @@ const renameCategories = async () => {
       };
     });
 
-    console.log(1);
-
-    await new Promise((r) => setTimeout(r, 1500));
+    await new Promise((r) => setTimeout(r, 5000));
   }
 };
 

@@ -1,16 +1,9 @@
 import { mwn } from "mwn";
 import * as dotenv from "dotenv";
 import * as readline from "readline";
+import { BotConfig } from "./src/utils/bot";
 
 dotenv.config();
-
-const config = {
-  apiUrl: "https://mn.wikipedia.org/w/api.php",
-  username: `${process.env.USERNAME}`,
-  password: `${process.env.PASSWORD}`,
-  userAgent: "UlaanbaatarBot 0.01 ([[User:UlaanbaatarBot]])",
-  defaultParams: { assert: "user" },
-};
 
 const iin = (val: string) => {
   const matcher = val.match(/[аиоөуүэ]/);
@@ -24,9 +17,7 @@ const iin = (val: string) => {
 };
 
 const suurin = async () => {
-  const bot = new mwn(config);
-
-  console.log(config);
+  const bot = new mwn(BotConfig);
 
   await bot.login();
 
