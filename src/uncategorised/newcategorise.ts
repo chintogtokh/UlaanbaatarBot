@@ -6,7 +6,7 @@ import { BotConfig, LangBotConfig } from "../utils/bot";
 
 dotenv.config();
 
-const FOREIGN_LANGUAGE = "ru";
+const FOREIGN_LANGUAGE = "en";
 
 const main = async () => {
   const bot = new mwn(BotConfig);
