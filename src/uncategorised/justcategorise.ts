@@ -1,23 +1,26 @@
 import { mwn } from "mwn";
 import * as dotenv from "dotenv";
-import { BotConfig, LangBotConfig } from "../utils/bot";
+import * as fs from "fs";
+import { BotConfig } from "../utils/bot";
 
 dotenv.config();
+
+const FILE = "/Users/chintogtokh/dev/UlaanbaatarBot/src/uncategorised/data.txt";
 
 const main = async () => {
   const bot = new mwn(BotConfig);
   await bot.login();
 
-  const articles = [
-    "Бүх цэргийн наадам",
-    "Дорноговь аймгийн наадам - 2009",
-    "Налайхын баяр наадам",
-    "Орхон аймгийн баяр наадам",
-    "Уул тайлгын наадам",
-    "Хүрээ цам-Даншиг наадам",
-  ];
+  const retrieveParseList = () => {
+    const articles: string[] = [];
+    const arr = fs.readFileSync(FILE).toString().split("\n");
+    articles.push(...arr);
+    return articles;
+  };
 
-  const categoryNames = ["Үндэсний бөхийн барилдааны жагсаалт"];
+  const articles = retrieveParseList();
+
+  const categoryNames = ["Монголын телевизийн нэвтрүүлэг"];
 
   for await (const article of articles) {
     await bot.edit(article, (rev) => {
