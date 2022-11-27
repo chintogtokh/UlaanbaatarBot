@@ -5,7 +5,7 @@ import { BotConfig } from "../utils/bot";
 
 dotenv.config();
 
-const FILE = "/Users/chintogtokh/dev/UlaanbaatarBot/src/uncategorised/data.txt";
+const FILE = "/home/chintogtokh/dev/UlaanbaatarBot/src/uncategorised/data.txt";
 
 const main = async () => {
   const bot = new mwn(BotConfig);
@@ -20,7 +20,7 @@ const main = async () => {
 
   const articles = retrieveParseList();
 
-  const categoryNames = ["Монголын телевизийн нэвтрүүлэг"];
+  const categoryNames = ["Үндэсний бөх"];
 
   for await (const article of articles) {
     await bot.edit(article, (rev) => {
