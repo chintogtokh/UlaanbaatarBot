@@ -4,7 +4,8 @@
     "date_articles": "npx ts-node src/projects/date_articles/createDateArticles",
     "cat": "npx ts-node src/uncategorised/newcategorise",
     "justcat": "npx ts-node src/uncategorised/justcategorise",
-    "checkcat": "npx ts-node src/uncategorised/checkcat"
+    "checkcat": "npx ts-node src/uncategorised/checkcat",
+    "rename": "npx ts-node src/projects/rename_articles/rename"
   },
   "dependencies": {
     "dotenv": "^16.0.3",

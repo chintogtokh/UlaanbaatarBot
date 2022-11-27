@@ -8,20 +8,20 @@ const renameCategories = async () => {
   const bot = new mwn(BotConfig);
   await bot.login();
 
-  const pages = await bot.getPagesInCategory("Ангилал:Программ хангамж");
+  const pages = await bot.getPagesInCategory("Ангилал:Аюулгүй байдал");
 
   for await (const element of pages) {
     console.log(element);
 
     bot.edit(element, (rev) => {
       let text = rev.content.replace(
-        /\[\[Ангилал:Программ хангамж/g,
-        "[[Ангилал:Програм хангамж"
+        /\[\[Ангилал:Аюулгүй байдал/g,
+        "[[Ангилал:Аюулгүйн хамгаалалт"
       );
       return {
         text: text,
         summary:
-          "[[Ангилал:Программ хангамж]]-ийг [[Ангилал:Програм хангамж]]-аар сольж байна",
+          "[[Ангилал:Аюулгүй байдал]]-ийг [[Ангилал:Аюулгүйн хамгаалалт]]-аар сольж байна",
         minor: true,
       };
     });
