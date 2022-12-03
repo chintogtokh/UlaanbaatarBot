@@ -1,9 +1,6 @@
 import { mwn } from "mwn";
-import * as dotenv from "dotenv";
 import * as fs from "fs";
 import { BotConfig } from "../utils/bot";
-
-dotenv.config();
 
 const FILE = "/home/chintogtokh/dev/UlaanbaatarBot/src/uncategorised/data.txt";
 

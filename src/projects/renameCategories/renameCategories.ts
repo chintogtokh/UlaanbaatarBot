@@ -1,8 +1,8 @@
 import { mwn } from "mwn";
-import * as dotenv from "dotenv";
 import { BotConfig } from "../../utils/bot";
 
-dotenv.config();
+const FROM_CATEGORY = "Ангилал:Аюулгүй байдал";
+const TO_CATEGORY = "Ангилал:Аюулгүйн хамгаалалт";
 
 const renameCategories = async () => {
   const bot = new mwn(BotConfig);
@@ -13,15 +13,15 @@ const renameCategories = async () => {
   for await (const element of pages) {
     console.log(element);
 
+    // test later, delete this comment
     bot.edit(element, (rev) => {
       let text = rev.content.replace(
-        /\[\[Ангилал:Аюулгүй байдал/g,
-        "[[Ангилал:Аюулгүйн хамгаалалт"
+        new RegExp(`\\\[\\\[${FROM_CATEGORY}`, "g"),
+        `[[${TO_CATEGORY}`
       );
       return {
         text: text,
-        summary:
-          "[[Ангилал:Аюулгүй байдал]]-ийг [[Ангилал:Аюулгүйн хамгаалалт]]-аар сольж байна",
+        summary: `[[${FROM_CATEGORY}]]-ийг [[${TO_CATEGORY}]]-аар сольж байна`,
         minor: true,
       };
     });

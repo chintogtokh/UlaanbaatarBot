@@ -1,7 +1,7 @@
 import { mwn } from "mwn";
 import * as dotenv from "dotenv";
 import * as readline from "readline";
-import { BotConfig } from "./src/utils/bot";
+import { BotConfig } from "../../utils/bot";
 
 dotenv.config();
 

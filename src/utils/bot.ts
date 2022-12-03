@@ -25,3 +25,11 @@ export const LangBotConfig = (lang: string) => ({
   userAgent: "UlaanbaatarBot 0.01 ([[User:UlaanbaatarBot]])",
   defaultParams: { assert: "user" },
 });
+
+export const WikidataBotConfig = () => ({
+  apiUrl: `https://www.wikidata.org/w/api.php`,
+  username: `${process.env.USERNAMEADMIN}`,
+  password: `${process.env.PASSWORDADMIN}`,
+  userAgent: "User:Chinneeb as UlaanbaatarBot 0.01 ([[User:UlaanbaatarBot]])",
+  defaultParams: { assert: "user" },
+});
