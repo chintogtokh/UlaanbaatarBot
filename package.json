@@ -6,7 +6,8 @@
     "justcat": "npx ts-node src/uncategorised/justcategorise",
     "checkcat": "npx ts-node src/uncategorised/checkcat",
     "rename": "npx ts-node src/projects/rename_articles/rename",
-    "linkToWikidata": "npx ts-node src/projects/linkToWikidata/linkToWikidata"
+    "linkToWikidata": "npx ts-node src/projects/linkToWikidata/linkToWikidata",
+    "linkToWikidataI": "npx ts-node src/projects/linkToWikidata/linkToWikidataInteractive"
   },
   "dependencies": {
     "dotenv": "^16.0.3",
