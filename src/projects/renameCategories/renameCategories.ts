@@ -1,14 +1,14 @@
 import { mwn } from "mwn";
 import { BotConfig } from "../../utils/bot";
 
-const FROM_CATEGORY = "Ангилал:Аюулгүй байдал";
-const TO_CATEGORY = "Ангилал:Аюулгүйн хамгаалалт";
+const FROM_CATEGORY = "Ангилал:Монгол улсын ерөнхийлөгч";
+const TO_CATEGORY = "Ангилал:Монгол Улсын Ерөнхийлөгч";
 
 const renameCategories = async () => {
   const bot = new mwn(BotConfig);
   await bot.login();
 
-  const pages = await bot.getPagesInCategory("Ангилал:Аюулгүй байдал");
+  const pages = await bot.getPagesInCategory(FROM_CATEGORY);
 
   for await (const element of pages) {
     console.log(element);
@@ -26,7 +26,7 @@ const renameCategories = async () => {
       };
     });
 
-    await new Promise((r) => setTimeout(r, 5000));
+    await new Promise((r) => setTimeout(r, 2000));
   }
 };
 

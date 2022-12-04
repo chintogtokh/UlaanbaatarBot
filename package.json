@@ -5,7 +5,7 @@
     "cat": "npx ts-node src/uncategorised/newcategorise",
     "justcat": "npx ts-node src/uncategorised/justcategorise",
     "checkcat": "npx ts-node src/uncategorised/checkcat",
-    "rename": "npx ts-node src/projects/rename_articles/rename",
+    "renameCategories": "npx ts-node src/projects/renameCategories/renameCategories",
     "linkToWikidata": "npx ts-node src/projects/linkToWikidata/linkToWikidata",
     "linkToWikidataI": "npx ts-node src/projects/linkToWikidata/linkToWikidataInteractive"
   },
