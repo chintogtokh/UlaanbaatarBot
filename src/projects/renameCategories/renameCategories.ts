@@ -1,8 +1,8 @@
 import { mwn } from "mwn";
 import { BotConfig } from "../../utils/bot";
 
-const FROM_CATEGORY = "Ангилал:Хууль сахиулах байгууллага";
-const TO_CATEGORY = "Ангилал:Хууль сахиулах";
+const FROM_CATEGORY = "Ангилал:Программчлал";
+const TO_CATEGORY = "Ангилал:Програмчлал";
 
 const renameCategories = async () => {
   const bot = new mwn(BotConfig);
@@ -27,15 +27,14 @@ const renameCategories = async () => {
         minor: true,
       };
     });
-
-    await bot.move(
-      FROM_CATEGORY,
-      TO_CATEGORY,
-      `[[${FROM_CATEGORY}]]-ийг [[${TO_CATEGORY}]]-аар сольж байна`
-    );
-
-    await new Promise((r) => setTimeout(r, 2000));
+    await new Promise((r) => setTimeout(r, 1000));
   }
+
+  await bot.move(
+    FROM_CATEGORY,
+    TO_CATEGORY,
+    `[[${FROM_CATEGORY}]]-ийг [[${TO_CATEGORY}]]-аар сольж байна`
+  );
 };
 
 renameCategories();
