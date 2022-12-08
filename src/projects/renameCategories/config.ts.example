@@ -1,0 +1,6 @@
+const Config = {
+  from: "Ангилал:",
+  to: "Ангилал:",
+};
+
+export default Config;

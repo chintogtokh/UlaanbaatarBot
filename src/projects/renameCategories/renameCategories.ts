@@ -1,8 +1,9 @@
 import { mwn } from "mwn";
+import Config from "./config";
 import { BotConfig } from "../../utils/bot";
 
-const FROM_CATEGORY = "Ангилал:Программчлал";
-const TO_CATEGORY = "Ангилал:Програмчлал";
+const FROM_CATEGORY = Config.from; // "Ангилал:Параллель боловсруулалт";
+const TO_CATEGORY = Config.to; // "Ангилал:Зэрэгцээ тооцоолол";
 
 const renameCategories = async () => {
   const bot = new mwn(BotConfig);
