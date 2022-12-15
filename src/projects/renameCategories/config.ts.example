@@ -1,6 +1,8 @@
-const Config = {
-  from: "Ангилал:",
-  to: "Ангилал:",
-};
+const CategoryConfig = [
+  {
+    from: "Ангилал:Өгөгдлийн сангийн менежментийн систем",
+    to: "Ангилал:Өгөгдлийн сан удирдах систем",
+  },
+];
 
-export default Config;
+export default CategoryConfig;

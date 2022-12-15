@@ -1,41 +1,45 @@
 import { mwn } from "mwn";
-import Config from "./config";
+import CategoryConfig from "./config";
 import { BotConfig } from "../../utils/bot";
-
-const FROM_CATEGORY = Config.from; // "Ангилал:Параллель боловсруулалт";
-const TO_CATEGORY = Config.to; // "Ангилал:Зэрэгцээ тооцоолол";
 
 const renameCategories = async () => {
   const bot = new mwn(BotConfig);
   await bot.login();
 
-  const pages = await bot.getPagesInCategory(FROM_CATEGORY);
+  for await (const category of CategoryConfig) {
+    const FROM_CATEGORY = category.from;
+    const TO_CATEGORY = category.to;
 
-  console.log(pages);
+    console.log(`Processing: ${FROM_CATEGORY} to ${TO_CATEGORY}`);
 
-  for await (const element of pages) {
-    console.log(element);
+    const pages = await bot.getPagesInCategory(FROM_CATEGORY);
 
-    // test later, delete this comment
-    bot.edit(element, (rev) => {
-      let text = rev.content.replace(
-        new RegExp(`\\\[\\\[${FROM_CATEGORY}`, "g"),
-        `[[${TO_CATEGORY}`
-      );
-      return {
-        text: text,
-        summary: `[[${FROM_CATEGORY}]]-ийг [[${TO_CATEGORY}]]-аар сольж байна`,
-        minor: true,
-      };
-    });
-    await new Promise((r) => setTimeout(r, 1000));
+    console.log(pages);
+
+    for await (const element of pages) {
+      console.log(element);
+
+      // test later, delete this comment
+      bot.edit(element, (rev) => {
+        let text = rev.content.replace(
+          new RegExp(`\\\[\\\[${FROM_CATEGORY}`, "g"),
+          `[[${TO_CATEGORY}`
+        );
+        return {
+          text: text,
+          summary: `[[${FROM_CATEGORY}]]-ийг [[${TO_CATEGORY}]]-аар сольж байна`,
+          minor: true,
+        };
+      });
+      await new Promise((r) => setTimeout(r, 1000));
+    }
+
+    await bot.move(
+      FROM_CATEGORY,
+      TO_CATEGORY,
+      `[[${FROM_CATEGORY}]]-ийг [[${TO_CATEGORY}]]-аар сольж байна`
+    );
   }
-
-  await bot.move(
-    FROM_CATEGORY,
-    TO_CATEGORY,
-    `[[${FROM_CATEGORY}]]-ийг [[${TO_CATEGORY}]]-аар сольж байна`
-  );
 };
 
 renameCategories();
