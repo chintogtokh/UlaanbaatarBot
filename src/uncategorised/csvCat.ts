@@ -20,20 +20,22 @@ const main = async () => {
   for await (const article of articles) {
     const splitted = article.replace("\r", "").split(",");
     const name = splitted[0];
-    const categoryNames = splitted.slice(1).filter((v) => v);
+    const processOrNot = splitted[1] === "0";
+    if (!processOrNot) continue;
+    const categoryNames = splitted.slice(4).filter((v) => v);
     console.log(name, categoryNames);
-    // await bot.edit(name, (rev) => {
-    //   let text =
-    //     rev.content +
-    //     "\n" +
-    //     categoryNames.map((v) => `[[Ангилал:${v}]]`).join("\n");
-    //   console.log(text);
-    //   return {
-    //     text: text,
-    //     summary: "Анги нэмэв",
-    //     minor: true,
-    //   };
-    // });
+    await bot.edit(name, (rev) => {
+      let text =
+        rev.content +
+        "\n" +
+        categoryNames.map((v) => `[[Ангилал:${v}]]`).join("\n");
+      console.log(text);
+      return {
+        text: text,
+        summary: "Анги нэмэв",
+        minor: true,
+      };
+    });
 
     await new Promise((r) => setTimeout(r, 2000));
   }
