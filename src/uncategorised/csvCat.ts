@@ -2,7 +2,7 @@ import { mwn } from "mwn";
 import * as fs from "fs";
 import { BotConfig } from "../utils/bot";
 
-const FILE = "/Users/chintogtokh/dev/UlaanbaatarBot/src/uncategorised/1.csv";
+const FILE = "/home/chintogtokh/dev/UlaanbaatarBot/src/uncategorised/1.csv";
 
 const main = async () => {
   const bot = new mwn(BotConfig);
@@ -20,9 +20,9 @@ const main = async () => {
   for await (const article of articles) {
     const splitted = article.replace("\r", "").split(",");
     const name = splitted[0];
-    const processOrNot = splitted[1] === "0";
+    const processOrNot = splitted[1] === "1";
     if (!processOrNot) continue;
-    const categoryNames = splitted.slice(4).filter((v) => v);
+    const categoryNames = splitted.slice(2).filter((v) => v);
     console.log(name, categoryNames);
     await bot.edit(name, (rev) => {
       let text =

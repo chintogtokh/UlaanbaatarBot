@@ -66,11 +66,11 @@ const createDateArticles = async () => {
   const yearsToAdd = {
     [ArticleType.BornIn]: [],
     [ArticleType.DiedIn]: [],
-    [ArticleType.Year]: [55],
+    [ArticleType.Year]: [1615, 1624, 1692, 46, 685],
   };
 
   for (const articleType of Object.keys(ArticleType)) {
-    for await (const year of yearsToAdd[articleType]) {
+    for await (const year of yearsToAdd[articleType as ArticleType]) {
       const summary = "Автоматаар үүсгэж байна";
       const name = categoryName(year, articleType);
       const content = categoryContent(year, articleType);
@@ -79,7 +79,7 @@ const createDateArticles = async () => {
       console.log(content);
 
       await bot.create(name!, content!, summary);
-      await new Promise((r) => setTimeout(r, 5000));
+      await new Promise((r) => setTimeout(r, 2000));
     }
   }
 };

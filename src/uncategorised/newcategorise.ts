@@ -78,7 +78,7 @@ const main = async () => {
       console.log(text);
       return {
         text: text,
-        summary: "Анги нэмэв",
+        summary: "Ангилал нэмэв",
         minor: true,
       };
     });
@@ -88,7 +88,7 @@ const main = async () => {
 
   const arr = fs
     .readFileSync(
-      "/Users/chintogtokh/dev/UlaanbaatarBot/src/uncategorised/data.txt"
+      "/home/chintogtokh/dev/UlaanbaatarBot/src/uncategorised/data.txt"
     )
     .toString()
     .split("\n");
