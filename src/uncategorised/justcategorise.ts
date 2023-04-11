@@ -17,7 +17,7 @@ const main = async () => {
 
   const articles = retrieveParseList();
 
-  const categoryNames = ["Үндэсний бөх"];
+  const categoryNames = ["Шинээр хөгжиж буй технологи"];
 
   for await (const article of articles) {
     await bot.edit(article, (rev) => {
