@@ -32,7 +32,9 @@ const readFromCsv = () => {
     "/home/chintogtokh/dev/UlaanbaatarBot/src/projects/createcats/data.csv";
   const articles: string[] = [];
   const arr = fs.readFileSync(FILE).toString().split("\n");
-  articles.push(...arr);
+  arr.forEach((element) => {
+    if (!element.startsWith("#")) articles.push(element);
+  });
   return articles;
 };
 
