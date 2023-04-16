@@ -20,7 +20,7 @@ const main = async () => {
   console.log(articles);
 
   for await (const article of articles) {
-    const splitted = article.replace("\r", "").split("=");
+    const splitted = article.replace("\r", "").split(",");
     const name = splitted[0];
     const processOrNot = splitted[1] === "1";
     console.log(splitted);
