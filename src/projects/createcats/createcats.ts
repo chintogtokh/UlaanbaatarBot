@@ -28,8 +28,7 @@ const wikidatabot = new mwn(WikidataBotConfig());
 wikidatabot.login(); // suss
 
 const readFromCsv = () => {
-  const FILE =
-    "/home/chintogtokh/dev/UlaanbaatarBot/src/projects/createcats/data.csv";
+  const FILE = "./src/projects/createcats/data.csv";
   const articles: string[] = [];
   const arr = fs.readFileSync(FILE).toString().split("\n");
   arr.forEach((element) => {

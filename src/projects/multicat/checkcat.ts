@@ -2,7 +2,7 @@ import { ApiParams, mwn } from "mwn";
 import * as dotenv from "dotenv";
 import * as readline from "readline";
 import * as fs from "fs";
-import { BotConfig, LangBotConfig } from "../utils/bot";
+import { BotConfig, LangBotConfig } from "../../utils/bot";
 
 dotenv.config();
 

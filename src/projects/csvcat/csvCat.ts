@@ -1,26 +1,33 @@
 import { mwn } from "mwn";
 import * as fs from "fs";
-import { BotConfig } from "../utils/bot";
+import { BotConfig } from "../../utils/bot";
 
-const FILE = "/home/chintogtokh/dev/UlaanbaatarBot/src/uncategorised/data.txt";
+const FILE = "./src/projects/csvcat/1.csv";
 
 const main = async () => {
   const bot = new mwn(BotConfig);
   await bot.login();
 
-  const retrieveParseList = () => {
+  const parseCSV = () => {
     const articles: string[] = [];
     const arr = fs.readFileSync(FILE).toString().split("\n");
-    articles.push(...arr);
+    articles.push(...arr.slice(1));
     return articles;
   };
 
-  const articles = retrieveParseList();
+  const articles = parseCSV();
 
-  const categoryNames = ["Шинээр хөгжиж буй технологи"];
+  console.log(articles);
 
   for await (const article of articles) {
-    await bot.edit(article, (rev) => {
+    const splitted = article.replace("\r", "").split(",");
+    const name = splitted[0];
+    const processOrNot = splitted[1] === "1";
+    console.log(splitted);
+    if (!processOrNot) continue;
+    const categoryNames = splitted.slice(2).filter((v) => v);
+    console.log(name, categoryNames);
+    await bot.edit(name, (rev) => {
       let text =
         rev.content +
         "\n" +

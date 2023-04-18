@@ -2,11 +2,11 @@
   "scripts": {
     "boh": "npx ts-node src/projects/wrestlers/categorise",
     "createDateArticles": "npx ts-node src/projects/createDateArticles/createDateArticles",
-    "cat": "npx ts-node src/uncategorised/newcategorise",
-    "justcat": "npx ts-node src/uncategorised/justcategorise",
-    "checkcat": "npx ts-node src/uncategorised/checkcat",
+    "cat": "npx ts-node src/projects/multicat/newcategorise",
+    "justcat": "npx ts-node src/projects/multicat/justcategorise",
+    "checkcat": "npx ts-node src/projects/multicat/checkcat",
     "createcats": "npx ts-node src/projects/createcats/createcats",
-    "csvcat": "npx ts-node src/uncategorised/csvCat",
+    "csvcat": "npx ts-node src/projects/csvcat/csvCat",
     "renameCategories": "npx ts-node src/projects/renameCategories/renameCategories",
     "linkToWikidata": "npx ts-node src/projects/linkToWikidata/linkToWikidata",
     "linkToWikidataI": "npx ts-node src/projects/linkToWikidata/linkToWikidataInteractive"

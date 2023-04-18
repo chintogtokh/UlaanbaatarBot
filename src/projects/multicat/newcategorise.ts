@@ -2,7 +2,7 @@ import { ApiParams, mwn } from "mwn";
 import * as dotenv from "dotenv";
 import * as readline from "readline";
 import * as fs from "fs";
-import { BotConfig, LangBotConfig } from "../utils/bot";
+import { BotConfig, LangBotConfig } from "../../utils/bot";
 
 dotenv.config();
 
@@ -87,9 +87,7 @@ const main = async () => {
   const articles: string[] = [];
 
   const arr = fs
-    .readFileSync(
-      "/home/chintogtokh/dev/UlaanbaatarBot/src/uncategorised/data.txt"
-    )
+    .readFileSync("./src/projects/multicat/data.txt")
     .toString()
     .split("\n");
 
