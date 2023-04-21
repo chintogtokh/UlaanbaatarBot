@@ -17,7 +17,15 @@ const main = async () => {
 
   const articles = retrieveParseList();
 
-  const categoryNames = ["Шинээр хөгжиж буй технологи"];
+  const categoryNames = [
+    "ATC-A11",
+    "Эмийн бодис",
+    "Пропионы хүчил",
+    "Витамин",
+    "Тэжээлийн нэмэлт бодис (Европын Холбоо)",
+    "Спирт",
+    "Карбон хүчил",
+  ];
 
   for await (const article of articles) {
     await bot.edit(article, (rev) => {
