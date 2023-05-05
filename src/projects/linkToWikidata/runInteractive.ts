@@ -1,7 +1,7 @@
 import { ApiParams, mwn } from "mwn";
 import { WikidataBotConfig } from "../../utils/bot";
 import * as readline from "readline";
-import { connectMnToEn } from "./linkToWikidata";
+import { connectMnToEn } from "../../utils/wikidataUtils";
 
 const linkToWikidata = async () => {
   const bot = new mwn(WikidataBotConfig());

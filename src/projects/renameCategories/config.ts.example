@@ -1,8 +1,0 @@
-const CategoryConfig = [
-  {
-    from: "Ангилал:Өгөгдлийн сангийн менежментийн систем",
-    to: "Ангилал:Өгөгдлийн сан удирдах систем",
-  },
-];
-
-export default CategoryConfig;
