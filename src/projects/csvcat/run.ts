@@ -1,46 +1,52 @@
 import { mwn } from "mwn";
 import * as fs from "fs";
-import { BotConfig } from "../../utils/bot";
+import { BotConfig, WikidataBotConfig } from "../../utils/bot";
+import { readFromCsv } from "../../utils/csv";
+import { connectArticles, connectMnToEn } from "../../utils/wikidataUtils";
 
 const FILE = "./src/projects/csvcat/1.csv";
 
 const main = async () => {
   const bot = new mwn(BotConfig);
   await bot.login();
+  const wikidatabot = new mwn(WikidataBotConfig());
+  await wikidatabot.login();
 
-  const parseCSV = () => {
-    const articles: string[] = [];
-    const arr = fs.readFileSync(FILE).toString().split("\n");
-    articles.push(...arr.slice(1));
-    return articles;
-  };
-
-  const articles = parseCSV();
-
-  console.log(articles);
+  const articles = readFromCsv(FILE);
 
   for await (const article of articles) {
-    const splitted = article.replace("\r", "").split(",");
-    const name = splitted[0];
-    const processOrNot = splitted[1] === "1";
-    console.log(splitted);
-    if (!processOrNot) continue;
-    const categoryNames = splitted.slice(2).filter((v) => v);
-    console.log(name, categoryNames);
-    await bot.edit(name, (rev) => {
+    console.log(article);
+    await bot.edit(article.name, (rev) => {
       let text =
         rev.content +
         "\n" +
-        categoryNames.map((v) => `[[Ангилал:${v}]]`).join("\n");
-      console.log(text);
+        (article.categories
+          ? article.categories.map((v) => `[[Ангилал:${v}]]`).join("\n")
+          : "");
+      console.log(rev.content);
       return {
-        text: text,
+        text,
         summary: "Анги нэмэв",
         minor: true,
       };
     });
 
     await new Promise((r) => setTimeout(r, 2000));
+
+    if (article.interwiki) {
+      //todo: copy
+      const interwikiLang = article.interwiki.split(":")[0];
+      const interwikiTitle = article.interwiki.replace(`${interwikiLang}:`, "");
+
+      await connectArticles(
+        wikidatabot,
+        interwikiLang,
+        interwikiTitle,
+        "mn",
+        article.name
+      );
+      await new Promise((r) => setTimeout(r, 2000));
+    }
   }
 };
 

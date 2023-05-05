@@ -7,7 +7,8 @@
     "csvcat": "npx ts-node src/projects/csvcat/run",
     "renameCategory": "npx ts-node src/projects/rename/renameCategory",
     "linkToWikidata": "npx ts-node src/projects/linkToWikidata/run",
-    "linkToWikidataI": "npx ts-node src/projects/linkToWikidata/runInteractive"
+    "linkToWikidataI": "npx ts-node src/projects/linkToWikidata/runInteractive",
+    "replace": "npx ts-node src/projects/ubercsv/replace"
   },
   "dependencies": {
     "dotenv": "^16.0.3",

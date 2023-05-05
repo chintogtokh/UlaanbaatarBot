@@ -17,8 +17,8 @@ export const readFromCsv = (FILE: string): CsvRow[] => {
     pages.push({
       name: element[0],
       interwiki: element[1],
-      content: element[2],
-      categories: element.slice(3),
+      content: element[2] ?? "",
+      categories: element.slice(3) ?? [],
     });
   });
   return pages;

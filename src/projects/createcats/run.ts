@@ -9,7 +9,7 @@ dotenv.config();
 const wikidatabot = new mwn(WikidataBotConfig());
 wikidatabot.login(); // suss
 
-const FILE = "./src/projects/createcats/data.csv";
+const FILE = "./src/projects/createcats/1.csv";
 
 const createCatArticles = async () => {
   const bot = new mwn(BotConfig);
