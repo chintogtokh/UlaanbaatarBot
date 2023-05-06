@@ -3,6 +3,7 @@ import { mwn } from "mwn";
 import { BotConfig, WikidataBotConfig } from "../../utils/bot";
 import { connectArticles } from "../../utils/wikidataUtils";
 import { readFromCsv } from "../../utils/csv";
+import { TIMEOUT } from "../../utils/vars";
 
 dotenv.config();
 
@@ -28,17 +29,16 @@ const createCatArticles = async () => {
     console.log(page.name);
     console.log(content);
 
-    // await bot.create(`Ангилал:${name}`!, content!, summary);
-    await new Promise((r) => setTimeout(r, 3000));
+    await new Promise((r) => setTimeout(r, TIMEOUT));
     if (page.interwiki) {
       await connectArticles(
         wikidatabot,
         "mn",
         `Category:${name}`!,
-        page.interwiki?.split(":")[0],
-        `Category:${page.interwiki.split(":")[1]}`
+        page.interwiki.lang,
+        `Category:${page.interwiki.name}`
       );
-      await new Promise((r) => setTimeout(r, 1000));
+      await new Promise((r) => setTimeout(r, TIMEOUT));
     }
   }
 };

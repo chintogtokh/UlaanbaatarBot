@@ -3,6 +3,7 @@ import * as dotenv from "dotenv";
 import * as readline from "readline";
 import * as fs from "fs";
 import { BotConfig, LangBotConfig } from "../../utils/bot";
+import { TIMEOUT } from "../../utils/vars";
 
 dotenv.config();
 
@@ -78,7 +79,7 @@ const main = async () => {
       console.log(text);
       return {
         text: text,
-        summary: "Ангилал нэмэв",
+        summary: "Анги нэмэв",
         minor: true,
       };
     });
@@ -112,7 +113,7 @@ const main = async () => {
       console.log(`No ${FOREIGN_LANGUAGE} name`);
     }
 
-    await new Promise((r) => setTimeout(r, 5000));
+    await new Promise((r) => setTimeout(r, TIMEOUT));
   }
 };
 

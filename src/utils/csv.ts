@@ -5,7 +5,10 @@ import * as fs from "fs";
 
 type CsvRow = {
   name: string;
-  interwiki: string;
+  interwiki: {
+    lang: string;
+    name: string;
+  };
   content: string;
   categories: string[];
 };
@@ -16,7 +19,10 @@ export const readFromCsv = (FILE: string): CsvRow[] => {
   arr.forEach((element) => {
     pages.push({
       name: element[0],
-      interwiki: element[1],
+      interwiki: {
+        lang: element[1].split(":")[0],
+        name: element[1].slice(element[1].indexOf(":") + 1),
+      },
       content: element[2] ?? "",
       categories: element.slice(3) ?? [],
     });

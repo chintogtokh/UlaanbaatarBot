@@ -2,6 +2,7 @@ import { mwn } from "mwn";
 import * as dotenv from "dotenv";
 import { BotConfig, WikidataBotConfig } from "../../utils/bot";
 import { connectArticles, connectMnToEn } from "../../utils/wikidataUtils";
+import { TIMEOUT } from "../../utils/vars";
 
 dotenv.config();
 
@@ -84,10 +85,7 @@ const createDateArticles = async () => {
   const yearsToAdd = {
     [ArticleType.BornIn]: [],
     [ArticleType.DiedIn]: [],
-    [ArticleType.Year]: [
-      1032, 1196, 1210, 1267, 1353, 1406, 1462, 1609, 1613, 1614, 1629, 1633,
-      1645, 1681, 1705,
-    ],
+    [ArticleType.Year]: [],
     [ArticleType.YearEstablished]: [],
   };
 
@@ -102,11 +100,11 @@ const createDateArticles = async () => {
       console.log(content);
 
       await bot.create(name!, content!, summary);
-      await new Promise((r) => setTimeout(r, 2000));
+      await new Promise((r) => setTimeout(r, TIMEOUT));
 
       await connectMnToEn(wikidatabot, name, enName);
 
-      await new Promise((r) => setTimeout(r, 2000));
+      await new Promise((r) => setTimeout(r, TIMEOUT));
     }
   }
 };

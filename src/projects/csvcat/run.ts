@@ -2,6 +2,7 @@ import { mwn } from "mwn";
 import * as fs from "fs";
 import { BotConfig, WikidataBotConfig } from "../../utils/bot";
 import { readFromCsv } from "../../utils/csv";
+import { TIMEOUT } from "../../utils/vars";
 import { connectArticles, connectMnToEn } from "../../utils/wikidataUtils";
 
 const FILE = "./src/projects/csvcat/1.csv";
@@ -20,10 +21,11 @@ const main = async () => {
       let text =
         rev.content +
         "\n" +
+        (article.content ? `${article.content}\n` : "") +
         (article.categories
           ? article.categories.map((v) => `[[Ангилал:${v}]]`).join("\n")
           : "");
-      console.log(rev.content);
+      console.log(text);
       return {
         text,
         summary: "Анги нэмэв",
@@ -31,21 +33,17 @@ const main = async () => {
       };
     });
 
-    await new Promise((r) => setTimeout(r, 2000));
+    await new Promise((r) => setTimeout(r, TIMEOUT));
 
     if (article.interwiki) {
-      //todo: copy
-      const interwikiLang = article.interwiki.split(":")[0];
-      const interwikiTitle = article.interwiki.replace(`${interwikiLang}:`, "");
-
       await connectArticles(
         wikidatabot,
-        interwikiLang,
-        interwikiTitle,
+        article.interwiki.lang,
+        article.interwiki.name,
         "mn",
         article.name
       );
-      await new Promise((r) => setTimeout(r, 2000));
+      await new Promise((r) => setTimeout(r, TIMEOUT));
     }
   }
 };
