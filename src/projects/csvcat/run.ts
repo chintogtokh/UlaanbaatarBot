@@ -5,7 +5,8 @@ import { readFromCsv } from "../../utils/csv";
 import { TIMEOUT } from "../../utils/vars";
 import { connectArticles, connectMnToEn } from "../../utils/wikidataUtils";
 
-const FILE = "./src/projects/csvcat/1.csv";
+// const FILE = "./src/projects/csvcat/1.csv";
+const FILE = "./allpeople.csv";
 
 const main = async () => {
   const bot = new mwn(BotConfig);
@@ -17,23 +18,6 @@ const main = async () => {
 
   for await (const article of articles) {
     console.log(article);
-    await bot.edit(article.name, (rev) => {
-      let text =
-        (article.content ? `${article.content}\n` : "") +
-        `${rev.content}\n` +
-        (article.categories
-          ? article.categories.map((v) => `[[Ангилал:${v}]]`).join("\n")
-          : "");
-      console.log(text);
-      return {
-        text,
-        summary: "Анги нэмэв",
-        minor: true,
-      };
-    });
-
-    await new Promise((r) => setTimeout(r, TIMEOUT));
-
     if (article.interwiki) {
       await connectArticles(
         wikidatabot,
@@ -42,8 +26,27 @@ const main = async () => {
         "mn",
         article.name
       );
-      await new Promise((r) => setTimeout(r, TIMEOUT));
+      await new Promise((r) => setTimeout(r, TIMEOUT + 5000));
     }
+
+    console.log(article);
+    await bot.edit(article.name, (rev) => {
+      let text =
+        (article.content ? `${article.content}\n` : "") +
+        `${rev.content}\n` +
+        (article.categories
+          ? article.categories.map((v) => `[[Ангилал:${v}]]`).join("\n")
+          : "");
+      console.log(text);
+
+      return {
+        text,
+        summary: "Анги нэмэв",
+        minor: true,
+      };
+    });
+
+    await new Promise((r) => setTimeout(r, TIMEOUT));
   }
 };
 

@@ -17,17 +17,19 @@ export const readFromCsv = (FILE: string): CsvRow[] => {
   const arr = simpleReadFromCsv(FILE);
   const pages: CsvRow[] = [];
   arr.forEach((element) => {
-    pages.push({
-      name: element[0],
-      interwiki: element[1]
-        ? {
-            lang: element[1].split(":")[0],
-            name: element[1].slice(element[1].indexOf(":") + 1),
-          }
-        : undefined,
-      content: element[2] ?? "",
-      categories: element.slice(3) ?? [],
-    });
+    if (element.length > 3) {
+      pages.push({
+        name: element[0],
+        interwiki: element[1]
+          ? {
+              lang: element[1].split(":")[0],
+              name: element[1].slice(element[1].indexOf(":") + 1),
+            }
+          : undefined,
+        content: element[2] ?? "",
+        categories: element.slice(3) ?? [],
+      });
+    }
   });
   return pages;
 };
@@ -37,8 +39,13 @@ export const simpleReadFromCsv = (FILE: string): string[][] => {
   const arr = fs.readFileSync(FILE).toString().split("\n");
   arr.forEach((element) => {
     if (!element.startsWith("#")) {
-      const pieces = element.split(",");
-      pages.push(pieces);
+      const pieces = element.replace("\\,", "[COMMAHERE]").split(",");
+      pages.push(
+        pieces.map((piece: string) => {
+          if (piece === "null") return "";
+          return piece.replace("[COMMAHERE]", ",");
+        })
+      );
     }
   });
   return pages;
