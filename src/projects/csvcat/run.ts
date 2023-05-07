@@ -19,9 +19,8 @@ const main = async () => {
     console.log(article);
     await bot.edit(article.name, (rev) => {
       let text =
-        rev.content +
-        "\n" +
         (article.content ? `${article.content}\n` : "") +
+        `${rev.content}\n` +
         (article.categories
           ? article.categories.map((v) => `[[Ангилал:${v}]]`).join("\n")
           : "");

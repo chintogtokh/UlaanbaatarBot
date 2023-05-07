@@ -1,6 +1,12 @@
 import { mwn } from "mwn";
 
-export const renameCategory = async (bot: mwn, from: string, to: string) => {
+export const renameCategory = async (
+  bot: mwn,
+  fromWithoutPrefix: string,
+  toWithoutPrefix: string
+) => {
+  const from = `Ангилал:${fromWithoutPrefix}`;
+  const to = `Ангилал:${toWithoutPrefix}`;
   console.log(`Processing: ${from} to ${to}`);
 
   const pages = await bot.getPagesInCategory(from);
