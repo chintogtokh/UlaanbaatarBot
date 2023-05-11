@@ -104,3 +104,16 @@ export const connectArticles = async (
     }
   });
 };
+
+export const connectedOrNot = async (bot: mwn, pageName: string) => {
+  const params: ApiParams = {
+    action: "query",
+    prop: "langlinks",
+    titles: pageName,
+    format: "json",
+  };
+  const res = await bot
+    .query(params)
+    .catch((e: any) => console.log("Error occured: ", e));
+  return res?.query?.pages?.[0].langlinks?.length > 0;
+};

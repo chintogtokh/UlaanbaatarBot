@@ -17,7 +17,7 @@ export const readFromCsv = (FILE: string): CsvRow[] => {
   const arr = simpleReadFromCsv(FILE);
   const pages: CsvRow[] = [];
   arr.forEach((element) => {
-    if (element.length > 3) {
+    if (element.length > 1) {
       pages.push({
         name: element[0],
         interwiki: element[1]

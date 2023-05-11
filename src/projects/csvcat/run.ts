@@ -19,32 +19,36 @@ const main = async () => {
   for await (const article of articles) {
     console.log(article);
     if (article.interwiki) {
-      await connectArticles(
-        wikidatabot,
-        article.interwiki.lang,
-        article.interwiki.name,
-        "mn",
-        article.name
-      );
+      try {
+        await connectArticles(
+          wikidatabot,
+          article.interwiki.lang,
+          article.interwiki.name,
+          "mn",
+          article.name
+        );
+      } catch (e) {
+        console.log("Error, check interwiki");
+      }
       await new Promise((r) => setTimeout(r, TIMEOUT + 5000));
     }
 
-    console.log(article);
-    await bot.edit(article.name, (rev) => {
-      let text =
-        (article.content ? `${article.content}\n` : "") +
-        `${rev.content}\n` +
-        (article.categories
-          ? article.categories.map((v) => `[[Ангилал:${v}]]`).join("\n")
-          : "");
-      console.log(text);
+    if (article.content.length > 0 || article.categories.length > 0)
+      await bot.edit(article.name, (rev) => {
+        let text =
+          (article.content ? `${article.content}\n` : "") +
+          `${rev.content}\n` +
+          (article.categories
+            ? article.categories.map((v) => `[[Ангилал:${v}]]`).join("\n")
+            : "");
+        console.log(text);
 
-      return {
-        text,
-        summary: "Анги нэмэв",
-        minor: true,
-      };
-    });
+        return {
+          text,
+          summary: "Анги нэмэв",
+          minor: true,
+        };
+      });
 
     await new Promise((r) => setTimeout(r, TIMEOUT));
   }
