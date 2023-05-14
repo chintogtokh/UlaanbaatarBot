@@ -3,6 +3,7 @@
     "boh": "npx ts-node src/projects/wrestlers/categorise",
     "createDateArticles": "npx ts-node src/projects/createDateArticles/run",
     "cat": "npx ts-node src/projects/multicat/run",
+    "catfix": "npx ts-node src/projects/multicat/cleanup",
     "createcats": "npx ts-node src/projects/createcats/run",
     "csvcat": "npx ts-node src/projects/csvcat/run",
     "renameCategory": "npx ts-node src/projects/rename/renameCategory",
