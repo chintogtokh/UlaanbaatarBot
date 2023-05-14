@@ -8,7 +8,7 @@ import { simpleReadFromCsv } from "../../utils/csv";
 
 dotenv.config();
 
-const FOREIGN_LANGUAGE = "en";
+const FOREIGN_LANGUAGE = "de";
 
 const getInOtherLanguage = async (
   bot: mwn,
@@ -134,7 +134,7 @@ const main = async () => {
         .map((val: string) => val.replace(",", ",").replace("Category:", ""))
         .join(",") +
       "\n";
-    fs.appendFileSync("./test.csv", data);
+    fs.appendFileSync("./testde.csv", data);
   };
 
   for await (const article of articles) {
