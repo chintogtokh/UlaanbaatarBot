@@ -6,7 +6,7 @@ import { TIMEOUT } from "../../utils/vars";
 import { connectArticles, connectMnToEn } from "../../utils/wikidataUtils";
 
 // const FILE = "./src/projects/csvcat/1.csv";
-const FILE = "./allpeople.csv";
+const FILE = "./catsallpeopleALL.csv";
 
 const main = async () => {
   const bot = new mwn(BotConfig);

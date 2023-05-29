@@ -27,7 +27,7 @@ export const readFromCsv = (FILE: string): CsvRow[] => {
             }
           : undefined,
         content: element[2] ?? "",
-        categories: element.slice(3) ?? [],
+        categories: element.slice(3).filter((v) => v.length > 1) ?? [],
       });
     }
   });
