@@ -10,10 +10,13 @@
     "linkToWikidata": "npx ts-node src/projects/linkToWikidata/run",
     "linkToWikidataI": "npx ts-node src/projects/linkToWikidata/runInteractive",
     "replace": "npx ts-node src/projects/ubercsv/replace",
-    "check": "npx ts-node src/projects/linkToWikidata/check"
+    "check": "npx ts-node src/projects/linkToWikidata/check",
+    "goog": "npx ts-node src/projects/googleSheets/index"
   },
   "dependencies": {
+    "@types/google-spreadsheet": "^3.3.2",
     "dotenv": "^16.0.3",
+    "google-spreadsheet": "^3.3.0",
     "mwn": "^1.11.4"
   },
   "devDependencies": {
