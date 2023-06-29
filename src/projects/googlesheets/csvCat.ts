@@ -1,12 +1,9 @@
 import { mwn } from "mwn";
-import * as fs from "fs";
 import { BotConfig, WikidataBotConfig } from "../../utils/bot";
-import { readFromCsv } from "../../utils/csv";
 import { TIMEOUT } from "../../utils/vars";
-import { connectArticles, connectMnToEn } from "../../utils/wikidataUtils";
+import { connectArticles } from "../../utils/wikidataUtils";
+import { loadSheetRows } from "../../utils/goog";
 
-// const FILE = "./src/projects/csvcat/1.csv";
-const FILE = "./catsallpeopleALL.csv";
 
 const main = async () => {
   const bot = new mwn(BotConfig);
@@ -14,10 +11,20 @@ const main = async () => {
   const wikidatabot = new mwn(WikidataBotConfig());
   await wikidatabot.login();
 
-  const articles = readFromCsv(FILE);
+  const allRows = await loadSheetRows('BotCsvCat')
 
-  for await (const article of articles) {
-    console.log(article);
+  for await (const allRow of allRows) {
+    const article = allRow.csvRow
+    if (!article) {
+      console.log("Error: ", allRow)
+      continue
+    }
+    console.log(article.name);
+
+    if (!article.interwiki && !article.content && article.categories.length == 0) {
+      console.log(`Skipping ${article.name}`);
+    }
+
     if (article.interwiki) {
       try {
         await connectArticles(
@@ -41,7 +48,6 @@ const main = async () => {
           (article.categories
             ? article.categories.map((v) => `[[Ангилал:${v}]]`).join("\n")
             : "");
-        console.log(text);
 
         return {
           text,

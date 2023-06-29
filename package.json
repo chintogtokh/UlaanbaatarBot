@@ -1,21 +1,20 @@
 {
   "scripts": {
-    "boh": "npx ts-node src/projects/wrestlers/categorise",
-    "createDateArticles": "npx ts-node src/projects/createDateArticles/run",
-    "cat": "npx ts-node src/projects/multicat/run",
-    "catfix": "npx ts-node src/projects/multicat/cleanup",
-    "createcats": "npx ts-node src/projects/createcats/run",
-    "csvcat": "npx ts-node src/projects/csvcat/run",
-    "renameCategory": "npx ts-node src/projects/rename/renameCategory",
-    "linkToWikidata": "npx ts-node src/projects/linkToWikidata/run",
-    "linkToWikidataI": "npx ts-node src/projects/linkToWikidata/runInteractive",
-    "replace": "npx ts-node src/projects/ubercsv/replace",
-    "check": "npx ts-node src/projects/linkToWikidata/check",
-    "goog": "npx ts-node src/projects/googleSheets/index"
+    "g:createCats": "npx ts-node src/projects/googlesheets/createCats",
+    "g:csvCat": "npx ts-node src/projects/googlesheets/csvCat",
+    "g:insertInterwiki": "npx ts-node src/projects/googlesheets/insertInterwiki",
+    "g:renameCats": "npx ts-node src/projects/googlesheets/renameCats",
+    "g:simpleCat": "npx ts-node src/projects/googlesheets/simpleCat",
+    "g:translateCats": "npx ts-node src/projects/googlesheets/translateCats",
+    "csv:createCats": "npx ts-node src/projects/csv/createcats",
+    "csv:csvCat": "npx ts-node src/projects/csv/csvCat",
+    "csv:rename": "npx ts-node src/projects/csv/renameCategory",
+    "createDateArticles": "npx ts-node src/projects/legacy/createDateArticles"
   },
   "dependencies": {
     "@types/google-spreadsheet": "^3.3.2",
     "dotenv": "^16.0.3",
+    "google-auth-library": "^8.8.0",
     "google-spreadsheet": "^3.3.0",
     "mwn": "^1.11.4"
   },

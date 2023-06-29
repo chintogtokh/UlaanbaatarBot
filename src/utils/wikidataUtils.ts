@@ -105,7 +105,9 @@ export const connectArticles = async (
   });
 };
 
-export const connectedOrNot = async (bot: mwn, pageName: string) => {
+export type LangLinkType = { lang: string, title: string };
+
+export const getInterwiki = async (bot: mwn, pageName: string) => {
   const params: ApiParams = {
     action: "query",
     prop: "langlinks",
@@ -115,5 +117,18 @@ export const connectedOrNot = async (bot: mwn, pageName: string) => {
   const res = await bot
     .query(params)
     .catch((e: any) => console.log("Error occured: ", e));
-  return res?.query?.pages?.[0].langlinks?.length > 0;
+  const langlinks: LangLinkType[] = res?.query?.pages?.[0].langlinks;
+
+  if (!langlinks) return null;
+
+  let retlink = langlinks[0];
+
+  for (const link of langlinks) {
+    if (link.lang === 'en') { retlink = link; break; }
+    if (link.lang === 'de') { retlink = link; break; }
+    if (link.lang === 'ru') { retlink = link; break; }
+  }
+
+  return `${retlink.lang}:${retlink.title}`
+
 };

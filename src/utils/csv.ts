@@ -3,7 +3,7 @@ import * as fs from "fs";
 // Example
 // Монголын театрын байгууламж,en:Theatres in Mongolia,{{commonscat|Theatres in Mongolia}},Монголын театр,Монголын барилга байгууламж
 
-type CsvRow = {
+export type CsvRow = {
   name: string;
   interwiki?: {
     lang: string;
@@ -11,7 +11,17 @@ type CsvRow = {
   };
   content: string;
   categories: string[];
+  moveTo?: string;
 };
+
+export const interwikiParse = (data: string) => (
+  (new RegExp('.:.')).test(data)
+    ? {
+      lang: data.split(":")[0],
+      name: data.slice(data.indexOf(":") + 1),
+    }
+    : undefined
+)
 
 export const readFromCsv = (FILE: string): CsvRow[] => {
   const arr = simpleReadFromCsv(FILE);
@@ -20,12 +30,7 @@ export const readFromCsv = (FILE: string): CsvRow[] => {
     if (element.length > 1) {
       pages.push({
         name: element[0],
-        interwiki: element[1]
-          ? {
-              lang: element[1].split(":")[0],
-              name: element[1].slice(element[1].indexOf(":") + 1),
-            }
-          : undefined,
+        interwiki: interwikiParse(element[1]),
         content: element[2] ?? "",
         categories: element.slice(3).filter((v) => v.length > 1) ?? [],
       });

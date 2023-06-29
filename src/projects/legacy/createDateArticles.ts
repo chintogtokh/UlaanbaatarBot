@@ -13,6 +13,13 @@ enum ArticleType {
   YearEstablished = "YearEstablished",
 }
 
+const yearsToAdd = {
+  [ArticleType.BornIn]: [],
+  [ArticleType.DiedIn]: [],
+  [ArticleType.Year]: [],
+  [ArticleType.YearEstablished]: [],
+};
+
 const data: {
   [key in ArticleType]: {
     en: (year: number) => string;
@@ -24,8 +31,7 @@ const data: {
     en: (year: number) => `Category:${year}`,
     mn: (year: number) => `Category:${year} он`,
     mnContent: (year: number) =>
-      `{{Commonscat|${year}}}\n[[Ангилал:${
-        Math.floor(year / 10) * 10
+      `{{Commonscat|${year}}}\n[[Ангилал:${Math.floor(year / 10) * 10
       }-д он|#]]`,
   },
   [ArticleType.DiedIn]: {
@@ -38,8 +44,8 @@ const data: {
           3,
           4
         )}}}\n{{Commonscat|${year} deaths|{{PAGENAME}}}}\n[[Ангилал:Өнгөрсөн (${Math.floor(
-        year / 100 + 1
-      )}-р зуун)|#]]`,
+          year / 100 + 1
+        )}-р зуун)|#]]`,
   },
   [ArticleType.BornIn]: {
     en: (year: number) => `Category:${year} births`,
@@ -51,8 +57,8 @@ const data: {
           3,
           4
         )}}}\n{{Commonscat|${year} births|{{PAGENAME}}}}\n[[Ангилал:Төрсөн (${Math.floor(
-        year / 100 + 1
-      )}-р зуун)|#]]`,
+          year / 100 + 1
+        )}-р зуун)|#]]`,
   },
   [ArticleType.YearEstablished]: {
     en: (year: number) => `Category:${year} establishments`,
@@ -66,28 +72,12 @@ const data: {
   },
 };
 
-const connectToWikidata = async (bot: mwn, type: ArticleType, year: number) =>
-  await connectArticles(
-    bot,
-    "mn",
-    data[type].mn(year),
-    "en",
-    data[type].en(year)
-  );
-
 const createDateArticles = async () => {
   const bot = new mwn(BotConfig);
   await bot.login();
 
   const wikidatabot = new mwn(WikidataBotConfig());
   await wikidatabot.login();
-
-  const yearsToAdd = {
-    [ArticleType.BornIn]: [],
-    [ArticleType.DiedIn]: [],
-    [ArticleType.Year]: [],
-    [ArticleType.YearEstablished]: [],
-  };
 
   for (const articleType of Object.keys(ArticleType)) {
     for await (const year of yearsToAdd[articleType as ArticleType]) {

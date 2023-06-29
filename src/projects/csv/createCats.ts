@@ -10,7 +10,7 @@ dotenv.config();
 const wikidatabot = new mwn(WikidataBotConfig());
 wikidatabot.login(); // suss
 
-const FILE = "./src/projects/createcats/1.csv";
+const FILE = "./src/projects/csv/data/createCats.csv";
 
 const createCatArticles = async () => {
   const bot = new mwn(BotConfig);
@@ -28,6 +28,8 @@ const createCatArticles = async () => {
 
     console.log(page.name);
     console.log(content);
+
+    await bot.create(`Ангилал:${page.name}`!, content!, summary);
 
     await new Promise((r) => setTimeout(r, TIMEOUT));
     if (page.interwiki) {
