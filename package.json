@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "g:createCats": "npx ts-node src/projects/googlesheets/createCats",
-    "g:csvCat": "npx ts-node src/projects/googlesheets/csvCat",
+    "g:createCats": "npx ts-node src/projects/googlesheets/createCatsNew",
+    "g:csvCat": "npx ts-node src/projects/googlesheets/csvCatNew",
     "g:insertInterwiki": "npx ts-node src/projects/googlesheets/insertInterwiki",
     "g:renameCats": "npx ts-node src/projects/googlesheets/renameCats",
     "g:simpleCat": "npx ts-node src/projects/googlesheets/simpleCat",
