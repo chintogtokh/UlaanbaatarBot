@@ -6,6 +6,8 @@
     "g:renameCats": "npx ts-node src/projects/googlesheets/renameCats",
     "g:simpleCat": "npx ts-node src/projects/googlesheets/simpleCat",
     "g:translateCats": "npx ts-node src/projects/googlesheets/translateCats",
+    "g:parseWiki": "npx ts-node src/projects/googlesheets/parseWiki",
+    "g:getUncategorised": "npx ts-node src/projects/googlesheets/getUncategorised",
     "csv:createCats": "npx ts-node src/projects/csv/createcats",
     "csv:csvCat": "npx ts-node src/projects/csv/csvCat",
     "csv:rename": "npx ts-node src/projects/csv/renameCategory",

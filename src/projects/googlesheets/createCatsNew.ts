@@ -4,7 +4,7 @@ import { TIMEOUT } from "../../utils/vars";
 import { loadSheetRows } from "../../utils/goog";
 import { connectArticles } from "../../utils/wikidataUtils";
 
-const SHEETNAME = "NewCategories";
+const SHEETNAME = "BotCreateCats";
 const summary = "Ангилал үүсгэж байна";
 
 const main = async () => {
@@ -21,7 +21,10 @@ const main = async () => {
     for await (const row of rows) {
         const csvRow = row.csvRow;
 
-        const newcats = csvRow?.categories.flatMap((cat) => cat.split("\n"));
+        const newcats = csvRow?.categories
+            .flatMap((cat) => cat.split("\n"))
+            .filter((cat) => !!cat)
+            .map((cat) => cat.replace("\r", ""));
 
         const content = [
             csvRow?.content,

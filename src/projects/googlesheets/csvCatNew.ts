@@ -10,7 +10,7 @@ const main = async () => {
     const wikidatabot = new mwn(WikidataBotConfig());
     await wikidatabot.login();
 
-    const allRows = await loadSheetRows("International");
+    const allRows = await loadSheetRows("Mongolians");
 
     for await (const allRow of allRows) {
         const article = allRow.csvRow;
@@ -22,7 +22,7 @@ const main = async () => {
 
         const newcats = article?.categories
             .flatMap((cat) => cat.split("\n"))
-            .filter((cat) => !!cat && cat !== "{NULL}")
+            .filter((cat) => !!cat && cat !== "{NULL}" && cat !== "?")
             .map((cat) =>
                 cat.replace("}", "").replace("{", "").replace("\r", "")
             );
@@ -31,20 +31,20 @@ const main = async () => {
             console.log(`Skipping ${article.name}`);
         }
 
-        // if (article.interwiki) {
-        //     try {
-        //         await connectArticles(
-        //             wikidatabot,
-        //             article.interwiki.lang,
-        //             article.interwiki.name,
-        //             "mn",
-        //             article.name
-        //         );
-        //     } catch (e) {
-        //         console.log("Error, check interwiki");
-        //     }
-        //     await new Promise((r) => setTimeout(r, TIMEOUT + 5000));
-        // }
+        if (article.interwiki) {
+            try {
+                await connectArticles(
+                    wikidatabot,
+                    article.interwiki.lang,
+                    article.interwiki.name,
+                    "mn",
+                    article.name
+                );
+            } catch (e) {
+                console.log("Error, check interwiki");
+            }
+            await new Promise((r) => setTimeout(r, TIMEOUT + 5000));
+        }
 
         console.log(article.content, newcats);
 
@@ -58,7 +58,7 @@ const main = async () => {
                         : "");
                 return {
                     text,
-                    summary: "Анги нэмэв",
+                    summary: "Ангилал нэмэв",
                     minor: true,
                 };
             });
