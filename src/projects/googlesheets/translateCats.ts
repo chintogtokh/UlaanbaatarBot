@@ -6,7 +6,7 @@ import { loadSheet } from "../../utils/goog";
 
 dotenv.config();
 
-const FOREIGN_LANGUAGES = ["en"];
+const FOREIGN_LANGUAGES = ["en", "ru", "de"];
 const SHEETNAME = "BotTranslateCats";
 
 const getInOtherLanguage = async (

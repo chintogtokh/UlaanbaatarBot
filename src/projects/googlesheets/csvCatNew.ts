@@ -10,7 +10,7 @@ const main = async () => {
     const wikidatabot = new mwn(WikidataBotConfig());
     await wikidatabot.login();
 
-    const allRows = await loadSheetRows("Mongolians");
+    const allRows = await loadSheetRows("International");
 
     for await (const allRow of allRows) {
         const article = allRow.csvRow;
