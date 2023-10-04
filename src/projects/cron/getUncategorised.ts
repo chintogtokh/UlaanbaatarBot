@@ -67,7 +67,7 @@ async function main() {
     let message = {
         from: "Chintogtokh Batbold <chintogtokh@zohomail.com.au>",
         to: "Chintogtokh Batbold <bchintogtokh@gmail.com>",
-        subject: `Wikipedia Summary for 📘 ${formattedDate}`,
+        subject: `✍️ Wikipedia Summary for ${formattedDate}`,
         html:
             `<p><b>Greetings</b><br />This is the Wikipedia Summary for 📘 ${formattedDate}` +
             "<p>" +
@@ -75,8 +75,8 @@ async function main() {
             "</p>",
     };
 
-    // let info = await transporter.sendMail(message);
-    // console.log("Message sent successfully as %s", info.messageId);
+    let info = await transporter.sendMail(message);
+    console.log("Message sent successfully as %s", info.messageId);
 }
 
 main().catch((err) => {
