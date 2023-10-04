@@ -4,10 +4,10 @@ on: workflow_dispatch
 jobs:
   fetch-uncategorised:
     env:
-      USERNAME: ${{ variables.USERNAME }}
-      PASSWORD: ${{ variables.PASSWORD }}
-      USERNAMEADMIN: ${{ variables.USERNAMEADMIN }}
-      PASSWORDADMIN: ${{ variables.PASSWORDADMIN }}
+      USERNAME: ${{ USERNAME }}
+      PASSWORD: ${{ PASSWORD }}
+      USERNAMEADMIN: ${{ USERNAMEADMIN }}
+      PASSWORDADMIN: ${{ PASSWORDADMIN }}
     runs-on: ubuntu-latest
     steps:
       # - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
