@@ -3,6 +3,7 @@ run-name: Get Uncategorised 🚀
 on: 
   schedule:
       - cron: '0 19 * * *'
+  workflow_dispatch:
 jobs:
   fetch-uncategorised:
     env:
