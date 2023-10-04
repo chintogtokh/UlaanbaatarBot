@@ -23,7 +23,7 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: List files in the repository
         run: |
-          echo $GOOGLE_B64 | base64 --decode
+          echo $GOOGLE_B64 > googleconfig.json
           npm install
           npm run cron:getUncategorised
       - run: echo "🍏 This job's status is ${{ job.status }}."
