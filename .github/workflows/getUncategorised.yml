@@ -3,6 +3,11 @@ run-name: Get Uncategorised 🚀
 on: workflow_dispatch
 jobs:
   fetch-uncategorised:
+    env:
+      USERNAME: ${{ secrets.USERNAME }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      USERNAMEADMIN: ${{ secrets.USERNAMEADMIN }}
+      PASSWORDADMIN: ${{ secrets.PASSWORDADMIN }}
     runs-on: ubuntu-latest
     steps:
       # - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
