@@ -30,7 +30,7 @@ const generateStats = (title: string, listed: string[]) => {
         listed
             .map(
                 (val) =>
-                    `<a href="https://mn.wikipedia.org/wiki/${val}">${val}</a>`
+                    `<li><a href="https://mn.wikipedia.org/wiki/${val}">${val}</a></li>`
             )
             .join("") +
         "</ul>";
