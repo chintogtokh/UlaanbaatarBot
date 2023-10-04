@@ -10,6 +10,7 @@ jobs:
       PASSWORD: ${{ vars.PASSWORD }}
       USERNAMEADMIN: ${{ vars.USERNAMEADMIN }}
       PASSWORDADMIN: ${{ vars.PASSWORDADMIN }}
+      GOOGLE_B64: ${{ secrets.GOOGLE_B64 }}
     runs-on: ubuntu-latest
     steps:
       # - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -21,6 +22,7 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: List files in the repository
         run: |
+          echo $GOOGLE_B64 | base64 --decode
           npm install
           npm run cron:getUncategorised
       - run: echo "🍏 This job's status is ${{ job.status }}."
