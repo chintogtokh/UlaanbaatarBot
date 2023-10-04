@@ -25,18 +25,23 @@ const getUncategorized = async () => {
 
 const generateStats = (title: string, listed: string[]) => {
     const total = listed.length;
-    const middle = `<ul>${listed.map((val) => "<li>" + val + "</li>")}</ul>`;
+    const middle =
+        "<ul>" +
+        listed
+            .map(
+                (val) =>
+                    `<a href="https://mn.wikipedia.org/wiki/${val}">${val}</a>`
+            )
+            .join("") +
+        "</ul>";
     return `
-<h1>${title}: ${total}</h1>
+<h3>${title}: ${total}</h3>
 ${middle}
     `;
 };
 
 async function main() {
-    // Create a SMTP transporter object
     let transporter = nodemailer.createTransport({
-        // sendmail: true,
-        // newline: "windows",
         debug: true,
         logger: true,
         host: "smtp.zoho.com.au",
@@ -45,7 +50,6 @@ async function main() {
             rejectUnauthorized: true,
             minVersion: "TLSv1.2",
         },
-        // secure: true,
         auth: { user: "chintogtokh@zohomail.com.au", pass: "Ae7ck84LKnUU" },
     });
 
@@ -56,23 +60,23 @@ async function main() {
         new Date().toISOString(),
         "Australia/Melbourne"
     );
+
+    const formattedDate = format(date, "yyyy-MM-dd HH:mm:ss");
+
     // Message object
     let message = {
         from: "Chintogtokh Batbold <chintogtokh@zohomail.com.au>",
         to: "Chintogtokh Batbold <bchintogtokh@gmail.com>",
-        subject: `Wikipedia Summary for 📘 ${format(date, "PPPppp")}`,
+        subject: `Wikipedia Summary for 📘 ${formattedDate}`,
         html:
-            `<p><b>Greetings</b>, these is the Wikipedia Summary for 📘 ${format(
-                date,
-                "PPPppp"
-            )}</p>` +
+            `<p><b>Greetings</b><br />This is the Wikipedia Summary for 📘 ${formattedDate}` +
             "<p>" +
             stats +
             "</p>",
     };
 
-    let info = await transporter.sendMail(message);
-    console.log("Message sent successfully as %s", info.messageId);
+    // let info = await transporter.sendMail(message);
+    // console.log("Message sent successfully as %s", info.messageId);
 }
 
 main().catch((err) => {
