@@ -62,7 +62,7 @@ async function main() {
     const stats = await generateStats("Uncategorized pages", uncategorized);
 
     const wanted = await getSpecial("Wantedcategories");
-    const wantedstats = await generateStats("Wanted Categories", uncategorized);
+    const wantedstats = await generateStats("Wanted Categories", wanted);
 
     const date = utcToZonedTime(
         new Date().toISOString(),
