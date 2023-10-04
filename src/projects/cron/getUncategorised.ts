@@ -36,13 +36,15 @@ async function main() {
     let transporter = nodemailer.createTransport({
         // sendmail: true,
         // newline: "windows",
+        service: "zoho",
         logger: true,
         host: "smtp.zoho.com.au",
         port: 465,
-        tls: {
-            rejectUnauthorized: true,
-            minVersion: "TLSv1.2",
-        },
+        // tls: {
+        //     rejectUnauthorized: true,
+        //     minVersion: "TLSv1.2",
+        // },
+        secure: true,
         auth: { user: "chintogtokh@zohomail.com.au", pass: "KAD6nvhXGfKv" },
     });
 

@@ -10,7 +10,6 @@
     "cron:getUncategorised": "npx ts-node src/projects/cron/getUncategorised"
   },
   "dependencies": {
-    "@types/date-fns": "^2.6.0",
     "@types/google-spreadsheet": "^3.3.2",
     "@types/nodemailer": "^6.4.11",
     "date-fns": "^2.30.0",
