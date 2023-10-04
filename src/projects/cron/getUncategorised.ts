@@ -48,7 +48,7 @@ async function main() {
         auth: { user: "chintogtokh@zohomail.com.au", pass: "Ae7ck84LKnUU" },
     });
 
-    const uncategorized = []; // await getUncategorized();
+    const uncategorized = ["a"]; // await getUncategorized();
     const stats = await generateStats("Uncategorized pages", uncategorized);
 
     // Message object
