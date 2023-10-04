@@ -36,6 +36,7 @@ async function main() {
     let transporter = nodemailer.createTransport({
         // sendmail: true,
         // newline: "windows",
+        debug: true,
         logger: true,
         host: "smtp.zoho.com.au",
         port: 465,
