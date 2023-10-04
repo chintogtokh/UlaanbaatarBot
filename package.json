@@ -13,6 +13,7 @@
     "@types/google-spreadsheet": "^3.3.2",
     "@types/nodemailer": "^6.4.11",
     "date-fns": "^2.30.0",
+    "date-fns-tz": "^2.0.0",
     "dotenv": "^16.0.3",
     "google-auth-library": "^8.8.0",
     "google-spreadsheet": "^3.3.0",

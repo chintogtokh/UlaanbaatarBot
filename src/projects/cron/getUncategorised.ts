@@ -2,6 +2,7 @@ import { ApiParams, mwn } from "mwn";
 import { BotConfig } from "../../utils/bot";
 import { format } from "date-fns";
 import * as nodemailer from "nodemailer";
+import { utcToZonedTime } from "date-fns-tz";
 
 const getUncategorized = async () => {
     const bot = new mwn(BotConfig);
@@ -51,14 +52,18 @@ async function main() {
     const uncategorized = await getUncategorized();
     const stats = await generateStats("Uncategorized pages", uncategorized);
 
+    const date = utcToZonedTime(
+        new Date().toISOString(),
+        "Australia/Melbourne"
+    );
     // Message object
     let message = {
         from: "Chintogtokh Batbold <chintogtokh@zohomail.com.au>",
         to: "Chintogtokh Batbold <bchintogtokh@gmail.com>",
-        subject: `Wikipedia Summary for 📘 ${format(new Date(), "PPPppp")}`,
+        subject: `Wikipedia Summary for 📘 ${format(date, "PPPppp")}`,
         html:
             `<p><b>Greetings</b>, these is the Wikipedia Summary for 📘 ${format(
-                new Date(),
+                date,
                 "PPPppp"
             )}</p>` +
             "<p>" +
