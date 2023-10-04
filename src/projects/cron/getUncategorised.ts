@@ -4,7 +4,7 @@ import { format } from "date-fns";
 import * as nodemailer from "nodemailer";
 import { utcToZonedTime } from "date-fns-tz";
 
-const getUncategorized = async () => {
+const getSpecial = async (type: string) => {
     const bot = new mwn(BotConfig);
     await bot.login();
 
@@ -12,7 +12,7 @@ const getUncategorized = async () => {
         action: "query",
         format: "json",
         list: "querypage",
-        qppage: "Uncategorizedpages",
+        qppage: type,
         qplimit: 500,
     };
 
@@ -25,6 +25,11 @@ const getUncategorized = async () => {
 
 const generateStats = (title: string, listed: string[]) => {
     const total = listed.length;
+    if (total > 50) {
+        return `
+        <h3>${title}: ${total}</h3>
+            `;
+    }
     const middle =
         "<ul>" +
         listed
@@ -53,8 +58,11 @@ async function main() {
         auth: { user: "chintogtokh@zohomail.com.au", pass: "Ae7ck84LKnUU" },
     });
 
-    const uncategorized = await getUncategorized();
+    const uncategorized = await getSpecial("Uncategorizedpages");
     const stats = await generateStats("Uncategorized pages", uncategorized);
+
+    const wanted = await getSpecial("Wantedcategories");
+    const wantedstats = await generateStats("Wanted Categories", uncategorized);
 
     const date = utcToZonedTime(
         new Date().toISOString(),
@@ -72,6 +80,7 @@ async function main() {
             `<p><b>Greetings</b><br />This is the Wikipedia Summary for 📘 ${formattedDate}` +
             "<p>" +
             stats +
+            wantedstats +
             "</p>",
     };
 
