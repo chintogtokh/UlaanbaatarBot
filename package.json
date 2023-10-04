@@ -1,24 +1,22 @@
 {
   "scripts": {
-    "g:createCats": "npx ts-node src/projects/googlesheets/createCatsNew",
-    "g:csvCat": "npx ts-node src/projects/googlesheets/csvCatNew",
+    "g:createCats": "npx ts-node src/projects/googlesheets/createCats",
+    "g:csvCat": "npx ts-node src/projects/googlesheets/csvCat",
+    "g:fetchArticles": "npx ts-node src/projects/googlesheets/fetchArticles",
     "g:insertInterwiki": "npx ts-node src/projects/googlesheets/insertInterwiki",
     "g:renameCats": "npx ts-node src/projects/googlesheets/renameCats",
-    "g:simpleCat": "npx ts-node src/projects/googlesheets/simpleCat",
+    "g:replaceCats": "npx ts-node src/projects/googlesheets/replaceCats",
     "g:translateCats": "npx ts-node src/projects/googlesheets/translateCats",
-    "g:parseWiki": "npx ts-node src/projects/googlesheets/parseWiki",
-    "g:getUncategorised": "npx ts-node src/projects/googlesheets/getUncategorised",
-    "csv:createCats": "npx ts-node src/projects/csv/createcats",
-    "csv:csvCat": "npx ts-node src/projects/csv/csvCat",
-    "csv:rename": "npx ts-node src/projects/csv/renameCategory",
-    "createDateArticles": "npx ts-node src/projects/legacy/createDateArticles"
+    "cron:getUncategorised": "npx ts-node src/projects/cron/getUncategorised"
   },
   "dependencies": {
     "@types/google-spreadsheet": "^3.3.2",
+    "@types/nodemailer": "^6.4.11",
     "dotenv": "^16.0.3",
     "google-auth-library": "^8.8.0",
     "google-spreadsheet": "^3.3.0",
-    "mwn": "^1.11.4"
+    "mwn": "^1.11.4",
+    "nodemailer": "^6.9.5"
   },
   "devDependencies": {
     "ts-node": "^10.9.1"

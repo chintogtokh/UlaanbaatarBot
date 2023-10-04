@@ -3,6 +3,7 @@ import { BotConfig, WikidataBotConfig } from "../../utils/bot";
 import { TIMEOUT } from "../../utils/vars";
 import { connectArticles } from "../../utils/wikidataUtils";
 import { loadSheetRows } from "../../utils/goog";
+import Config from "./config";
 
 const main = async () => {
     const bot = new mwn(BotConfig);
@@ -10,7 +11,7 @@ const main = async () => {
     const wikidatabot = new mwn(WikidataBotConfig());
     await wikidatabot.login();
 
-    const allRows = await loadSheetRows("BotCsvCat");
+    const allRows = await loadSheetRows(Config.csvCat.sheetName);
 
     for await (const allRow of allRows) {
         const article = allRow.csvRow;
@@ -20,11 +21,14 @@ const main = async () => {
         }
         console.log(article.name);
 
-        if (
-            !article.interwiki &&
-            !article.content &&
-            article.categories.length == 0
-        ) {
+        const newcats = article?.categories
+            .flatMap((cat) => cat.split("\n"))
+            .filter((cat) => !!cat && cat !== "{NULL}" && cat !== "?")
+            .map((cat) =>
+                cat.replace("}", "").replace("{", "").replace("\r", "")
+            );
+
+        if (!article.interwiki && !article.content && newcats.length == 0) {
             console.log(`Skipping ${article.name}`);
         }
 
@@ -43,23 +47,25 @@ const main = async () => {
             await new Promise((r) => setTimeout(r, TIMEOUT + 5000));
         }
 
-        if (article.content.length > 0 || article.categories.length > 0)
+        console.log(article.content, newcats);
+
+        if (article.content.length > 0 || newcats.length > 0) {
             await bot.edit(article.name, (rev) => {
                 let text =
+                    `${rev.content}\n\n` +
                     (article.content ? `${article.content}\n` : "") +
-                    `${rev.content}\n` +
-                    (article.categories
-                        ? article.categories
-                              .map((v) => `[[Ангилал:${v}]]`)
-                              .join("\n")
+                    (newcats
+                        ? newcats.map((v) => `[[Ангилал:${v}]]`).join("\n")
                         : "");
-
                 return {
                     text,
-                    summary: "Анги нэмэв",
+                    summary: Config.csvCat.summary,
                     minor: true,
                 };
             });
+        }
+
+        console.log(`Done ${article.name}`);
 
         await new Promise((r) => setTimeout(r, TIMEOUT));
     }

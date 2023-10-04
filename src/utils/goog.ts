@@ -36,6 +36,7 @@ export const loadSheetRows = async (sheetName: string) => {
                 interwiki: interwikiParse(element["interwiki"]),
                 categories: allCats,
                 moveTo: element["moveTo"],
+                moveBoolean: !!element["moveBoolean"],
             },
             goog: element,
         });

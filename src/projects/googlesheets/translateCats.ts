@@ -3,15 +3,15 @@ import * as dotenv from "dotenv";
 import { BotConfig, LangBotConfig } from "../../utils/bot";
 import { TIMEOUT } from "../../utils/vars";
 import { loadSheet } from "../../utils/goog";
+import Config from "./config";
 
 dotenv.config();
 
-const FOREIGN_LANGUAGES = ["en", "ru", "de"];
-const SHEETNAME = "BotTranslateCats";
+const FOREIGN_LANGUAGES = Config.translateCats.langs;
 
 const getInOtherLanguage = async (
     bot: mwn,
-    engBot: mwn,
+    foreignBot: mwn,
     title: string,
     fromLang: string,
     FOREIGN_LANGUAGE: string
@@ -25,7 +25,7 @@ const getInOtherLanguage = async (
     const content =
         fromLang === "mn"
             ? await bot.query(params)
-            : await engBot.query(params);
+            : await foreignBot.query(params);
 
     const toLang = fromLang == "mn" ? FOREIGN_LANGUAGE : "mn";
     const langlinks: { lang: string; title: string }[] =
@@ -36,7 +36,7 @@ const getInOtherLanguage = async (
 
 const getCategories = async (
     bot: mwn,
-    engBot: mwn,
+    foreignBot: mwn,
     title: string,
     fromLang: string
 ) => {
@@ -47,7 +47,9 @@ const getCategories = async (
     };
 
     const content =
-        fromLang == "mn" ? await bot.query(params) : await engBot.query(params);
+        fromLang == "mn"
+            ? await bot.query(params)
+            : await foreignBot.query(params);
     const categories: { ns: number; title: string }[] =
         content?.query?.pages?.[0]?.categories;
 
@@ -81,12 +83,12 @@ const main = async () => {
     const bot = new mwn(BotConfig);
     await bot.login();
 
-    const googleSheet = await loadSheet(SHEETNAME);
+    const googleSheet = await loadSheet(Config.translateCats.sheetName);
     const rows = await googleSheet.getRows();
 
     for (const FOREIGN_LANGUAGE of FOREIGN_LANGUAGES) {
-        const engBot = new mwn(LangBotConfig(FOREIGN_LANGUAGE));
-        await engBot.login();
+        const foreignBot = new mwn(LangBotConfig(FOREIGN_LANGUAGE));
+        await foreignBot.login();
 
         for await (const row of rows) {
             if (row["skip"]) {
@@ -96,25 +98,25 @@ const main = async () => {
 
             const article = row["name"];
             console.log(`Parsing ${article}: \n`);
-            const engName = await getInOtherLanguage(
+            const foreignName = await getInOtherLanguage(
                 bot,
-                engBot,
+                foreignBot,
                 article,
                 "mn",
                 FOREIGN_LANGUAGE
             );
-            if (engName) {
+            if (foreignName) {
                 const categories = await getCategories(
                     bot,
-                    engBot,
-                    engName,
+                    foreignBot,
+                    foreignName,
                     FOREIGN_LANGUAGE
                 );
                 const potentialCats: string[] = [];
                 for await (const cat of categories) {
                     const mnName = await getInOtherLanguage(
                         bot,
-                        engBot,
+                        foreignBot,
                         cat,
                         FOREIGN_LANGUAGE,
                         FOREIGN_LANGUAGE
@@ -152,7 +154,7 @@ const main = async () => {
             await new Promise((r) => setTimeout(r, TIMEOUT));
         }
 
-        await engBot.logout();
+        await foreignBot.logout();
     }
 };
 
