@@ -44,7 +44,7 @@ async function main() {
             minVersion: "TLSv1.2",
         },
         // secure: true,
-        auth: { user: "chintogtokh@zohomail.com.au", pass: "KAD6nvhXGfKv" },
+        auth: { user: "chintogtokh@zohomail.com.au", pass: "Ae7ck84LKnUU" },
     });
 
     const uncategorized = await getUncategorized();
