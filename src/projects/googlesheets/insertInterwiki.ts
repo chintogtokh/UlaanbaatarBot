@@ -31,7 +31,7 @@ const main = async () => {
         } else if (!rowInterwiki) {
             row["interwiki"] = "X";
         }
-        console.log(row["interwiki"]);
+        row["skip"] = "#";
         await row.save();
 
         await new Promise((r) => setTimeout(r, TIMEOUT));

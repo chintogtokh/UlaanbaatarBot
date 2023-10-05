@@ -65,6 +65,12 @@ const main = async () => {
             });
         }
 
+        const googRow = allRow?.goog;
+        if (googRow) {
+            googRow["skip"] = "#";
+            await googRow.save();
+        }
+
         console.log(`Done ${article.name}`);
 
         await new Promise((r) => setTimeout(r, TIMEOUT));

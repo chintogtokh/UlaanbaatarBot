@@ -13,9 +13,6 @@ const main = async () => {
 
     const rows = await loadSheetRows(Config.createCats.sheetName);
 
-    /**
-     * name - interwiki - contents - category1..13
-     */
     for await (const row of rows) {
         const csvRow = row.csvRow;
 
@@ -50,6 +47,12 @@ const main = async () => {
                 csvRow?.interwiki.lang,
                 `Category:${csvRow?.interwiki.name}`
             );
+        }
+
+        const googRow = row?.goog;
+        if (googRow) {
+            googRow["skip"] = "#";
+            await googRow.save();
         }
 
         await new Promise((r) => setTimeout(r, TIMEOUT));
