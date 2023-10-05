@@ -79,6 +79,12 @@ const main = async () => {
             }
         }
 
+        const googRow = allRow?.goog;
+        if (googRow) {
+            googRow["skip"] = "#";
+            await googRow.save();
+        }
+
         console.log(`Done Ангилал:${article.name}`);
 
         await new Promise((r) => setTimeout(r, TIMEOUT));

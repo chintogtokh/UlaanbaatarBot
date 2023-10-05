@@ -19,6 +19,12 @@ const main = async () => {
                 thePage?.moveTo,
                 thePage?.moveBoolean
             );
+
+            const googRow = page?.goog;
+            if (googRow) {
+                googRow["skip"] = "#";
+                await googRow.save();
+            }
         }
     }
 };
