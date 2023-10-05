@@ -3,6 +3,7 @@ import { BotConfig } from "../../utils/bot";
 import { format } from "date-fns";
 import * as nodemailer from "nodemailer";
 import { utcToZonedTime } from "date-fns-tz";
+import { loadSheet } from "../../utils/goog";
 
 const getSpecial = async (type: string) => {
     const bot = new mwn(BotConfig);
@@ -45,6 +46,16 @@ ${middle}
     `;
 };
 
+const insertIntoSheet = async (sheetName: string, data: string[]) => {
+    const sheet = await loadSheet(sheetName);
+    await sheet.loadCells("A1:G100");
+    for (let index = 0; index < data.length; index++) {
+        const element = data[index];
+        sheet.getCell(1 + index, 1).value = element;
+        await sheet.getCell(1 + index, 1).save();
+    }
+};
+
 async function main() {
     let transporter = nodemailer.createTransport({
         debug: true,
@@ -59,6 +70,7 @@ async function main() {
     });
 
     const uncategorized = await getSpecial("Uncategorizedpages");
+    await insertIntoSheet("InsertInterwiki", uncategorized);
     const stats = await generateStats("Uncategorized pages", uncategorized);
 
     const wanted = await getSpecial("Wantedcategories");
@@ -84,8 +96,8 @@ async function main() {
             "</p>",
     };
 
-    let info = await transporter.sendMail(message);
-    console.log("Message sent successfully as %s", info.messageId);
+    // let info = await transporter.sendMail(message);
+    // console.log("Message sent successfully as %s", info.messageId);
 }
 
 main().catch((err) => {
