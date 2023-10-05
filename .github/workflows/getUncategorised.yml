@@ -23,7 +23,7 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: Do the things
         run: |
-          echo $GOOGLE_B64 > googleconfig.json
+          echo $GOOGLE_B64 | base64 -d > googleconfig.json
           npm install
           npm run cron:getUncategorised
           npm run g:insertInterwiki
