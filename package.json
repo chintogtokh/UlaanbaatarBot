@@ -9,7 +9,7 @@
     "g:replaceCats": "npx ts-node src/projects/googlesheets/replaceCats",
     "g:translateCats": "npx ts-node src/projects/googlesheets/translateCats",
     "cron:getUncategorised": "npx ts-node src/projects/cron/getUncategorised",
-    "cron:copySheetData": "npx ts-node src/projects/cron/copySheetData",
+    "cron:copySheetData": "npx ts-node src/projects/cron/copySheetData"
   },
   "dependencies": {
     "@types/google-spreadsheet": "^3.3.2",
