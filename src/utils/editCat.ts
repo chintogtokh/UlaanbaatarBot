@@ -17,30 +17,33 @@ export const renameCategory = async (
 
     console.log(pages);
 
+    const getEditedText = (content: string, category: string) => {
+        const value = content
+            .replace(
+                new RegExp(`\\[\\[Ангилал:${category}\\]\\]`, "g"),
+                `[[${to}]]`
+            )
+            .replace(
+                new RegExp(`\\[\\[Ангилал:${category}\\|.*\\]\\]`, "g"),
+                `[[${to}]]`
+            )
+            .replace(
+                new RegExp(`\\[\\[Category:${category}\\]\\]`, "g"),
+                `[[${to}]]`
+            )
+            .replace(
+                new RegExp(`\\[\\[Category:${category}\\|.*\\]\\]`, "g"),
+                `[[${to}]]`
+            );
+        return value;
+    };
+
     for await (const element of pages) {
         console.log(element, `[[${from}]]-ийг [[${to}]]-аар сольж байна`);
 
-        // test later, delete this comment
         await bot.edit(element, (rev) => {
-            let text = rev.content.replace(
-                new RegExp(`\\\[\\\[${escapeRegExp(from)}`, "g"),
-                `[[${to}`
-            );
-
-            if (toWithoutPrefix === "DELETE") {
-                console.log("DELETE");
-                text = rev.content.replace(
-                    new RegExp(
-                        `\\\[\\\[${escapeRegExp(from)}(|.*)?\\\]\\\]`,
-                        "g"
-                    ),
-                    ""
-                );
-                console.log(text);
-            }
-
             return {
-                text: text,
+                text: getEditedText(rev.content, fromWithoutPrefix),
                 summary: `[[${from}]]-ийг [[${to}]]-аар сольж байна`,
                 minor: true,
             };
