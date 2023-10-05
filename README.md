@@ -6,17 +6,15 @@ See: https://docs.google.com/spreadsheets/d/1joX9r-2ycIuMTfmsq1VxEyeUy-wzk0Tlhfx
 
 * `g:createCats`
 * `g:csvCat`
+* `g:deleteCats`
+* `g:fetchArticles`
 * `g:insertInterwiki`
 * `g:renameCats`
-* `g:simpleCat`
+* `g:replaceCats`
 * `g:translateCats`
 
-### Potential Workflows
+## Cron
 
-1. Fetch uncategorised articles
-2. Check if articles have interwiki. If not, manually add interwiki
-   1. Maybe use ChatGPT?
-3. Fetch potential list of categories based on other languages
-4. Organise into buckets of categories for manual check
+* `cron:getUncategorised`
+* `cron:copySheetData`
 
-* Potential category generator

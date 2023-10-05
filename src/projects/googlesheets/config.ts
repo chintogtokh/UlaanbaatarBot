@@ -16,6 +16,9 @@ const Config = {
     renameCats: {
         sheetName: "RenameCats",
     },
+    deleteCats: {
+        sheetName: "DeleteCats",
+    },
     replaceCats: {
         sheetName: "ReplaceCats",
         summary: "Ангилал шинэчилж байна",

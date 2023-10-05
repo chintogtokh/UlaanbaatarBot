@@ -59,3 +59,40 @@ export const renameCategory = async (
         }
     }
 };
+
+export const deleteCategory = async (bot: mwn, fromWithoutPrefix: string) => {
+    const from = `Ангилал:${fromWithoutPrefix}`; //needa cat as well
+    console.log(`Deleting: ${from}`);
+
+    const pages = await bot.getPagesInCategory(from);
+
+    const getReplacedText = (content: string, category: string) => {
+        const value = content
+            .replace(new RegExp(`\\[\\[Ангилал:${category}\\]\\]`, "g"), "")
+            .replace(
+                new RegExp(`\\[\\[Ангилал:${category}\\|.*\\]\\]`, "g"),
+                ""
+            )
+            .replace(new RegExp(`\\[\\[Category:${category}\\]\\]`, "g"), "")
+            .replace(
+                new RegExp(`\\[\\[Category:${category}\\|.*\\]\\]`, "g"),
+                ""
+            );
+        return value;
+    };
+
+    for await (const element of pages) {
+        console.log(element, `[[${from}]]-г устгаж байна`);
+
+        // test later, delete this comment
+        await bot.edit(element, (rev) => {
+            // console.log(getReplacedText(rev.content, fromWithoutPrefix));
+            return {
+                text: getReplacedText(rev.content, fromWithoutPrefix),
+                summary: `[[${from}]]-г устгаж байна`,
+                minor: true,
+            };
+        });
+        await new Promise((r) => setTimeout(r, 3000));
+    }
+};

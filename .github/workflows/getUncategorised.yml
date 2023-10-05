@@ -2,7 +2,7 @@ name: Get Uncategorised
 run-name: Get Uncategorised 🚀
 on: 
   schedule:
-      - cron: '0 19 * * *'
+      - cron: '0 8 * * *' # 8 AM UTC = 7 PM AEST
   workflow_dispatch:
 jobs:
   fetch-uncategorised:
@@ -20,8 +20,8 @@ jobs:
         run: |
           echo $GOOGLE_B64 | base64 -d > googleconfig.json
           npm install
-          npm run cron:getUncategorised
-          npm run g:insertInterwiki
-          npm run cron:copySheetData
-          npm run g:translateCats
+          npm run cron:getUncategorised # Get uncategorised
+          npm run g:insertInterwiki # Insert interwikis
+          npm run cron:copySheetData # Copy insertInterwiki2TranslateCats
+          npm run g:translateCats # Translate cats
       - run: echo "Job's status is ${{ job.status }}."
