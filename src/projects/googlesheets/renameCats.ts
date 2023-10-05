@@ -1,6 +1,6 @@
 import { mwn } from "mwn";
 import { BotConfig } from "../../utils/bot";
-import { renameCategory } from "../../utils/rename";
+import { renameCategory } from "../../utils/editCat";
 import { loadSheetRows } from "../../utils/goog";
 import Config from "./config";
 
