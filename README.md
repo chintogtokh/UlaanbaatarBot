@@ -18,3 +18,13 @@ See: https://docs.google.com/spreadsheets/d/1joX9r-2ycIuMTfmsq1VxEyeUy-wzk0Tlhfx
 * `cron:getUncategorised`
 * `cron:copySheetData`
 
+# Setup
+1. `nvm use`
+1. `npm install`
+
+## Required Secrets
+Both Available from [Github Secrets](https://github.com/chintogtokh/UlaanbaatarBot/settings/secrets/actions).
+
+* `googleconfig.json` (abse64 encoded under `GOOGLE_B64`)
+* `.env` 
+
