@@ -4,6 +4,7 @@
     "g:csvCat": "npx ts-node src/projects/googlesheets/csvCat",
     "g:deleteCats": "npx ts-node src/projects/googlesheets/deleteCats",
     "g:fetchArticles": "npx ts-node src/projects/googlesheets/fetchArticles",
+    "g:fetchCats": "npx ts-node src/projects/googlesheets/fetchCats",
     "g:insertInterwiki": "npx ts-node src/projects/googlesheets/insertInterwiki",
     "g:renameCats": "npx ts-node src/projects/googlesheets/renameCats",
     "g:replaceCats": "npx ts-node src/projects/googlesheets/replaceCats",

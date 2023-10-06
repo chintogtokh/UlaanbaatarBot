@@ -8,6 +8,7 @@ See: https://docs.google.com/spreadsheets/d/1joX9r-2ycIuMTfmsq1VxEyeUy-wzk0Tlhfx
 * `g:csvCat`
 * `g:deleteCats`
 * `g:fetchArticles`
+* `g:fetchCats`
 * `g:insertInterwiki`
 * `g:renameCats`
 * `g:replaceCats`

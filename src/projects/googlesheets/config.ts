@@ -9,6 +9,9 @@ const Config = {
     },
     fetchArticles: {
         sheetName: "WantedCategories",
+    },   
+    fetchCats: {
+        sheetName: "FetchCats",
     },
     insertInterwiki: {
         sheetName: "InsertInterwiki",
