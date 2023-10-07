@@ -23,5 +23,4 @@ jobs:
           npm run cron:getUncategorised # Get uncategorised
           npm run g:insertInterwiki # Insert interwikis
           npm run cron:copySheetData # Copy insertInterwiki2TranslateCats
-          npm run g:translateCats # Translate cats
       - run: echo "Job's status is ${{ job.status }}."
