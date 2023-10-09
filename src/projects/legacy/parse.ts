@@ -3,7 +3,8 @@ import { BotConfig } from "../../utils/bot";
 import { TIMEOUT } from "../../utils/vars";
 import { loadSheetRows } from "../../utils/goog";
 
-const SHEETNAME = "Stubs";
+
+
 
 /**
  * Reads the article and adds the content into Google Sheets
@@ -11,6 +12,7 @@ const SHEETNAME = "Stubs";
 const main = async () => {
     // const bot = new mwn(BotConfig);
     // await bot.login();
+    const SHEETNAME = "Stubs";
 
     const allRowDatas = await loadSheetRows(SHEETNAME);
 
@@ -24,13 +26,16 @@ const main = async () => {
         // const rawData = await bot.read(row["name"]);
         // const intro = rawData?.revisions?.[0]?.content;
 
-        const content = row["content"]
+        const content = row["type"] as string
 
-        content.find("тухай хэт богино")
+        const mat = content.matchAll(/\[\[([^\]\[\|]*)[^\]\[]*\]\]/g);
 
+        console.log(content, Array.from(mat, match => match[1]))
+
+        // row["typenew"] = mat;
         // await row.save();
 
-        // await new Promise((r) => setTimeout(r, TIMEOUT));
+        await new Promise((r) => setTimeout(r, TIMEOUT));
     }
 };
 
