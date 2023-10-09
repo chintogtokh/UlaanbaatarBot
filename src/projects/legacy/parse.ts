@@ -9,8 +9,8 @@ const SHEETNAME = "Stubs";
  * Reads the article and adds the content into Google Sheets
  */
 const main = async () => {
-    const bot = new mwn(BotConfig);
-    await bot.login();
+    // const bot = new mwn(BotConfig);
+    // await bot.login();
 
     const allRowDatas = await loadSheetRows(SHEETNAME);
 
@@ -21,16 +21,16 @@ const main = async () => {
             continue;
         }
 
-        const rawData = await bot.read(row["name"]);
-        const intro = rawData?.revisions?.[0]?.content;
+        // const rawData = await bot.read(row["name"]);
+        // const intro = rawData?.revisions?.[0]?.content;
 
-        const interwiki = true;
-        if (interwiki) {
-            row["content"] = " " + intro;
-        }
-        await row.save();
+        const content = row["content"]
 
-        await new Promise((r) => setTimeout(r, TIMEOUT));
+        content.find("тухай хэт богино")
+
+        // await row.save();
+
+        // await new Promise((r) => setTimeout(r, TIMEOUT));
     }
 };
 

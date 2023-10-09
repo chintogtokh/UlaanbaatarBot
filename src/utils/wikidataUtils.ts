@@ -122,7 +122,7 @@ export const getInterwiki = async (bot: mwn, pageName: string) => {
     const res = await bot
         .query(params)
         .catch((e: any) => console.log("Error occured: ", e));
-    const langlinks: LangLinkType[] = res?.query?.pages?.[0].langlinks;
+    const langlinks: LangLinkType[] = res && res?.query?.pages?.[0].langlinks;
 
     if (!langlinks) return null;
 
