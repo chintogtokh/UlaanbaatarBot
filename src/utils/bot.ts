@@ -10,6 +10,14 @@ export const BotConfig = {
   defaultParams: { assert: "user" },
 };
 
+export const AdminBotConfig = {
+  apiUrl: "https://mn.wikipedia.org/w/api.php",
+  username: `${process.env.USERNAMEADMIN}`,
+  password: `${process.env.PASSWORDADMIN}`,
+  userAgent: "Chinneeb 0.01 ([[User:Chinneeb]])",
+  defaultParams: { assert: "user" },
+};
+
 export const EnglishBotConfig = {
   apiUrl: "https://en.wikipedia.org/w/api.php",
   username: `${process.env.USERNAME}`,
