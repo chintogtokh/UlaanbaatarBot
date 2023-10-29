@@ -67,7 +67,7 @@ const main = async () => {
 
         const googRow = allRow?.goog;
         if (googRow) {
-            googRow["skip"] = "#";
+            googRow["skip"] = "D";
             await googRow.save();
         }
 
