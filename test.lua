@@ -1,2 +1,2 @@
-local a = "Ангилал:МЭӨ 1920 онуу"
-print(string.match(a, '^Ангилал:(МЭӨ)?%d+ он(.+)'))
+local a = "МЭӨ 1920-д он"
+print(string.match(a, "%d+-д он"))

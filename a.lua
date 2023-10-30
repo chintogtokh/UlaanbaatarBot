@@ -242,7 +242,9 @@ p.getPageInfo = function(currentPage)
     local signedNumFromPage = numFromPage
     if (bcOrAd == "МЭӨ") then signedNumFromPage = -signedNumFromPage end
     local categories = {}
+    local fullDate = ""
 
+    -- should be first
     if string.match(currentPage, "%d+-д он") then
         -- decade
         dateType = "decade"
@@ -253,24 +255,28 @@ p.getPageInfo = function(currentPage)
             categories, (bcOrAd == "МЭӨ" and "МЭӨ " or "") ..
             math.floor(numFromPage / 100) + 1 .. "-р зуун" .. topic
         )
+        fullDate = (bcOrAd == "МЭӨ" and "МЭӨ " or "") .. string.match(currentPage, "%d+-д он")
     elseif string.match(currentPage, "%d+ он") then
         -- year
         dateType = "year"
         topic = string.match(currentPage, '%d+ он(.+)') or ""
         table.insert(categories,
             (bcOrAd == "МЭӨ" and "МЭӨ " or "") .. math.floor(numFromPage / 10) * 10 .. "-д он" .. topic)
+        fullDate = (bcOrAd == "МЭӨ" and "МЭӨ " or "") .. string.match(currentPage, "%d+ он")
     elseif string.match(currentPage, "%d+-р зуун") then
         -- century
         dateType = "century"
         topic = string.match(currentPage, '%d+-р зуун(.+)') or ""
         table.insert(
             categories, (bcOrAd == "МЭӨ" and "МЭӨ " or "") ..
-            math.floor(numFromPage / 1000) + 1 .. "-р мянган" .. topic
+            math.floor(numFromPage * 100 / 1000) + 1 .. "-р мянган" .. topic
         )
+        fullDate = (bcOrAd == "МЭӨ" and "МЭӨ " or "") .. string.match(currentPage, "%d+-р зуун")
     elseif string.match(currentPage, "%d+-р мянган") then
         -- millennium
         dateType = "millennium"
         topic = string.match(currentPage, '%d+-р мянган(.+)') or ""
+        fullDate = (bcOrAd == "МЭӨ" and "МЭӨ " or "") .. string.match(currentPage, "%d+-р мянган")
     else
         error("Invalid date")
     end
@@ -279,7 +285,8 @@ p.getPageInfo = function(currentPage)
         ['numFromPage'] = signedNumFromPage,
         ['topic'] = topic,
         ['dateType'] = dateType,
-        ['categories'] = categories
+        ['categories'] = categories,
+        ['fullDate'] = fullDate
     }
 end
 
@@ -296,6 +303,12 @@ p.dateType = function(frame)
     local title = frame.args[1]
     local pageInfo = p.getPageInfo(title)
     return pageInfo['dateType']
+end
+
+p.fullDate = function(frame)
+    local title = frame.args[1]
+    local pageInfo = p.getPageInfo(title)
+    return pageInfo['fullDate']
 end
 
 p.generate = function(frame)
