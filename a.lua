@@ -180,7 +180,7 @@ p.year = function(year, dateType, topic)
     return table.concat(retYear, p.separator)
 end
 
--- Generate list of categories
+-- Generate the main category templates
 p.yearCat = function(num, topic)
     if num == 0 then
         error("Invalid date")
@@ -192,7 +192,9 @@ p.yearCat = function(num, topic)
         p.year(num, nil, topic) }, "\n<br />\n")
 end
 
--- Instead of 0, use 1 ; -0 use 1; for everything else use 10,-10, 1920, -1920 etc.
+-- Instead of 0s AD, use 1
+-- Instead of 0s BC use -1
+-- For everything else use 10,-10, 1920, -1920 etc.
 p.decadeCat = function(num, topic)
     if math.abs(num) ~= 1 and math.abs(num % 10) ~= 0 then
         error("Invalid date")
@@ -232,43 +234,91 @@ p.millenniumCat = function(num, topic)
         p.century(num, "millennium", topic) }, "\n<br />\n")
 end
 
-p.main = function(frame)
-    local functype = frame.args[1]
-    local num = tonumber(frame.args[2])
-    local topic = frame.args[3] or ""
+p.getPageInfo = function(currentPage)
+    local dateType = nil
+    local topic = ""
+    local bcOrAd = string.find(currentPage, "МЭӨ") and "МЭӨ" or ""
+    local numFromPage = tonumber(string.match(currentPage, "%d+"))
+    local signedNumFromPage = numFromPage
+    if (bcOrAd == "МЭӨ") then signedNumFromPage = -signedNumFromPage end
+    local categories = {}
 
-    topic = topic or ""
-    local funcs = {
-        year = function() return p.yearCat(num, topic) end,
-        decade = function() return p.decadeCat(num, topic) end,
-        century = function() return p.centuryCat(num, topic) end,
-        millennium = function() return p.millenniumCat(num, topic) end,
-    }
-    -- "<h2>" .. num .. functype .. "</h2>" ..
-    if funcs[functype] then
-        return "<div {{Цагалбарын хэв}}>\n" ..
-            funcs[functype]() .. "\n</div>"
+    if string.match(currentPage, "%d+-д он") then
+        -- decade
+        dateType = "decade"
+        topic = string.match(currentPage, '%d+-д он(.+)') or ""
+        if numFromPage == 0 and bcOrAd == "МЭӨ" then signedNumFromPage = -1 end
+        if numFromPage == 0 and bcOrAd == "" then signedNumFromPage = 1 end
+        table.insert(
+            categories, (bcOrAd == "МЭӨ" and "МЭӨ " or "") ..
+            math.floor(numFromPage / 100) + 1 .. "-р зуун" .. topic
+        )
+    elseif string.match(currentPage, "%d+ он") then
+        -- year
+        dateType = "year"
+        topic = string.match(currentPage, '%d+ он(.+)') or ""
+        table.insert(categories,
+            (bcOrAd == "МЭӨ" and "МЭӨ " or "") .. math.floor(numFromPage / 10) * 10 .. "-д он" .. topic)
+    elseif string.match(currentPage, "%d+-р зуун") then
+        -- century
+        dateType = "century"
+        topic = string.match(currentPage, '%d+-р зуун(.+)') or ""
+        table.insert(
+            categories, (bcOrAd == "МЭӨ" and "МЭӨ " or "") ..
+            math.floor(numFromPage / 1000) + 1 .. "-р мянган" .. topic
+        )
+    elseif string.match(currentPage, "%d+-р мянган") then
+        -- millennium
+        dateType = "millennium"
+        topic = string.match(currentPage, '%d+-р мянган(.+)') or ""
     else
-        error("Invalid function name")
+        error("Invalid date")
     end
+
+    return {
+        ['numFromPage'] = signedNumFromPage,
+        ['topic'] = topic,
+        ['dateType'] = dateType,
+        ['categories'] = categories
+    }
+end
+
+p.categorySort = function(frame)
+    local title = frame.args[1]
+    local pageInfo = p.getPageInfo(title)
+    if pageInfo['numFromPage'] < 0 then
+        return "!" .. 10000000 - math.abs(pageInfo['numFromPage'])
+    end
+    return "#" .. string.format("%09d", math.abs(pageInfo['numFromPage']))
+end
+
+p.dateType = function(frame)
+    local title = frame.args[1]
+    local pageInfo = p.getPageInfo(title)
+    return pageInfo['dateType']
 end
 
 p.generate = function(frame)
-    local functype = frame.args[1]
-    local num = tonumber(frame.args[2])
-    local topic = frame.args[3] or ""
+    local title = frame.args[1]
+    local pageInfo = p.getPageInfo(title)
+    local categorySort = p.categorySort(frame)
 
-    topic = topic or ""
     local funcs = {
-        year = function() return p.yearCat(num, topic) end,
-        decade = function() return p.decadeCat(num, topic) end,
-        century = function() return p.centuryCat(num, topic) end,
-        millennium = function() return p.millenniumCat(num, topic) end,
+        year = function() return p.yearCat(pageInfo['numFromPage'], pageInfo['topic']) end,
+        decade = function() return p.decadeCat(pageInfo['numFromPage'], pageInfo['topic']) end,
+        century = function() return p.centuryCat(pageInfo['numFromPage'], pageInfo['topic']) end,
+        millennium = function() return p.millenniumCat(pageInfo['numFromPage'], pageInfo['topic']) end,
     }
-    -- "<h2>" .. num .. functype .. "</h2>" ..
-    if funcs[functype] then
+
+    local categoryList = {}
+    for _, value in pairs(pageInfo['categories']) do
+        table.insert(categoryList, "[[Ангилал: " .. value .. "|" .. categorySort .. "]]")
+    end
+
+    if funcs[pageInfo['dateType']] then
         return "<div {{Цагалбарын хэв}}>\n" ..
-            funcs[functype]() .. "\n</div>"
+            funcs[pageInfo['dateType']]() .. "\n</div>" ..
+            table.concat(categoryList, "\n")
     else
         error("Invalid function name")
     end
