@@ -9,7 +9,7 @@ const Config = {
     },
     fetchArticles: {
         sheetName: "WantedCategories",
-    },   
+    },
     fetchCats: {
         sheetName: "FetchCats",
     },
@@ -29,6 +29,9 @@ const Config = {
     translateCats: {
         sheetName: "TranslateCats",
         langs: ["en", "ru", "de"],
+    },
+    unlinkPages: {
+        sheetName: "UnlinkPages",
     },
 };
 

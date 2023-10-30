@@ -11,6 +11,7 @@
     "g:renameCats": "npx ts-node src/projects/googlesheets/renameCats",
     "g:replaceCats": "npx ts-node src/projects/googlesheets/replaceCats",
     "g:translateCats": "npx ts-node src/projects/googlesheets/translateCats",
+    "g:unlinkPages": "npx ts-node src/projects/googlesheets/unlinkPages",
     "cron:getUncategorised": "npx ts-node src/projects/cron/getUncategorised",
     "cron:copySheetData": "npx ts-node src/projects/cron/copySheetData"
   },

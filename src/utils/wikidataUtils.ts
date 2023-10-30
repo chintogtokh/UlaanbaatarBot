@@ -108,6 +108,41 @@ export const connectArticles = async (
         }
     });
 };
+export const unlinkPage = async (
+    bot: mwn,
+    pageName: string,
+    interwiki: string,
+) => {
+    await bot.getTokens();
+    const token = await bot.getCsrfToken();
+    const params: ApiParams = {
+        action: "wbgetentities",
+        sites: "mnwiki",
+        titles: pageName.trim()
+    };
+
+    const result = await bot.query(params).catch(async (e: any) => {
+        console.log("Error: ", e);
+    });
+    const thing = result && result.entities[Object.keys(result.entities)[0]]
+
+    console.log(thing)
+
+    const params1: ApiParams = {
+        token,
+        action: "wbeditentity",
+        id: thing.title,
+        data: JSON.stringify({ "sitelinks": { "mnwiki": { "site": "mnwiki", "title": interwiki !== "X" ? "Ангилал:" + interwiki : null } } })
+    }
+
+    const result1 = await bot.query(params1).catch(async (e: any) => {
+        console.log("Error: ", e);
+    });
+
+    console.log(result1)
+
+};
+
 
 export type LangLinkType = { lang: string; title: string };
 
