@@ -181,9 +181,15 @@ p.year = function(year, dateType, topic)
 end
 
 -- Generate the main category templates
-p.yearCat = function(num, topic)
+p.yearCat = function(num, topic, minimal)
     if num == 0 then
         error("Invalid date")
+    end
+
+    if minimal then
+        return table.concat({
+            p.decade(num, nil, topic),
+            p.year(num, nil, topic) }, "\n<br />\n")
     end
 
     return table.concat({ p.millennium(num, nil, topic),
@@ -195,9 +201,15 @@ end
 -- Instead of 0s AD, use 1
 -- Instead of 0s BC use -1
 -- For everything else use 10,-10, 1920, -1920 etc.
-p.decadeCat = function(num, topic)
+p.decadeCat = function(num, topic, minimal)
     if math.abs(num) ~= 1 and math.abs(num % 10) ~= 0 then
         error("Invalid date")
+    end
+    if minimal then
+        return table.concat({
+            p.century(num, nil, topic),
+            p.decade(num, nil, topic),
+            p.year(num, nil, topic) }, "\n<br />\n")
     end
     return table.concat({ p.millennium(num, nil, topic),
         p.century(num, nil, topic),
@@ -205,7 +217,7 @@ p.decadeCat = function(num, topic)
         p.year(num, "decade", topic) }, "\n<br />\n")
 end
 
-p.centuryCat = function(num, topic)
+p.centuryCat = function(num, topic, minimal)
     if num == 0 then
         error("Invalid date")
     end
@@ -215,6 +227,7 @@ p.centuryCat = function(num, topic)
     else
         num = (num - 1) * 100
     end
+
     return table.concat({ p.millennium(num, "century", topic),
         p.century(num, "century", topic),
         p.decade(num, "century", topic) }, "\n<br />\n")
@@ -313,14 +326,15 @@ end
 
 p.generate = function(frame)
     local title = frame.args[1]
+    local minimal = frame.args[2]
     local pageInfo = p.getPageInfo(title)
     local categorySort = p.categorySort(frame)
 
     local funcs = {
-        year = function() return p.yearCat(pageInfo['numFromPage'], pageInfo['topic']) end,
-        decade = function() return p.decadeCat(pageInfo['numFromPage'], pageInfo['topic']) end,
-        century = function() return p.centuryCat(pageInfo['numFromPage'], pageInfo['topic']) end,
-        millennium = function() return p.millenniumCat(pageInfo['numFromPage'], pageInfo['topic']) end,
+        year = function() return p.yearCat(pageInfo['numFromPage'], pageInfo['topic'], minimal) end,
+        decade = function() return p.decadeCat(pageInfo['numFromPage'], pageInfo['topic'], minimal) end,
+        century = function() return p.centuryCat(pageInfo['numFromPage'], pageInfo['topic'], minimal) end,
+        millennium = function() return p.millenniumCat(pageInfo['numFromPage'], pageInfo['topic'], minimal) end,
     }
 
     local categoryList = {}
