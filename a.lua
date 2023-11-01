@@ -208,8 +208,8 @@ p.decadeCat = function(num, topic, minimal)
     if minimal then
         return table.concat({
             p.century(num, nil, topic),
-            p.decade(num, nil, topic),
-            p.year(num, nil, topic) }, "\n<br />\n")
+            p.decade(num, "decade", topic),
+            p.year(num, "decade", topic) }, "\n<br />\n")
     end
     return table.concat({ p.millennium(num, nil, topic),
         p.century(num, nil, topic),
@@ -247,7 +247,7 @@ p.millenniumCat = function(num, topic)
         p.century(num, "millennium", topic) }, "\n<br />\n")
 end
 
-p.getPageInfo = function(currentPage)
+p.getPageInfo = function(currentPage, minimal)
     local dateType = nil
     local topic = ""
     local bcOrAd = string.find(currentPage, "МЭӨ") and "МЭӨ" or ""
@@ -280,10 +280,12 @@ p.getPageInfo = function(currentPage)
         -- century
         dateType = "century"
         topic = string.match(currentPage, '%d+-р зуун(.+)') or ""
-        table.insert(
-            categories, (bcOrAd == "МЭӨ" and "МЭӨ " or "") ..
-            math.floor(numFromPage * 100 / 1000) + 1 .. "-р мянган" .. topic
-        )
+        if (~minimal) then
+            table.insert(
+                categories, (bcOrAd == "МЭӨ" and "МЭӨ " or "") ..
+                math.floor(numFromPage * 100 / 1000) + 1 .. "-р мянган" .. topic
+            )
+        end
         fullDate = (bcOrAd == "МЭӨ" and "МЭӨ " or "") .. string.match(currentPage, "%d+-р зуун")
     elseif string.match(currentPage, "%d+-р мянган") then
         -- millennium
@@ -327,7 +329,7 @@ end
 p.generate = function(frame)
     local title = frame.args[1]
     local minimal = frame.args[2]
-    local pageInfo = p.getPageInfo(title)
+    local pageInfo = p.getPageInfo(title, minimal)
     local categorySort = p.categorySort(frame)
 
     local funcs = {

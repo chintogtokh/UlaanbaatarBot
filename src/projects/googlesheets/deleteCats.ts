@@ -1,11 +1,11 @@
 import { mwn } from "mwn";
-import { BotConfig } from "../../utils/bot";
+import { AdminBotConfig } from "../../utils/bot";
 import { deleteCategory } from "../../utils/editCat";
 import { loadSheetRows } from "../../utils/goog";
 import Config from "./config";
 
 const main = async () => {
-    const bot = new mwn(BotConfig);
+    const bot = new mwn(AdminBotConfig);
     await bot.login();
 
     const pages = await loadSheetRows(Config.deleteCats.sheetName);
@@ -14,6 +14,7 @@ const main = async () => {
         const thePage = page.csvRow;
         if (thePage?.name) {
             await deleteCategory(bot, thePage?.name);
+            await bot.delete("Ангилал:" + thePage?.name, "Устгаж байна")
         }
         const googRow = page?.goog;
         if (googRow) {
