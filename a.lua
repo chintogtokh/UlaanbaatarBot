@@ -1,9 +1,10 @@
 local p = {}
+local _ = {}
 
-p.separator = "&nbsp;•&nbsp;";
+_.separator = "&nbsp;•&nbsp;";
 
 -- Utility functions
-p.flipTable = function(table)
+_.flipTable = function(table)
     local flippedTable = {}
     for k, v in pairs(table) do
         flippedTable[v] = k
@@ -11,16 +12,16 @@ p.flipTable = function(table)
     return flippedTable
 end
 
-p.sanitizeNum = function(num)
+_.sanitizeNum = function(num)
     return num <= 0 and "МЭӨ " .. math.abs(num) + 1 or num
 end
 
-p.sanitizeDecade = function(num)
+_.sanitizeDecade = function(num)
     return num * 10 < 0 and "МЭӨ " .. math.abs(num) - 10 or num
 end
 
 -- Generate categoryLink for specific date unit
-p.generateCategory = function(dateUnit, typeOfLink, typeOfDate, topic)
+_.generateCategory = function(dateUnit, typeOfLink, typeOfDate, topic)
     -- typeOfLink: startlink, endlink, currentlink, normallink
     -- typeOfDate: millennium, century, decade, year
     topic = topic or ""
@@ -56,7 +57,7 @@ p.generateCategory = function(dateUnit, typeOfLink, typeOfDate, topic)
     --     "[[" .. actualLink .. "]]" .. (typeOfLink == "currentlink" and "'''" or "")
 end
 
-p.millennium = function(year, dateType, topic)
+_.millennium = function(year, dateType, topic)
     local millennium = {}
     local val = math.floor((year < 0 and (year - 1) or year) / 1000)
 
@@ -72,17 +73,17 @@ p.millennium = function(year, dateType, topic)
             currentlink = year >= 0 and 1 or 2,
         }
     end
-    local flippedIndexes = p.flipTable(indexes)
+    local flippedIndexes = _.flipTable(indexes)
 
     for i = indexes.startlink, indexes.endlink do
         table.insert(millennium,
-            p.generateCategory(p.sanitizeNum(val + i), flippedIndexes[i] or "normallink", "millennium", topic))
+            _.generateCategory(_.sanitizeNum(val + i), flippedIndexes[i] or "normallink", "millennium", topic))
     end
 
-    return table.concat(millennium, p.separator)
+    return table.concat(millennium, _.separator)
 end
 
-p.century = function(year, dateType, topic)
+_.century = function(year, dateType, topic)
     local century = {}
     local val = math.floor((year < 0 and (year + 1) or year) / 100)
     local indexes = {
@@ -102,19 +103,19 @@ p.century = function(year, dateType, topic)
             currentlink = 1,
         }
     end
-    local flippedIndexes = p.flipTable(indexes)
+    local flippedIndexes = _.flipTable(indexes)
 
     for i = indexes.startlink, indexes.endlink do
         table.insert(century,
-            p.generateCategory(p.sanitizeNum(val + i),
+            _.generateCategory(_.sanitizeNum(val + i),
                 dateType == "millennium" and "normallink" or (flippedIndexes[i] or "normallink"),
                 "century", topic))
     end
 
-    return table.concat(century, p.separator)
+    return table.concat(century, _.separator)
 end
 
-p.decade = function(year, dateType, topic)
+_.decade = function(year, dateType, topic)
     local decade = {}
     local val = math.floor((year < 0 and (year - 1) or year) / 10) * 10
     local indexes = {
@@ -128,19 +129,19 @@ p.decade = function(year, dateType, topic)
             endlink = year >= 0 and 90 or 100,
         }
     end
-    local flippedIndexes = p.flipTable(indexes)
+    local flippedIndexes = _.flipTable(indexes)
 
     for i = indexes.startlink, indexes.endlink, 10 do
         table.insert(decade,
-            p.generateCategory(p.sanitizeDecade(val + i),
+            _.generateCategory(_.sanitizeDecade(val + i),
                 dateType == "century" and "normallink" or (flippedIndexes[i] or "normallink"),
                 "decade", topic))
     end
 
-    return table.concat(decade, p.separator)
+    return table.concat(decade, _.separator)
 end
 
-p.year = function(year, dateType, topic)
+_.year = function(year, dateType, topic)
     local retYear = {}
     local tempnum = (year < 0 and (year + 1)) or year
     local val = tempnum
@@ -169,55 +170,60 @@ p.year = function(year, dateType, topic)
         end
     end
 
-    local flippedIndexes = p.flipTable(indexes)
+    local flippedIndexes = _.flipTable(indexes)
 
     for i = indexes.startlink, indexes.endlink, 1 do
-        table.insert(retYear, p.generateCategory(p.sanitizeNum(val + i),
+        table.insert(retYear, _.generateCategory(_.sanitizeNum(val + i),
             dateType == "decade" and "normallink" or (flippedIndexes[i] or "normallink"),
             "year", topic))
     end
 
-    return table.concat(retYear, p.separator)
+    return table.concat(retYear, _.separator)
 end
 
 -- Generate the main category templates
-p.yearCat = function(num, topic, minimal)
+_.yearCat = function(num, topic, minimal)
     if num == 0 then
         error("Invalid date")
     end
 
     if minimal then
+        if minimal == "nodecade" then
+            return table.concat({
+                _.century(num, nil, topic),
+                _.year(num, nil, topic) }, "\n<br />\n")
+        end
         return table.concat({
-            p.decade(num, nil, topic),
-            p.year(num, nil, topic) }, "\n<br />\n")
+            _.decade(num, nil, topic),
+            _.year(num, nil, topic) }, "\n<br />\n")
     end
 
-    return table.concat({ p.millennium(num, nil, topic),
-        p.century(num, nil, topic),
-        p.decade(num, nil, topic),
-        p.year(num, nil, topic) }, "\n<br />\n")
+    return table.concat({ _.millennium(num, nil, topic),
+        _.century(num, nil, topic),
+        _.decade(num, nil, topic),
+        _.year(num, nil, topic) }, "\n<br />\n")
 end
 
 -- Instead of 0s AD, use 1
 -- Instead of 0s BC use -1
 -- For everything else use 10,-10, 1920, -1920 etc.
-p.decadeCat = function(num, topic, minimal)
+_.decadeCat = function(num, topic, minimal)
     if math.abs(num) ~= 1 and math.abs(num % 10) ~= 0 then
         error("Invalid date")
     end
     if minimal then
         return table.concat({
-            p.century(num, nil, topic),
-            p.decade(num, "decade", topic),
-            p.year(num, "decade", topic) }, "\n<br />\n")
+            _.century(num, nil, topic),
+            _.decade(num, "decade", topic),
+            _.year(num, "decade", topic) }, "\n<br />\n")
     end
-    return table.concat({ p.millennium(num, nil, topic),
-        p.century(num, nil, topic),
-        p.decade(num, "decade", topic),
-        p.year(num, "decade", topic) }, "\n<br />\n")
+    return table.concat({ _.millennium(num, nil, topic),
+        _.century(num, nil, topic),
+        _.decade(num, "decade", topic),
+        _.year(num, "decade", topic) }, "\n<br />\n")
 end
 
-p.centuryCat = function(num, topic, minimal)
+_.centuryCat = function(num, topic, minimal)
     if num == 0 then
         error("Invalid date")
     end
@@ -228,12 +234,17 @@ p.centuryCat = function(num, topic, minimal)
         num = (num - 1) * 100
     end
 
-    return table.concat({ p.millennium(num, "century", topic),
-        p.century(num, "century", topic),
-        p.decade(num, "century", topic) }, "\n<br />\n")
+    if minimal == "nodecade" then
+        return table.concat({ _.millennium(num, "century", topic),
+            _.century(num, "century", topic) }, "\n<br />\n")
+    end
+
+    return table.concat({ _.millennium(num, "century", topic),
+        _.century(num, "century", topic),
+        _.decade(num, "century", topic) }, "\n<br />\n")
 end
 
-p.millenniumCat = function(num, topic)
+_.millenniumCat = function(num, topic)
     if num == 0 then
         error("Invalid date")
     end
@@ -243,11 +254,11 @@ p.millenniumCat = function(num, topic)
     else
         num = (num - 1) * 1000
     end
-    return table.concat({ p.millennium(num, "millennium", topic),
-        p.century(num, "millennium", topic) }, "\n<br />\n")
+    return table.concat({ _.millennium(num, "millennium", topic),
+        _.century(num, "millennium", topic) }, "\n<br />\n")
 end
 
-p.getPageInfo = function(currentPage, minimal)
+_.getPageInfo = function(currentPage, minimal)
     local dateType = nil
     local topic = ""
     local bcOrAd = string.find(currentPage, "МЭӨ") and "МЭӨ" or ""
@@ -273,14 +284,21 @@ p.getPageInfo = function(currentPage, minimal)
         -- year
         dateType = "year"
         topic = string.match(currentPage, '%d+ он(.+)') or ""
-        table.insert(categories,
-            (bcOrAd == "МЭӨ" and "МЭӨ " or "") .. math.floor(numFromPage / 10) * 10 .. "-д он" .. topic)
+        if minimal and minimal == "nodecade" then
+            table.insert(
+                categories, (bcOrAd == "МЭӨ" and "МЭӨ " or "") ..
+                math.floor(numFromPage / 100) + 1 .. "-р зуун" .. topic
+            )
+        else
+            table.insert(categories,
+                (bcOrAd == "МЭӨ" and "МЭӨ " or "") .. math.floor(numFromPage / 10) * 10 .. "-д он" .. topic)
+        end
         fullDate = (bcOrAd == "МЭӨ" and "МЭӨ " or "") .. string.match(currentPage, "%d+ он")
     elseif string.match(currentPage, "%d+-р зуун") then
         -- century
         dateType = "century"
         topic = string.match(currentPage, '%d+-р зуун(.+)') or ""
-        if (~minimal) then
+        if not minimal then
             table.insert(
                 categories, (bcOrAd == "МЭӨ" and "МЭӨ " or "") ..
                 math.floor(numFromPage * 100 / 1000) + 1 .. "-р мянган" .. topic
@@ -307,7 +325,7 @@ end
 
 p.categorySort = function(frame)
     local title = frame.args[1]
-    local pageInfo = p.getPageInfo(title)
+    local pageInfo = _.getPageInfo(title)
     if pageInfo['numFromPage'] < 0 then
         return "!" .. 10000000 - math.abs(pageInfo['numFromPage'])
     end
@@ -316,27 +334,27 @@ end
 
 p.dateType = function(frame)
     local title = frame.args[1]
-    local pageInfo = p.getPageInfo(title)
+    local pageInfo = _.getPageInfo(title)
     return pageInfo['dateType']
 end
 
 p.fullDate = function(frame)
     local title = frame.args[1]
-    local pageInfo = p.getPageInfo(title)
+    local pageInfo = _.getPageInfo(title)
     return pageInfo['fullDate']
 end
 
 p.generate = function(frame)
     local title = frame.args[1]
     local minimal = frame.args[2]
-    local pageInfo = p.getPageInfo(title, minimal)
+    local pageInfo = _.getPageInfo(title, minimal)
     local categorySort = p.categorySort(frame)
 
     local funcs = {
-        year = function() return p.yearCat(pageInfo['numFromPage'], pageInfo['topic'], minimal) end,
-        decade = function() return p.decadeCat(pageInfo['numFromPage'], pageInfo['topic'], minimal) end,
-        century = function() return p.centuryCat(pageInfo['numFromPage'], pageInfo['topic'], minimal) end,
-        millennium = function() return p.millenniumCat(pageInfo['numFromPage'], pageInfo['topic'], minimal) end,
+        year = function() return _.yearCat(pageInfo['numFromPage'], pageInfo['topic'], minimal) end,
+        decade = function() return _.decadeCat(pageInfo['numFromPage'], pageInfo['topic'], minimal) end,
+        century = function() return _.centuryCat(pageInfo['numFromPage'], pageInfo['topic'], minimal) end,
+        millennium = function() return _.millenniumCat(pageInfo['numFromPage'], pageInfo['topic'], minimal) end,
     }
 
     local categoryList = {}
