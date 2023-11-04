@@ -311,7 +311,7 @@ _.getPageInfo = function(currentPage, minimal)
         topic = string.match(currentPage, '%d+-р мянган(.+)') or ""
         fullDate = (bcOrAd == "МЭӨ" and "МЭӨ " or "") .. string.match(currentPage, "%d+-р мянган")
     else
-        error("Invalid date")
+        error("Invalid date: " .. currentPage)
     end
 
     return {
@@ -324,7 +324,8 @@ _.getPageInfo = function(currentPage, minimal)
 end
 
 p.categorySort = function(frame)
-    local title = frame.args[1]
+    local currentTitle = mw.title.getCurrentTitle()
+    local title = currentTitle.fullText
     local pageInfo = _.getPageInfo(title)
     if pageInfo['numFromPage'] < 0 then
         return "!" .. 10000000 - math.abs(pageInfo['numFromPage'])
@@ -333,20 +334,24 @@ p.categorySort = function(frame)
 end
 
 p.dateType = function(frame)
-    local title = frame.args[1]
+    local currentTitle = mw.title.getCurrentTitle()
+    local title = currentTitle.fullText
     local pageInfo = _.getPageInfo(title)
     return pageInfo['dateType']
 end
 
 p.fullDate = function(frame)
-    local title = frame.args[1]
+    local currentTitle = mw.title.getCurrentTitle()
+    local title = currentTitle.fullText
     local pageInfo = _.getPageInfo(title)
     return pageInfo['fullDate']
 end
 
 p.generate = function(frame)
-    local title = frame.args[1]
-    local minimal = frame.args[2]
+    local currentTitle = mw.title.getCurrentTitle()
+    local ns = currentTitle.namespace
+    local title = currentTitle.fullText
+    local minimal = frame.args["minimal"]
     local pageInfo = _.getPageInfo(title, minimal)
     local categorySort = p.categorySort(frame)
 
@@ -362,13 +367,20 @@ p.generate = function(frame)
         table.insert(categoryList, "[[Ангилал: " .. value .. "|" .. categorySort .. "]]")
     end
 
+    local returnstring = ""
+
     if funcs[pageInfo['dateType']] then
-        return "<div {{Цагалбарын хэв}}>\n" ..
+        returnstring = "<div {{Цагалбарын хэв}}>\n" ..
             funcs[pageInfo['dateType']]() .. "\n</div>" ..
             table.concat(categoryList, "\n")
     else
         error("Invalid function name")
     end
+
+    return frame:getParent():preprocess("<includeonly>" .. returnstring .. "</includeonly>") ..
+        frame:getParent():preprocess("<noinclude>" ..
+            "[[Ангилал:Загвар:Хуанлийн үлгэр]][[Ангилал:Загвар:Ангилалд зориулагдсан]]" ..
+            "</noinclude>");
 end
 
 return p
