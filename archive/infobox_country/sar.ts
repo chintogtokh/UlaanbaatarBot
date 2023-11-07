@@ -1,6 +1,6 @@
 import { mwn } from "mwn";
 import * as dotenv from "dotenv";
-import { BotConfig } from "../../utils/bot";
+import { BotConfig } from "../../src/utils/bot";
 
 dotenv.config();
 
