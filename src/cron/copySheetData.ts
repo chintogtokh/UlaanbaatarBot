@@ -1,5 +1,5 @@
-import { loadSheet } from "../../utils/goog";
-import { TIMEOUT } from "../../utils/vars";
+import { loadSheet } from "../utils/goog";
+import { TIMEOUT } from "../utils/vars";
 
 const insertInterwiki2TranslateCats = async () => {
     const fromSheetName = "InsertInterwiki";

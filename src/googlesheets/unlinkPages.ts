@@ -1,8 +1,8 @@
 import { mwn } from "mwn";
-import { BotConfig, WikidataBotConfig } from "../../utils/bot";
-import { TIMEOUT } from "../../utils/vars";
-import { unlinkPage } from "../../utils/wikidataUtils";
-import { loadSheetRows } from "../../utils/goog";
+import { BotConfig, WikidataBotConfig } from "../utils/bot";
+import { TIMEOUT } from "../utils/vars";
+import { unlinkPage } from "../utils/wikidataUtils";
+import { loadSheetRows } from "../utils/goog";
 import Config from "./config";
 
 const unlinkPages = async () => {

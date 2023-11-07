@@ -1,8 +1,8 @@
 import { mwn } from "mwn";
 import * as dotenv from "dotenv";
-import { BotConfig, WikidataBotConfig } from "../../utils/bot";
-import { connectArticles, connectMnToEn } from "../../utils/wikidataUtils";
-import { TIMEOUT } from "../../utils/vars";
+import { BotConfig, WikidataBotConfig } from "../utils/bot";
+import { connectArticles, connectMnToEn } from "../utils/wikidataUtils";
+import { TIMEOUT } from "../utils/vars";
 
 dotenv.config();
 
@@ -31,8 +31,7 @@ const data: {
         en: (year: number) => `Category:${year}`,
         mn: (year: number) => `Category:${year} он`,
         mnContent: (year: number) =>
-            `{{Commonscat|${year}}}\n[[Ангилал:${
-                Math.floor(year / 10) * 10
+            `{{Commonscat|${year}}}\n[[Ангилал:${Math.floor(year / 10) * 10
             }-д он|#]]`,
     },
     [ArticleType.DiedIn]: {

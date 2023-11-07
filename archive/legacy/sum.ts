@@ -1,7 +1,7 @@
 import { mwn } from "mwn";
-import { BotConfig, WikidataBotConfig } from "../../utils/bot";
-import { TIMEOUT } from "../../utils/vars";
-import { loadSheet } from "../../utils/goog";
+import { BotConfig, WikidataBotConfig } from "../utils/bot";
+import { TIMEOUT } from "../utils/vars";
+import { loadSheet } from "../utils/goog";
 
 const SHEETNAME = "Sum";
 
