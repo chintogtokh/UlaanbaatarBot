@@ -4,7 +4,7 @@ import { deleteCategory } from "../../utils/editCat";
 import { loadSheetRows } from "../../utils/goog";
 import Config from "./config";
 
-const main = async () => {
+const deleteCats = async () => {
     const bot = new mwn(AdminBotConfig);
     await bot.login();
 
@@ -18,10 +18,10 @@ const main = async () => {
         }
         const googRow = page?.goog;
         if (googRow) {
-            googRow["skip"] = "#";
+            googRow["skip"] = "D";
             await googRow.save();
         }
     }
 };
 
-main();
+export default deleteCats;

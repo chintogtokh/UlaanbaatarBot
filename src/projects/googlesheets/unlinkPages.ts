@@ -5,7 +5,7 @@ import { unlinkPage } from "../../utils/wikidataUtils";
 import { loadSheetRows } from "../../utils/goog";
 import Config from "./config";
 
-const main = async () => {
+const unlinkPages = async () => {
     const bot = new mwn(BotConfig);
     await bot.login();
     const wikidatabot = new mwn(WikidataBotConfig());
@@ -44,4 +44,4 @@ const main = async () => {
     }
 };
 
-main();
+export default unlinkPages;

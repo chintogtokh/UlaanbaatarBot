@@ -6,7 +6,7 @@ import { getInterwiki } from "../../utils/wikidataUtils";
 import { interwikiParse } from "../../utils/csv";
 import Config from "./config";
 
-const main = async () => {
+const insertInterwiki = async () => {
     const bot = new mwn(BotConfig);
     await bot.login();
     const wikidatabot = new mwn(WikidataBotConfig());
@@ -31,11 +31,11 @@ const main = async () => {
         } else if (!rowInterwiki) {
             row["interwiki"] = "X";
         }
-        row["skip"] = "#";
+        row["skip"] = "D";
         await row.save();
 
         await new Promise((r) => setTimeout(r, TIMEOUT));
     }
 };
 
-main();
+export default insertInterwiki;

@@ -8,7 +8,7 @@ import Config from "./config";
 /**
  * Replaces category pages with "Content". Creates if not exists.
  */
-const main = async () => {
+const replaceCats = async () => {
     const bot = new mwn(BotConfig);
     await bot.login();
     const wikidatabot = new mwn(WikidataBotConfig());
@@ -81,7 +81,7 @@ const main = async () => {
 
         const googRow = allRow?.goog;
         if (googRow) {
-            googRow["skip"] = "#";
+            googRow["skip"] = "D";
             await googRow.save();
         }
 
@@ -91,4 +91,4 @@ const main = async () => {
     }
 };
 
-main();
+export default replaceCats;

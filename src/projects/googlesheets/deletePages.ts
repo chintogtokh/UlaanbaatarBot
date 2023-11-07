@@ -3,7 +3,7 @@ import { AdminBotConfig } from "../../utils/bot";
 import { loadSheetRows } from "../../utils/goog";
 import { TIMEOUT } from "../../utils/vars";
 
-const main = async () => {
+const deletePages = async () => {
     const bot = new mwn(AdminBotConfig);
     await bot.login();
 
@@ -16,11 +16,11 @@ const main = async () => {
         }
         const googRow = page?.goog;
         if (googRow) {
-            googRow["skip"] = "#";
+            googRow["skip"] = "D";
             await googRow.save();
         }
         await new Promise((r) => setTimeout(r, TIMEOUT));
     }
 };
 
-main();
+export default deletePages;

@@ -5,7 +5,7 @@ import { loadSheetRows } from "../../utils/goog";
 import { connectArticles } from "../../utils/wikidataUtils";
 import Config from "./config";
 
-const main = async () => {
+const createCats = async () => {
     const bot = new mwn(BotConfig);
     await bot.login();
     const wikidatabot = new mwn(WikidataBotConfig());
@@ -51,7 +51,7 @@ const main = async () => {
 
         const googRow = row?.goog;
         if (googRow) {
-            googRow["skip"] = "#";
+            googRow["skip"] = "D";
             await googRow.save();
         }
 
@@ -59,4 +59,4 @@ const main = async () => {
     }
 };
 
-main();
+export default createCats;

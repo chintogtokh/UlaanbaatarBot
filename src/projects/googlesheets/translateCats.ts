@@ -79,7 +79,7 @@ const getCategories = async (
     return parsed;
 };
 
-const main = async () => {
+const translateCats = async () => {
     const bot = new mwn(BotConfig);
     await bot.login();
 
@@ -137,14 +137,14 @@ const main = async () => {
                 row[`${FOREIGN_LANGUAGE}categories`] =
                     row[`${FOREIGN_LANGUAGE}categories`] ||
                     "" +
-                        categories
-                            .map((cat) =>
-                                cat
-                                    .replace("Kategorie:", "")
-                                    .replace("Категория:", "")
-                                    .replace("Category:", "")
-                            )
-                            .join("\n");
+                    categories
+                        .map((cat) =>
+                            cat
+                                .replace("Kategorie:", "")
+                                .replace("Категория:", "")
+                                .replace("Category:", "")
+                        )
+                        .join("\n");
 
                 await row.save();
             } else {
@@ -158,4 +158,4 @@ const main = async () => {
     }
 };
 
-main();
+export default translateCats;

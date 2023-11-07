@@ -1,7 +1,7 @@
 import { mwn } from "mwn";
 
 const escapeRegExp = (string: string) =>
-    string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
+    string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 export const renameCategory = async (
     bot: mwn,
@@ -43,7 +43,7 @@ export const renameCategory = async (
 
         await bot.edit(element, (rev) => {
             return {
-                text: getEditedText(rev.content, fromWithoutPrefix),
+                text: getEditedText(rev.content, escapeRegExp(fromWithoutPrefix)),
                 summary: `[[${from}]]-ийг [[${to}]]-аар сольж байна`,
                 minor: true,
             };
@@ -69,7 +69,10 @@ export const deleteCategory = async (bot: mwn, fromWithoutPrefix: string) => {
 
     const pages = await bot.getPagesInCategory(from);
 
+
     const getReplacedText = (content: string, category: string) => {
+        console.log(`\\[\\[Ангилал:${category}\\]\\]`)
+
         const value = content
             .replace(new RegExp(`\\[\\[Ангилал:${category}\\]\\]`, "g"), "")
             .replace(
@@ -89,9 +92,8 @@ export const deleteCategory = async (bot: mwn, fromWithoutPrefix: string) => {
 
         // test later, delete this comment
         await bot.edit(element, (rev) => {
-            // console.log(getReplacedText(rev.content, fromWithoutPrefix));
             return {
-                text: getReplacedText(rev.content, fromWithoutPrefix),
+                text: getReplacedText(rev.content, escapeRegExp(fromWithoutPrefix)),
                 summary: `[[${from}]]-г устгаж байна`,
                 minor: true,
             };

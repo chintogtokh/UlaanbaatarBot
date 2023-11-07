@@ -5,7 +5,7 @@ import { connectArticles } from "../../utils/wikidataUtils";
 import { loadSheetRows } from "../../utils/goog";
 import Config from "./config";
 
-const main = async () => {
+const csvCat = async () => {
     const bot = new mwn(BotConfig);
     await bot.login();
     const wikidatabot = new mwn(WikidataBotConfig());
@@ -77,4 +77,4 @@ const main = async () => {
     }
 };
 
-main();
+export default csvCat;

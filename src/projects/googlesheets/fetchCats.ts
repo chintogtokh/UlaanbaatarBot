@@ -7,7 +7,7 @@ import Config from "./config";
 /**
  * Fetch pages inside categories
  */
-const main = async () => {
+const fetchCats = async () => {
     const bot = new mwn(BotConfig);
     await bot.login();
     const wikidatabot = new mwn(WikidataBotConfig());
@@ -42,7 +42,7 @@ const main = async () => {
 
         row["categories1"] = within;
         row["categories2"] = content.query?.pages?.[0].categories?.length;
-        row["skip"] = "#";
+        row["skip"] = "D";
 
         await row.save();
 
@@ -50,4 +50,4 @@ const main = async () => {
     }
 };
 
-main();
+export default fetchCats;
