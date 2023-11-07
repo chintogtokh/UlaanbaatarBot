@@ -1,7 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
-import chin from '@/projects/runGoogle';
-import createCats from './projects/googlesheets/createCats';
+import { Config } from './projects/googlesheets';
 // import createCats from 'projects/googlesheets/createCats';
 
 dotenv.config();
@@ -20,6 +19,24 @@ var sendAndSleep = (response: Response, counter: number) => {
         }, 1000)
     };
 };
+
+app.get('/rungoogle', async (req, res) => {
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.setHeader('Transfer-Encoding', 'chunked');
+
+    const script = req.query.script
+    if (!(typeof script == 'string' && script in Object.keys(Config))) {
+        // res.sendStatus(500)
+        // return
+    }
+    res.write("Outputting...\n");
+
+    res.write(`Running ${script}\n`)
+    const item = Config["fetchArticles"]
+    await item.script(res as Response)
+
+    sendAndSleep(res, 1);
+});
 
 app.get('/', async (req, res) => {
     // await createCats()
