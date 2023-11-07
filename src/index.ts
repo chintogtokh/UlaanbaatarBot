@@ -1,7 +1,8 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Response } from 'express';
 import dotenv from 'dotenv';
 import { Config } from './googlesheets';
-// import createCats from 'projects/googlesheets/createCats';
+import { ConfigType } from './googlesheets/config';
+import { createWriteStream } from 'fs';
 
 dotenv.config();
 
@@ -20,30 +21,40 @@ var sendAndSleep = (response: Response, counter: number) => {
     };
 };
 
+const writer = (res: Response, ...args: any) => {
+    res.write(args + "<br/>")
+}
+
 app.get('/rungoogle', async (req, res) => {
+
+    var access = createWriteStream('./api.access.log');
+    // process.stdout.write = process.stderr.write = res.write as any
+
+    process.stdout.write = process.stderr.write = ((data: any) => {
+        res.write(data)
+        res.write("<br />")
+    }) as any;
+
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.setHeader('Transfer-Encoding', 'chunked');
 
     const script = req.query.script
-    if (!(typeof script == 'string' && script in Object.keys(Config))) {
-        // res.sendStatus(500)
-        // return
+    if (!(typeof script == 'string' && Object.keys(Config).includes(script))) {
+        res.sendStatus(500)
+        return res.end();
     }
-    res.write("Outputting...\n");
-
-    res.write(`Running ${script}\n`)
-    const item = Config["fetchArticles"]
-    await item.script(res as Response)
+    writer(res, "Outputting...");
+    writer(res, `Running ${script}\n`)
+    const item = Config[script as keyof (ConfigType)]
+    await item.script()
 
     sendAndSleep(res, 1);
 });
 
 app.get('/', async (req, res) => {
-    // await createCats()
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.setHeader('Transfer-Encoding', 'chunked');
-
-    res.write("Thinking...");
+    res.write("G'day");
     sendAndSleep(res, 1);
 });
 

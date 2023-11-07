@@ -8,7 +8,7 @@ import { Response } from "express";
 /**
  * Fetch pages inside categories
  */
-const fetchArticles = async (response: Response) => {
+const fetchArticles = async () => {
     const bot = new mwn(BotConfig);
     await bot.login();
     const wikidatabot = new mwn(WikidataBotConfig());
@@ -20,7 +20,6 @@ const fetchArticles = async (response: Response) => {
         const row = allRowData?.goog;
 
         console.log(allRowData?.csvRow);
-        response && response.write(allRowData?.csvRow?.name)
 
         if (!row) {
             console.log("Unknown error");
