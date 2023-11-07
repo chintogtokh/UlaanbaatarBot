@@ -1,9 +1,9 @@
 import { mwn } from "mwn";
-import { BotConfig, WikidataBotConfig } from "../../utils/bot";
-import { TIMEOUT } from "../../utils/vars";
-import { loadSheetRows } from "../../utils/goog";
-import { getInterwiki } from "../../utils/wikidataUtils";
-import { interwikiParse } from "../../utils/csv";
+import { BotConfig, WikidataBotConfig } from "../utils/bot";
+import { TIMEOUT } from "../utils/vars";
+import { loadSheetRows } from "../utils/goog";
+import { getInterwiki } from "../utils/wikidataUtils";
+import { interwikiParse } from "../utils/csv";
 import Config from "./config";
 
 const insertInterwiki = async () => {

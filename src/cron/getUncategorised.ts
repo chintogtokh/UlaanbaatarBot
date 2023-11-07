@@ -1,9 +1,9 @@
 import { ApiParams, mwn } from "mwn";
-import { BotConfig } from "../../utils/bot";
+import { BotConfig } from "../utils/bot";
 import { format } from "date-fns";
 import * as nodemailer from "nodemailer";
 import { utcToZonedTime } from "date-fns-tz";
-import { loadSheet } from "../../utils/goog";
+import { loadSheet } from "../utils/goog";
 
 const getSpecial = async (type: string) => {
     const bot = new mwn(BotConfig);

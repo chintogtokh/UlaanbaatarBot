@@ -1,8 +1,8 @@
 import { mwn } from "mwn";
-import { BotConfig, WikidataBotConfig } from "../../utils/bot";
-import { TIMEOUT } from "../../utils/vars";
-import { loadSheetRows } from "../../utils/goog";
-import { connectArticles } from "../../utils/wikidataUtils";
+import { BotConfig, WikidataBotConfig } from "../utils/bot";
+import { TIMEOUT } from "../utils/vars";
+import { loadSheetRows } from "../utils/goog";
+import { connectArticles } from "../utils/wikidataUtils";
 import Config from "./config";
 
 const createCats = async () => {

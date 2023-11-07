@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
-import { Config } from './projects/googlesheets';
+import { Config } from './googlesheets';
 // import createCats from 'projects/googlesheets/createCats';
 
 dotenv.config();

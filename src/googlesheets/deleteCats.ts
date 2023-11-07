@@ -1,7 +1,7 @@
 import { mwn } from "mwn";
-import { AdminBotConfig } from "../../utils/bot";
-import { deleteCategory } from "../../utils/editCat";
-import { loadSheetRows } from "../../utils/goog";
+import { AdminBotConfig } from "../utils/bot";
+import { deleteCategory } from "../utils/editCat";
+import { loadSheetRows } from "../utils/goog";
 import Config from "./config";
 
 const deleteCats = async () => {

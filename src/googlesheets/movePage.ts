@@ -1,6 +1,6 @@
 import { mwn } from 'mwn';
-import { BotConfig } from '../../utils/bot';
-import { loadSheetRows } from '../../utils/goog';
+import { BotConfig } from '../utils/bot';
+import { loadSheetRows } from '../utils/goog';
 import Config from './config';
 
 const movePage = async () => {

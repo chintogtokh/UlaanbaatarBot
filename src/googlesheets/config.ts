@@ -23,7 +23,7 @@ const Config = {
         sheetName: "DeletePages",
     },
     fetchArticles: {
-        script: (res: Response) => fetchArticles(res as Response),
+        script: (res?: Response) => fetchArticles(res as Response),
         sheetName: "FetchArticles",
     },
     fetchCats: {

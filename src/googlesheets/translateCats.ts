@@ -1,8 +1,8 @@
 import { ApiParams, mwn } from "mwn";
 import * as dotenv from "dotenv";
-import { BotConfig, LangBotConfig } from "../../utils/bot";
-import { TIMEOUT } from "../../utils/vars";
-import { loadSheet } from "../../utils/goog";
+import { BotConfig, LangBotConfig } from "../utils/bot";
+import { TIMEOUT } from "../utils/vars";
+import { loadSheet } from "../utils/goog";
 import Config from "./config";
 
 dotenv.config();

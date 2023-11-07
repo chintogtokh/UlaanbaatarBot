@@ -1,7 +1,7 @@
 import { ApiParams, mwn } from "mwn";
-import { BotConfig } from "../../utils/bot";
-import { TIMEOUT } from "../../utils/vars";
-import { loadSheetRows } from "../../utils/goog";
+import { BotConfig } from "../utils/bot";
+import { TIMEOUT } from "../utils/vars";
+import { loadSheetRows } from "../utils/goog";
 
 
 const main = async () => {

@@ -1,7 +1,7 @@
 import { mwn } from "mwn";
-import { AdminBotConfig } from "../../utils/bot";
-import { loadSheetRows } from "../../utils/goog";
-import { TIMEOUT } from "../../utils/vars";
+import { AdminBotConfig } from "../utils/bot";
+import { loadSheetRows } from "../utils/goog";
+import { TIMEOUT } from "../utils/vars";
 
 const deletePages = async () => {
     const bot = new mwn(AdminBotConfig);
