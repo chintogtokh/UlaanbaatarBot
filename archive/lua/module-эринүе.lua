@@ -51,10 +51,6 @@ _.generateCategory = function(dateUnit, typeOfLink, typeOfDate, topic)
     else
         return greyLink
     end
-
-    -- Simplified for debuging
-    -- return (typeOfLink == "currentlink" and "'''" or "") ..
-    --     "[[" .. actualLink .. "]]" .. (typeOfLink == "currentlink" and "'''" or "")
 end
 
 _.millennium = function(year, dateType, topic)
@@ -182,48 +178,60 @@ _.year = function(year, dateType, topic)
 end
 
 -- Generate the main category templates
-_.yearCat = function(num, topic, minimal)
+_.yearBox = function(num, topic, minimal)
     if num == 0 then
         error("Invalid date")
     end
 
     if minimal then
-        if minimal == "nodecade" then
+        if minimal == "cy" then
             return table.concat({
                 _.century(num, nil, topic),
                 _.year(num, nil, topic) }, "\n<br />\n")
+        elseif minimal == "cdy" then
+            return table.concat({
+                _.century(num, nil, topic),
+                _.decade(num, nil, topic),
+                _.year(num, nil, topic) }, "\n<br />\n")
+        elseif minimal == "y" then
+            return table.concat({
+                _.year(num, nil, topic) }, "\n<br />\n")
+        else
+            error("Invalid 'minimal' type set for year category")
         end
-        return table.concat({
+    else
+        return table.concat({ _.millennium(num, nil, topic),
+            _.century(num, nil, topic),
             _.decade(num, nil, topic),
             _.year(num, nil, topic) }, "\n<br />\n")
     end
-
-    return table.concat({ _.millennium(num, nil, topic),
-        _.century(num, nil, topic),
-        _.decade(num, nil, topic),
-        _.year(num, nil, topic) }, "\n<br />\n")
 end
 
 -- Instead of 0s AD, use 1
 -- Instead of 0s BC use -1
 -- For everything else use 10,-10, 1920, -1920 etc.
-_.decadeCat = function(num, topic, minimal)
+_.decadeBox = function(num, topic, minimal)
     if math.abs(num) ~= 1 and math.abs(num % 10) ~= 0 then
         error("Invalid date")
     end
     if minimal then
-        return table.concat({
+        if minimal == "cdy" then
+            return table.concat({
+                _.century(num, nil, topic),
+                _.decade(num, "decade", topic),
+                _.year(num, "decade", topic) }, "\n<br />\n")
+        else
+            error("Invalid 'minimal' type set for decade category")
+        end
+    else
+        return table.concat({ _.millennium(num, nil, topic),
             _.century(num, nil, topic),
             _.decade(num, "decade", topic),
             _.year(num, "decade", topic) }, "\n<br />\n")
     end
-    return table.concat({ _.millennium(num, nil, topic),
-        _.century(num, nil, topic),
-        _.decade(num, "decade", topic),
-        _.year(num, "decade", topic) }, "\n<br />\n")
 end
 
-_.centuryCat = function(num, topic, minimal)
+_.centuryBox = function(num, topic, minimal)
     if num == 0 then
         error("Invalid date")
     end
@@ -234,17 +242,25 @@ _.centuryCat = function(num, topic, minimal)
         num = (num - 1) * 100
     end
 
-    if minimal == "nodecade" then
+    if minimal then
+        if minimal == "cy" then
+            return table.concat({
+                _.century(num, "century", topic) }, "\n<br />\n")
+        elseif minimal == "cdy" then
+            return table.concat({
+                _.century(num, "century", topic),
+                _.decade(num, "century", topic) }, "\n<br />\n")
+        else
+            error("Invalid 'minimal' type set for century category")
+        end
+    else
         return table.concat({ _.millennium(num, "century", topic),
-            _.century(num, "century", topic) }, "\n<br />\n")
+            _.century(num, "century", topic),
+            _.decade(num, "century", topic) }, "\n<br />\n")
     end
-
-    return table.concat({ _.millennium(num, "century", topic),
-        _.century(num, "century", topic),
-        _.decade(num, "century", topic) }, "\n<br />\n")
 end
 
-_.millenniumCat = function(num, topic)
+_.millenniumBox = function(num, topic, minimal)
     if num == 0 then
         error("Invalid date")
     end
@@ -254,8 +270,13 @@ _.millenniumCat = function(num, topic)
     else
         num = (num - 1) * 1000
     end
-    return table.concat({ _.millennium(num, "millennium", topic),
-        _.century(num, "millennium", topic) }, "\n<br />\n")
+
+    if minimal then
+        error("Invalid 'minimal' type set for millennium category")
+    else
+        return table.concat({ _.millennium(num, "millennium", topic),
+            _.century(num, "millennium", topic) }, "\n<br />\n")
+    end
 end
 
 _.getPageInfo = function(currentPage, minimal)
@@ -268,27 +289,47 @@ _.getPageInfo = function(currentPage, minimal)
     local categories = {}
     local fullDate = ""
 
-    -- should be first
+    -- decade should be first due to pattern matching
     if string.match(currentPage, "%d+-д он") then
         -- decade
         dateType = "decade"
         topic = string.match(currentPage, '%d+-д он(.+)') or ""
         if numFromPage == 0 and bcOrAd == "МЭӨ" then signedNumFromPage = -1 end
         if numFromPage == 0 and bcOrAd == "" then signedNumFromPage = 1 end
-        table.insert(
-            categories, (bcOrAd == "МЭӨ" and "МЭӨ " or "") ..
-            math.floor(numFromPage / 100) + 1 .. "-р зуун" .. topic
-        )
+        if minimal then
+            if minimal == "cdy" then
+                table.insert(
+                    categories, (bcOrAd == "МЭӨ" and "МЭӨ " or "") ..
+                    math.floor(numFromPage / 100) + 1 .. "-р зуун" .. topic
+                )
+            else
+                error("Invalid 'minimal' type set for decade category")
+            end
+        else
+            table.insert(
+                categories, (bcOrAd == "МЭӨ" and "МЭӨ " or "") ..
+                math.floor(numFromPage / 100) + 1 .. "-р зуун" .. topic
+            )
+        end
         fullDate = (bcOrAd == "МЭӨ" and "МЭӨ " or "") .. string.match(currentPage, "%d+-д он")
     elseif string.match(currentPage, "%d+ он") then
         -- year
         dateType = "year"
         topic = string.match(currentPage, '%d+ он(.+)') or ""
-        if minimal and minimal == "nodecade" then
-            table.insert(
-                categories, (bcOrAd == "МЭӨ" and "МЭӨ " or "") ..
-                math.floor(numFromPage / 100) + 1 .. "-р зуун" .. topic
-            )
+        if minimal then
+            if minimal == "cy" then
+                table.insert(
+                    categories, (bcOrAd == "МЭӨ" and "МЭӨ " or "") ..
+                    math.floor(numFromPage / 100) + 1 .. "-р зуун" .. topic
+                )
+            elseif minimal == "cdy" then
+                table.insert(categories,
+                    (bcOrAd == "МЭӨ" and "МЭӨ " or "") .. math.floor(numFromPage / 10) * 10 .. "-д он" .. topic)
+            elseif minimal == "y" then
+                -- do nothing
+            else
+                error("Invalid 'minimal' type set for year category")
+            end
         else
             table.insert(categories,
                 (bcOrAd == "МЭӨ" and "МЭӨ " or "") .. math.floor(numFromPage / 10) * 10 .. "-д он" .. topic)
@@ -323,43 +364,47 @@ _.getPageInfo = function(currentPage, minimal)
     }
 end
 
-p.categorySort = function(frame)
+-- Get sorting pipe suffix for dates
+p.categorySort = function()
     local currentTitle = mw.title.getCurrentTitle()
     local title = currentTitle.fullText
     local pageInfo = _.getPageInfo(title)
     if pageInfo['numFromPage'] < 0 then
-        return "!" .. 10000000 - math.abs(pageInfo['numFromPage'])
+        return "#a" .. 10000000 - math.abs(pageInfo['numFromPage'])
     end
-    return "#" .. string.format("%09d", math.abs(pageInfo['numFromPage']))
+    return "#b" .. string.format("%09d", math.abs(pageInfo['numFromPage']))
 end
 
-p.dateType = function(frame)
+-- Get the date type (year, decade, century, millennium)
+p.dateType = function()
     local currentTitle = mw.title.getCurrentTitle()
     local title = currentTitle.fullText
     local pageInfo = _.getPageInfo(title)
     return pageInfo['dateType']
 end
 
-p.fullDate = function(frame)
+-- Get the full date (МЭӨ 2-р зуун, 1809 он etc.)
+p.fullDate = function()
     local currentTitle = mw.title.getCurrentTitle()
     local title = currentTitle.fullText
     local pageInfo = _.getPageInfo(title)
     return pageInfo['fullDate']
 end
 
+-- Generate category date box
 p.generate = function(frame)
     local currentTitle = mw.title.getCurrentTitle()
     local ns = currentTitle.namespace
     local title = currentTitle.fullText
     local minimal = frame.args["minimal"]
     local pageInfo = _.getPageInfo(title, minimal)
-    local categorySort = p.categorySort(frame)
+    local categorySort = p.categorySort()
 
     local funcs = {
-        year = function() return _.yearCat(pageInfo['numFromPage'], pageInfo['topic'], minimal) end,
-        decade = function() return _.decadeCat(pageInfo['numFromPage'], pageInfo['topic'], minimal) end,
-        century = function() return _.centuryCat(pageInfo['numFromPage'], pageInfo['topic'], minimal) end,
-        millennium = function() return _.millenniumCat(pageInfo['numFromPage'], pageInfo['topic'], minimal) end,
+        year = function() return _.yearBox(pageInfo['numFromPage'], pageInfo['topic'], minimal) end,
+        decade = function() return _.decadeBox(pageInfo['numFromPage'], pageInfo['topic'], minimal) end,
+        century = function() return _.centuryBox(pageInfo['numFromPage'], pageInfo['topic'], minimal) end,
+        millennium = function() return _.millenniumBox(pageInfo['numFromPage'], pageInfo['topic'], minimal) end,
     }
 
     local categoryList = {}
@@ -377,10 +422,7 @@ p.generate = function(frame)
         error("Invalid function name")
     end
 
-    return frame:getParent():preprocess("<includeonly>" .. returnstring .. "</includeonly>") ..
-        frame:getParent():preprocess("<noinclude>" ..
-            "[[Ангилал:Загвар:Хуанлийн үлгэр]][[Ангилал:Загвар:Ангилалд зориулагдсан]]" ..
-            "</noinclude>");
+    return returnstring
 end
 
 return p

@@ -30,6 +30,10 @@ app.get('/rungoogle', async (req, res) => {
     var access = createWriteStream('./api.access.log');
     // process.stdout.write = process.stderr.write = res.write as any
 
+    req.on('end', () => {
+        console.log('closed')
+    })
+
     process.stdout.write = process.stderr.write = ((data: any) => {
         res.write(data)
         res.write("<br />")
