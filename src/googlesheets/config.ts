@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { createCats, csvCat, deleteCats, deletePages, fetchArticles, fetchCats, insertInterwiki, movePage, renameCats, replaceCats, translateCats, unlinkPages } from '.';
+import { createCats, csvCat, deleteCats, deletePages, fetchArticles, fetchCats, fetchData, insertInterwiki, movePage, renameCats, replaceCats, translateCats, unlinkPages } from '.';
 
 export type ConfigType = typeof Config;
 
@@ -29,6 +29,10 @@ const Config = {
     fetchCats: {
         script: () => fetchCats(),
         sheetName: "FetchCats",
+    },
+    fetchData: {
+        script: () => fetchData(),
+        sheetName: "FetchData",
     },
     insertInterwiki: {
         script: () => insertInterwiki(),

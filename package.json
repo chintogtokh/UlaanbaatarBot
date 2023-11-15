@@ -13,6 +13,7 @@
     "g:deleteCats": "npx ts-node src/runCmd.ts deleteCats",
     "g:deletePages": "npx ts-node src/runCmd.ts deletePages",
     "g:fetchArticles": "npx ts-node src/runCmd.ts fetchArticles",
+    "g:fetchData": "npx ts-node src/runCmd.ts fetchData",
     "g:fetchCats": "npx ts-node src/runCmd.ts fetchCats",
     "g:insertInterwiki": "npx ts-node src/runCmd.ts insertInterwiki",
     "g:movePage": "npx ts-node src/runCmd.ts movePage",

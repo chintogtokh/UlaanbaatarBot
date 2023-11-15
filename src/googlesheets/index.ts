@@ -4,6 +4,7 @@ import deleteCats from "./deleteCats";
 import deletePages from "./deletePages";
 import fetchArticles from "./fetchArticles";
 import fetchCats from "./fetchCats";
+import fetchData from "./fetchData";
 import insertInterwiki from "./insertInterwiki";
 import movePage from "./movePage";
 import renameCats from "./renameCats";
@@ -20,6 +21,7 @@ export {
     deleteCats,
     deletePages,
     fetchArticles,
+    fetchData,
     fetchCats,
     insertInterwiki,
     movePage,

@@ -14,7 +14,7 @@ const deleteCats = async () => {
         const thePage = page.csvRow;
         if (thePage?.name) {
             await deleteCategory(bot, thePage?.name);
-            await bot.delete("Ангилал:" + thePage?.name, "Устгаж байна").catch((e) => console.log(e))
+            await bot.delete("Ангилал:" + thePage?.name, "Устгаж байна").catch((e) => console.log(e)).catch((e) => console.log(e))
         }
         const googRow = page?.goog;
         if (googRow) {
