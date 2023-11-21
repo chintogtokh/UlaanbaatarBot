@@ -31,6 +31,8 @@ const getInOtherLanguage = async (
     const langlinks: { lang: string; title: string }[] =
         content.query?.pages[0].langlinks;
 
+    console.log(content.query?.pages)
+
     return langlinks?.filter((v) => v.lang == toLang)?.[0]?.title || false;
 };
 
