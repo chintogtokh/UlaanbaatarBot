@@ -66,7 +66,7 @@ async function main() {
             rejectUnauthorized: true,
             minVersion: "TLSv1.2",
         },
-        auth: { user: "chintogtokh@zohomail.com.au", pass: "Ae7ck84LKnUU" },
+        // auth: { user: "xx@zohomail.com.au", pass: "Ae7ck84LKnUU" }, // deprecated password
     });
 
     const uncategorized = await getSpecial("Uncategorizedpages");
