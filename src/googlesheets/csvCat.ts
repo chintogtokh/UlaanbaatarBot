@@ -49,11 +49,13 @@ const csvCat = async () => {
 
         console.log(article.content, newcats);
 
-        if (article.content.length > 0 || newcats.length > 0) {
+        if (article.contentPre || article.contentPost || article.content.length > 0 || newcats.length > 0) {
             await bot.edit(article.name, (rev) => {
                 let text =
+                    (article.contentPre ? `${article.contentPre}\n` : "") +
                     `${rev.content}\n\n` +
                     (article.content ? `${article.content}\n` : "") +
+                    (article.contentPost ? `${article.contentPost}\n` : "") +
                     (newcats
                         ? newcats.map((v) => `[[Ангилал:${v}]]`).join("\n")
                         : "");

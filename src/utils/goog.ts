@@ -33,6 +33,8 @@ export const loadSheetRows = async (sheetName: string) => {
             csvRow: {
                 name: element["name"],
                 content: element["content"] || "",
+                contentPre: element["contentPre"],
+                contentPost: element["contentPost"],
                 interwiki: interwikiParse(element["interwiki"]),
                 categories: allCats,
                 moveTo: element["moveTo"],

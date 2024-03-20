@@ -10,6 +10,8 @@ export type CsvRow = {
         name: string;
     };
     content: string;
+    contentPre?: string;
+    contentPost?: string;
     categories: string[];
     moveTo?: string;
     moveBoolean?: boolean;
